@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #3e07a3;
+  --color-secondary: #19cfdc;
+  --color-apgPurple: #3e07a3;
+  --color-apgLightPurple: #f1eaff;
+  --color-apgTurqoise: #19cfdc;
+  --color-grey: #f5f5f5;
+  --color-greyText: #656565;
+}
+
+.btn {
+  @apply flex items-center justify-center rounded-full;
+}
+.pryBtn {
+  @apply bg-primary text-white transition-colors hover:bg-secondary hover:text-primary;
+}
+
+.secBtn {
+  @apply text-primary bg-white transition-colors hover:bg-white hover:text-secondary;
+}
+
+.btnSmall {
+  @apply py-3 text-base font-semibold tracking-tighter;
+}
+
+.btnBig {
+  @apply py-7 text-[18px] font-medium tracking-tighter;
+}
+@utility container {
+  margin-inline: auto;
+  padding-inline: 16px;
+  @variant md {
+    padding-inline: 24px;
+  }
+  @variant lg {
+    padding-inline: 24px;
+  }
+  @variant xl {
+    padding-inline: 20px;
+  }
+  @variant 2xl {
+    padding-inline: 40px;
+  }
+}
+h2 {
+  @apply text-2xl md:text-4xl lg:text-5xl font-bold leading-[130%] tracking-tighter;
+}
+
+h1 {
+  @apply text-3xl md:text-5xl lg:text-6xl  xl:text-[64px] font-bold tracking-tighter leading-[130%] lg:leading-[100%];
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.cardWidth {
+  @apply px-8
+  sm:pl-[calc((100vw-640px)/2+1rem)]
+  md:pl-[calc((100vw-768px)/2+24px)]
+  lg:pl-[calc((100vw-1024px)/2+24px)]
+  xl:pl-[calc((100vw-1280px)/2+20px)]
+  2xl:pl-[calc((100vw-1536px)/2+2.5rem)] lg:pr-40 md:pr-40 sm:max-w-full container;
+}
