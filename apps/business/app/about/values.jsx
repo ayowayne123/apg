@@ -42,10 +42,10 @@ function Values() {
     <section className="py-24">
       <div className=" container">
         <div className="flex lg:flex-row flex-col gap-3 justify-between lg:py-12 py-6">
-          <h2 className=" text-primary leading-[110%] lg:max-w-[437px] ">
+          <h2 className=" text-primary leading-[110%] lg:max-w-[437px] lg:text-right text-center ">
             Our Core Values, Your Constant Assurance
           </h2>
-          <p className="text-gray-600 lg:max-w-[437px] font-medium text-center lg:text-right  mx-auto  lg:text-2xl tracking-tighter lg:leading-[130%]">
+          <p className="text-gray-600 lg:max-w-[437px] font-medium text-center lg:text-right   lg:text-2xl tracking-tighter lg:leading-[130%]">
             We don’t just do business, we build relationships. These values
             guide every product we deliver, every space we offer, and every
             interaction we have.
@@ -57,7 +57,7 @@ function Values() {
           {values.map((value, index) => (
             <div
               key={index}
-              className="bg-white rounded-[20px]  p-8 hover:shadow-lg transition shrink-0 lg:w-[331px] lg:h-[394px] flex flex-col z-10"
+              className="bg-white rounded-[20px]  p-8 hover:shadow-lg transition shrink-0 sm:w-[331px] sm:h-[394px] flex flex-col z-10"
             >
               <div className="relative h-[90px] w-[90px] self-end  z-10">
                 <div

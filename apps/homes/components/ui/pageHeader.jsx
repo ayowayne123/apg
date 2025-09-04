@@ -4,7 +4,7 @@ function PageHeader({ type }) {
   let content;
 
   switch (type) {
-    case "about":
+    case "home":
       content = (
         <div className="text-center text-white px-6 lg:py-0 py-12 lg:max-w-2xl md:max-w-lg">
           <p className="uppercase tracking-wide  mb-6 text-lg lg:text-2xl font-semibold">

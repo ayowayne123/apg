@@ -15,7 +15,7 @@ export default function Footer() {
     <footer className="bg-white  text-greyText text-xl font-medium tracking-tighter">
       <div className="container pb-10 pt-36">
         {/* Top Section */}
-        <div className="flex flex-row justify-between gap-28">
+        <div className="flex lg:flex-row flex-col justify-between xl:gap-28 gap-16">
           {/* Logo + Description */}
           <div className="w-[311px] shrink-0">
             <div className="flex items-center gap-2 mb-3">
