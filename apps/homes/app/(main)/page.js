@@ -1,6 +1,7 @@
 import HeroSlider from "./home/hero";
 import ExperienceSection from "./home/about";
 import Offer from "./home/offer";
+import Browse from "./home/browse";
 
 export const metadata = {
   title: "APG Business Hub ",
@@ -53,6 +54,7 @@ export default function Home() {
         <ExperienceSection />
       </div>
       <Offer />
+      <Browse />
     </>
   );
 }
