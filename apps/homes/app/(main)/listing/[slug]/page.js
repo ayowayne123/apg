@@ -9,7 +9,7 @@ export default async function Listing({ params }) {
   //I will generate static data which I will later be dynamically passing into the component,
   return (
     <>
-      <Details />
+      <Details slug={slug} />
     </>
   );
 }
