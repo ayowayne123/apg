@@ -42,7 +42,7 @@ function Values() {
     <section className="py-24">
       <div className=" container">
         <div className="flex lg:flex-row flex-col gap-3 justify-between lg:py-12 py-6">
-          <h2 className=" text-primary leading-[110%] lg:max-w-[437px] lg:text-right text-center ">
+          <h2 className=" text-primary leading-[110%] lg:max-w-[437px] lg:text-left text-center ">
             Our Core Values, Your Constant Assurance
           </h2>
           <p className="text-gray-600 lg:max-w-[437px] font-medium text-center lg:text-right   lg:text-2xl tracking-tighter lg:leading-[130%]">

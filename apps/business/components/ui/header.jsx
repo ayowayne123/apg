@@ -17,7 +17,7 @@ export default function Header() {
     },
     {
       label: "homes",
-      link: "/homes",
+      link: "https://apg-homes.vercel.app/",
     },
     {
       label: "gadgets",
