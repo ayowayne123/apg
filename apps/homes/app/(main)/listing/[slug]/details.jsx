@@ -1,7 +1,9 @@
 // details.jsx
 import Image from "next/image";
 import { MapPin, Home, Ruler, Bath } from "lucide-react";
+import { LuBedDouble } from "react-icons/lu";
 import Link from "next/link";
+import interior from "@/public/images/interior.jpg";
 
 export default function Details() {
   // static mock data (replace later with dynamic props)
@@ -28,15 +30,24 @@ export default function Details() {
         inviting space for relaxation and entertainment.
       </>
     ),
-    features: [
-      "Luxury Living – Elegant design, spacious interiors, and high-end finishes",
-      "Custom Kitchens – Custom cabinetry, premium appliances, and modern layouts",
-      "Spacious Bedrooms – Luxurious private retreats with ensuite bathrooms",
-      "Outdoor Spaces – Expansive balconies and landscaped gardens",
-      "Exclusive Amenities – Swimming pool, gym, and community recreation amenities",
-      "Perfect for Entertaining – Open concept design ideal for gatherings",
-      "Prime Location – Convenient access to top attractions, dining, and shopping",
-    ],
+    features: {
+      intro: (
+        <>
+          The gourmet kitchen is a chef’s dream, featuring state-of-the-art
+          appliances, custom cabinetry, and a spacious island for casual dining.
+          Each bedroom is a private retreat, complete with luxurious en-suite
+          bathrooms, walk-in closets, and elegant design elements.
+        </>
+      ),
+      list: [
+        "Luxury Living – Elegant design, spacious interiors, and high-end finishes.",
+        "Breathtaking Views – Large windows offer stunning panoramic scenery.",
+        "Spacious Bedrooms – Luxurious en-suite bathrooms and walk-in closets.",
+        "Outdoor Retreat – Landscaped gardens, serene patio, and premium outdoor amenities.",
+        "Perfect for Entertaining – Open-concept layout ideal for gatherings and relaxation.",
+        "Prime Location – Convenient access to top attractions, dining, and shopping.",
+      ],
+    },
     gallery: [
       "/images/interior1.jpg",
       "/images/interior2.jpg",
@@ -89,7 +100,7 @@ export default function Details() {
 
           <span className="flex items-center gap-2">
             <span className="w-10 h-10 flex items-center justify-center rounded-full bg-white">
-              <span className="text-secondary text-lg">🛏</span>
+              <LuBedDouble size={20} className="text-secondary" />
             </span>
             {property.beds}bd
           </span>
@@ -124,8 +135,14 @@ export default function Details() {
           <h3 className="text-primary font-bold text-xl lg:text-2xl xl:text-[32px] tracking-tighter lg:-tracking-[1.9px] ">
             The Grand Haven – Key Features
           </h3>
-          <ul className="mt-4 list-disc pl-6 space-y-2 text-gray-600">
-            {property.features.map((feature, i) => (
+          {/* Intro paragraph */}
+          <p className=" mt-3 text-2xl text-greyText font-medium lg:tracking-[-1.5px]  leading-relaxed">
+            {property.features.intro}
+          </p>
+
+          {/* Features list */}
+          <ul className=" list-disc pl-6 space-y-2 mt-3 text-2xl text-greyText font-medium lg:tracking-[-1.5px] ">
+            {property.features.list.map((feature, i) => (
               <li key={i}>{feature}</li>
             ))}
           </ul>
@@ -137,11 +154,7 @@ export default function Details() {
             Featured Gallery
           </h3>
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* {property.gallery.map((img, i) => (
-            <div key={i} className="relative h-48 rounded-lg overflow-hidden">
-              <Image src={img} alt={`Gallery ${i + 1}`} fill className="object-cover" />
-            </div>
-          ))} */}
+            <Image src={interior} alt="house " fill className="object-cover" />
           </div>
           <div className="mt-6 text-center">
             <button className="bg-havenGreen text-white px-6 py-2 rounded-lg">
