@@ -153,11 +153,56 @@ export default function Details() {
           <h3 className="text-primary font-bold text-xl lg:text-2xl xl:text-[32px] tracking-tighter lg:-tracking-[1.9px]">
             Featured Gallery
           </h3>
-          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Image src={interior} alt="house " fill className="object-cover" />
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 h-[600px] gap-4  ">
+            <div className="h-full flex flex-col space-y-4">
+              <div className="relative w-full h-3/5 rounded-xl overflow-hidden">
+                <Image
+                  src={interior}
+                  alt="house "
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="relative w-full h-2/5 rounded-xl overflow-hidden">
+                <Image
+                  src={interior}
+                  alt="house "
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+            <div className="h-full flex flex-col space-y-4">
+              <div className="relative w-full h-5/5 rounded-xl overflow-hidden">
+                <Image
+                  src={interior}
+                  alt="house "
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+            <div className="h-full flex flex-col space-y-4">
+              <div className="relative w-full h-2/5 rounded-xl overflow-hidden">
+                <Image
+                  src={interior}
+                  alt="house "
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="relative w-full h-3/5 rounded-xl overflow-hidden">
+                <Image
+                  src={interior}
+                  alt="house "
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
           </div>
-          <div className="mt-6 text-center">
-            <button className="bg-havenGreen text-white px-6 py-2 rounded-lg">
+          <div className="mt-20 text-center mb-6 lg:mb-32">
+            <button className="btn secBtn btnBig w-[220px]">
               Back to Listings
             </button>
           </div>
