@@ -78,25 +78,25 @@ export default function Footer() {
             <div className="flex gap-1 text-white">
               <Link
                 href="#"
-                className="bg-primary items-center justify-center h-8 w-8 flex rounded-full hover:bg-primary/70 transition"
+                className="bg-secondary items-center justify-center h-8 w-8 flex rounded-full hover:bg-primary/70 transition"
               >
                 <FaFacebookF size={16} />
               </Link>
               <Link
                 href="#"
-                className="bg-primary items-center justify-center h-8 w-8 flex rounded-full hover:bg-primary/70 transition"
+                className="bg-secondary items-center justify-center h-8 w-8 flex rounded-full hover:bg-primary/70 transition"
               >
                 <FaInstagram size={16} />
               </Link>
               <Link
                 href="#"
-                className="bg-primary items-center justify-center h-8 w-8 flex rounded-full hover:bg-primary/70 transition"
+                className="bg-secondary items-center justify-center h-8 w-8 flex rounded-full hover:bg-primary/70 transition"
               >
                 <FaLinkedinIn size={16} />
               </Link>
               <Link
                 href="#"
-                className="bg-primary items-center justify-center h-8 w-8 flex rounded-full hover:bg-primary/70 transition"
+                className="bg-secondary items-center justify-center h-8 w-8 flex rounded-full hover:bg-primary/70 transition"
               >
                 <FaTwitter size={16} />
               </Link>
