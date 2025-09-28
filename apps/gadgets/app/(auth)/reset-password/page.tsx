@@ -24,8 +24,12 @@ export default function ResetPasswordPage() {
       });
       toast.success("Password reset successfully. You can log in now.");
       router.push("/login");
-    } catch (err: any) {
-      toast.error(err.message);
+    } catch (err) {
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error("Something went wrong");
+      }
     } finally {
       setLoading(false);
     }

@@ -19,8 +19,12 @@ export default function LoginPage() {
       });
       toast.success("Logged in successfully!");
       router.push("/"); // change to your app's landing page
-    } catch (err: any) {
-      toast.error(err.message);
+    } catch (err) {
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error("Something went wrong");
+      }
     }
   };
 

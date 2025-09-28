@@ -31,8 +31,12 @@ export default function SignupPage() {
       });
       toast.success("Account created. Check your email for OTP.");
       router.push(`/verify?email=${form.email}`);
-    } catch (err: any) {
-      toast.error(err.message);
+    } catch (err) {
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error("Something went wrong");
+      }
     }
   };
 

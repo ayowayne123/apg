@@ -43,8 +43,12 @@ export default function VerifyPage() {
       });
       toast.success("Account verified! Please login.");
       router.push("/login");
-    } catch (err: any) {
-      toast.error(err.message);
+    } catch (err) {
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error("Something went wrong");
+      }
     }
   };
 

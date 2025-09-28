@@ -16,8 +16,12 @@ export default function ForgotPasswordPage() {
         body: JSON.stringify({ email }),
       });
       toast.success("Reset link/OTP sent to your email");
-    } catch (err: any) {
-      toast.error(err.message);
+    } catch (err) {
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error("Something went wrong");
+      }
     } finally {
       setLoading(false);
     }
