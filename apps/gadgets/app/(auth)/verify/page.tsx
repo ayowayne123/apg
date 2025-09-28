@@ -1,33 +1,39 @@
 "use client";
-import { useState, useRef } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
+import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { apiFetch } from "@/lib/api";
 
 export default function VerifyPage() {
   const [otp, setOtp] = useState(Array(6).fill(""));
+  const [email, setEmail] = useState("");
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
-  const params = useSearchParams();
-  const email = params.get("email");
   const router = useRouter();
+
+  // ✅ Extract search params safely on client only
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      setEmail(params.get("email") ?? "");
+    }
+  }, []);
 
   const handleChange = (value: string, index: number) => {
     if (/^\d*$/.test(value)) {
       const newOtp = [...otp];
-      newOtp[index] = value.slice(-1); // only last digit
+      newOtp[index] = value.slice(-1);
       setOtp(newOtp);
 
-      // move focus
       if (value && index < 5) {
         inputsRef.current[index + 1]?.focus();
       }
     }
   };
 
-  const handleKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>,
-    index: number
-  ) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
       inputsRef.current[index - 1]?.focus();
     }
@@ -44,11 +50,7 @@ export default function VerifyPage() {
       toast.success("Account verified! Please login.");
       router.push("/login");
     } catch (err) {
-      if (err instanceof Error) {
-        toast.error(err.message);
-      } else {
-        toast.error("Something went wrong");
-      }
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
     }
   };
 
@@ -64,7 +66,6 @@ export default function VerifyPage() {
           kindly check and enter below.
         </p>
 
-        {/* OTP Inputs */}
         <div className="flex justify-between gap-2 mt-12">
           {otp.map((digit, i) => (
             <input
@@ -78,7 +79,7 @@ export default function VerifyPage() {
               value={digit}
               onChange={(e) => handleChange(e.target.value, i)}
               onKeyDown={(e) => handleKeyDown(e, i)}
-              className="w-12 h-12 bg-[#F2F2F2]  rounded-lg text-center text-xl font-bold tracking-widest focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-12 h-12 bg-[#F2F2F2] rounded-lg text-center text-xl font-bold tracking-widest focus:outline-none focus:ring-2 focus:ring-primary"
             />
           ))}
         </div>
