@@ -17,11 +17,11 @@ export default function Header() {
     },
     {
       label: "homes",
-      link: "https://apg-homes.vercel.app/",
+      link: "https://homes.apgbusinesshub.com/",
     },
     {
       label: "gadgets",
-      link: "/gadgets",
+      link: "https://gadgets.apgbusinesshub.com/",
     },
     {
       label: "blog",
