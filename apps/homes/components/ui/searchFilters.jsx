@@ -1,6 +1,6 @@
 "use client";
 import React, { useContext, useState } from "react";
-import { ListingsContext } from "@/components/contexts/listingsContext";
+import { ListingsContext } from "@/components/context/listingsContext";
 import FilterDropdown from "./filterDropdown";
 import { FiSearch, FiFilter, FiChevronDown } from "react-icons/fi";
 import Link from "next/link";
