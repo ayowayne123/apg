@@ -1,15 +1,24 @@
 "use client";
-import { useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { apiFetch } from "@/lib/api";
 
 export default function ResetPasswordPage() {
   const [form, setForm] = useState({ password: "", confirm: "" });
   const [loading, setLoading] = useState(false);
-  const params = useSearchParams();
-  const token = params.get("token");
+  const [emailOrPhone, setEmailOrPhone] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const search = new URLSearchParams(window.location.search);
+      setEmailOrPhone(search.get("email_or_phone") ?? "");
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,16 +29,16 @@ export default function ResetPasswordPage() {
     try {
       await apiFetch("/api/reset-password", {
         method: "POST",
-        body: JSON.stringify({ token, password: form.password }),
+        body: JSON.stringify({
+          email_or_phone: emailOrPhone,
+          password: form.password,
+          password_confirmation: form.confirm,
+        }),
       });
       toast.success("Password reset successfully. You can log in now.");
       router.push("/login");
     } catch (err) {
-      if (err instanceof Error) {
-        toast.error(err.message);
-      } else {
-        toast.error("Something went wrong");
-      }
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
     }
