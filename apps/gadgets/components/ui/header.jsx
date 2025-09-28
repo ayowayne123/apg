@@ -1,0 +1,188 @@
+"use client";
+import React, { useState } from "react";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { Menu, X, Search, ShoppingCart, User, Heart, List } from "lucide-react";
+import { FaUser, FaHeart } from "react-icons/fa6";
+import { BsBagCheckFill } from "react-icons/bs";
+import { RiChatAiFill, RiLogoutCircleRLine } from "react-icons/ri";
+
+import logo from "@/public/icons/apg-gadgets.png";
+import Link from "next/link";
+
+export default function Header() {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  return (
+    <header className={`w-full py-6 relative`}>
+      <div className="container  ">
+        <div
+          className={` items-center justify-between lg:flex hidden flex-row lg:py-2 lg:px-[30px] w-full h-[98px] rounded-xl bg-grey  `}
+        >
+          <Link href="/" className="relative lg:h-[54px] lg:w-[142px]">
+            <Image src={logo} alt="Logo" className="object-contain" fill />
+          </Link>
+          <div className="hidden lg:flex flex-1 max-w-2xl mx-6">
+            <div className="flex items-center w-full bg-white rounded-xl overflow-hidden">
+              <input
+                type="text"
+                placeholder="Search gadgets..."
+                className="flex-1 px-4 py-2 text-sm outline-none"
+              />
+              <button className="px-4 text-gray-600">
+                <Search size={20} />
+              </button>
+            </div>
+          </div>
+          <div className="flex flex-row items-center gap-3">
+            <Link className="btn btnSmall secBtn w-28" href="/contact">
+              Contact
+            </Link>
+            {/* Cart */}
+            <Link
+              href="/cart"
+              className="text-black relative flex items-center justify-center h-11 w-11 bg-primary rounded-full"
+            >
+              <ShoppingCart size={22} />
+              {/* Badge */}
+              <span className="absolute -top-1 -right-1 bg-secondary text-xs h-5 w-5 text-white font-medium rounded-full flex items-center justify-center">
+                2
+              </span>
+            </Link>
+
+            {/* User dropdown / login */}
+            <div className="relative">
+              {isLoggedIn ? (
+                <button
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  className="flex items-center justify-center rounded-full h-11 w-11 text-white bg-secondary"
+                >
+                  <User size={22} />
+                </button>
+              ) : (
+                <Link href="/login" className="btn btnSmall pryBtn w-28 ">
+                  Sign In
+                </Link>
+              )}
+            </div>
+          </div>
+          {/* Dropdown */}
+          {dropdownOpen && (
+            <div className="absolute inset-0  z-40 container">
+              <div
+                className="fixed inset-0 z-40  h-screen w-full "
+                onClick={() => setDropdownOpen(false)}
+              ></div>
+              <div className="absolute z-50 right-5 top-28 w-80 bg-apgCream rounded-xl shadow-lg  ">
+                <div className="relative h-full w-max divide-y-[0.5px] divide-black px-11 py-11 flex flex-col ">
+                  <Link
+                    href="/account"
+                    className="flex items-center gap-3 py-4.5 hover:text-primary "
+                  >
+                    <span className="h-11 w-11 border-primary border bg-white rounded-full text-primary items-center flex justify-center">
+                      <FaUser size={24} />
+                    </span>{" "}
+                    <span className="text-xl font-semibold text-black">
+                      My Account{" "}
+                    </span>
+                  </Link>
+                  <Link
+                    href="/wishlist"
+                    className="flex items-center gap-3 py-4.5 hover:text-primary "
+                  >
+                    <span className="h-11 w-11 border-primary border bg-white rounded-full text-primary items-center flex justify-center">
+                      <FaHeart size={24} />
+                    </span>
+                    <span className="text-xl font-semibold text-black">
+                      WishList
+                    </span>
+                  </Link>
+                  <Link
+                    href="/orders"
+                    className="flex items-center gap-3 py-4.5 hover:text-primary "
+                  >
+                    <span className="h-11 w-11 border-primary border bg-white rounded-full text-primary items-center flex justify-center">
+                      <BsBagCheckFill size={24} />
+                    </span>
+                    <span className="text-xl font-semibold text-black">
+                      My Orders
+                    </span>
+                  </Link>
+                  <Link
+                    href="/reviews"
+                    className="flex items-center gap-3 py-4.5 hover:text-primary "
+                  >
+                    <span className="h-11 w-11 border-primary border bg-white rounded-full text-primary items-center flex justify-center">
+                      <RiChatAiFill size={24} />
+                    </span>
+                    <span className="text-xl font-semibold text-black">
+                      Reviews
+                    </span>
+                  </Link>
+
+                  <button
+                    onClick={() => setIsLoggedIn(false)}
+                    className="text-apgRed flex items-center justify-between gap-[90px] py-4.5 font-bold"
+                  >
+                    <span className="text-xl  ">Log Out</span>
+                    <span className="">
+                      <RiLogoutCircleRLine size={24} />
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+        {/* Mobile Header */}
+        <div className="flex items-center justify-between lg:hidden w-full px-4 py-3 bg-gray-200 rounded-xl">
+          <div className="relative h-10 w-20">
+            <Image src={logo} alt="Logo" className="object-contain" fill />
+          </div>
+          <button
+            onClick={() => setOpen(!open)}
+            className="text-primary focus:outline-none"
+          >
+            {open ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        <div
+          className={`fixed top-0 right-0 h-screen w-4/5 sm:w-2/5 bg-white shadow-2xl transform transition-transform duration-300 z-50 ${
+            open ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="flex items-center justify-between px-4 py-4 border-b">
+            <div className="relative h-[40px] w-[90px]">
+              <Image src={logo} alt="Logo" className="object-contain" fill />
+            </div>
+            <button onClick={() => setOpen(false)}>
+              <X className="h-7 w-7 text-primary" />
+            </button>
+          </div>
+          <nav className="flex flex-col gap-4 mt-6 px-6">
+            <Link
+              href="/contact"
+              className="btn btnSmall pryBtn w-full text-center"
+              onClick={() => setOpen(false)}
+            >
+              Contact
+            </Link>
+          </nav>
+        </div>
+
+        {/* Overlay */}
+        {open && (
+          <div
+            className="fixed inset-0 bg-black/70 z-40"
+            onClick={() => setOpen(false)}
+          />
+        )}
+      </div>
+    </header>
+  );
+}
