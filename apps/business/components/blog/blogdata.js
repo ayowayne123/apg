@@ -67,7 +67,7 @@ export const blogData = [
           
               <p><strong>Ready to make the switch?</strong> Explore the latest smartphones and discover how the right upgrade can transform your digital lifestyle.</p>
             `,
-    tags: ["smartphone", "technology", "upgrade"],
+    tags: ["smartphone", "technology", "upgrade", "security"],
     coverPhoto: {
       url: "https://images.unsplash.com/photo-1488509082528-cefbba5ad692?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       alt: "A modern smartphone on a desk",
