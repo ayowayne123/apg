@@ -97,7 +97,6 @@ export default function RentalsPage() {
     );
     setResults(filtered);
   };
-
   return (
     <div className="  py-6">
       {/* Filters */}
