@@ -1,7 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import BlogCard from "@/components/blog/blogCard";
-import { blogData } from "@/components/blog/blogdata";
+import BlogCardSkeleton from "@/components/blog/blogCardSkeleton";
+import { getBlogPosts } from "@/utils/calls";
 import { FiSearch } from "react-icons/fi";
 
 function AllBlogs() {
@@ -11,25 +12,26 @@ function AllBlogs() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    const timer = setTimeout(() => {
+    async function loadBlogs() {
+      setLoading(true);
       try {
-        setBlogs(blogData);
-        setLoading(false);
+        const data = await getBlogPosts();
+        setBlogs(data.data);
       } catch (err) {
         setError("Failed to load blogs");
+      } finally {
         setLoading(false);
       }
-    }, 1000);
+    }
 
-    return () => clearTimeout(timer);
+    loadBlogs();
   }, []);
 
   // Filter blogs based on search query
   const filteredBlogs = blogs.filter(
     (blog) =>
       blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      blog?.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
+      blog?.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -51,7 +53,7 @@ function AllBlogs() {
       {/* Blog grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-9 gap-6">
         {loading ? (
-          <p className="col-span-full text-center">Loading blogs...</p>
+          [...Array(16)].map((_, i) => <BlogCardSkeleton key={i} />)
         ) : error ? (
           <p className="col-span-full text-center text-red-500">{error}</p>
         ) : filteredBlogs.length > 0 ? (
@@ -61,9 +63,11 @@ function AllBlogs() {
             </div>
           ))
         ) : (
-          <p className="col-span-full text-center text-gray-500">
-            No matches found for "{searchQuery}"
-          </p>
+          searchQuery && (
+            <p className="col-span-full text-center text-gray-500">
+              No matches found for "{searchQuery}"
+            </p>
+          )
         )}
       </div>
     </section>

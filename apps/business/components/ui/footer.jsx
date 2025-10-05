@@ -35,27 +35,33 @@ export default function Footer() {
           <div>
             <ul className="space-y-1">
               <li>
-                <Link href="#" className="hover:text-primary">
+                <Link href="/about" className="hover:text-primary">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-primary">
+                <Link
+                  href="https://gadgets.apgbusinesshub.com/"
+                  className="hover:text-primary"
+                >
                   Gadgets
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-primary">
+                <Link
+                  href="https://homes.apgbusinesshub.com/"
+                  className="hover:text-primary"
+                >
                   Real Estate
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-primary">
+                <Link href="/faqs" className="hover:text-primary">
                   FAQs
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-primary">
+                <Link href="/blog" className="hover:text-primary">
                   Blog/Insights
                 </Link>
               </li>

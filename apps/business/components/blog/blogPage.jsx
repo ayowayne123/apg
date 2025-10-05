@@ -7,11 +7,11 @@ export default function BlogPage({ blog }) {
   return (
     <article className="container py-16 ">
       {/* Cover Photo */}
-      {blog?.coverPhoto?.url && (
+      {blog?.cover_photo?.url && (
         <div className="h-[400px] rounded-[35px] w-full relative overflow-hidden mb-3">
           <Image
-            src={blog.coverPhoto.url}
-            alt={blog.coverPhoto.alt || "Blog cover"}
+            src={blog.cover_photo.url}
+            alt={blog.cover_photo.alt || "Blog cover"}
             className=" object-cover"
             fill
           />
