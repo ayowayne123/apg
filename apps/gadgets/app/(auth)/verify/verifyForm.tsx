@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { apiFetch } from "@/lib/api";
+import { apiFetch } from "@/lib/api/api";
 
 export default function VerifyForm() {
   const [otp, setOtp] = useState(Array(6).fill(""));

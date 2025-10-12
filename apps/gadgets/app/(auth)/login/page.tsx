@@ -2,12 +2,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { apiFetch } from "@/lib/api";
+import { apiFetch } from "@/lib/api/api";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 
 export default function LoginPage() {
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [form, setForm] = useState({ email_or_phone: "", password: "" });
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -42,11 +42,13 @@ export default function LoginPage() {
             Email address / Phone Number
           </label>
           <input
-            type="email"
+            type="text"
             placeholder="yourId@email.com"
             className="w-full py-2  mt-2 px-5 h-[52px] focus:outline-primary rounded-lg bg-[#F2F2F2] text-sm placeholder:text-[#A0A3BD] mb-3"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            value={form.email_or_phone}
+            onChange={(e) =>
+              setForm({ ...form, email_or_phone: e.target.value })
+            }
           />
         </div>
         <div className="w-full ">
