@@ -1,30 +1,52 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { Menu, X, Search, ShoppingCart, User, Heart, List } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { Menu, X, Search, ShoppingCart, User } from "lucide-react";
 import { FaUser, FaHeart } from "react-icons/fa6";
 import { BsBagCheckFill } from "react-icons/bs";
 import { RiChatAiFill, RiLogoutCircleRLine } from "react-icons/ri";
-
+import Cookies from "js-cookie";
 import logo from "@/public/icons/apg-gadgets.png";
 import Link from "next/link";
 
 export default function Header() {
   const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Login Checker
+  useEffect(() => {
+    const token = Cookies.get("apg_token");
+    setIsLoggedIn(!!token);
+  }, []);
+
+  // Close Dropdown
+  useEffect(() => {
+    setDropdownOpen(false);
+  }, [pathname]);
+
+  // Logout
+  const handleLogout = () => {
+    Cookies.remove("apg_token");
+    setIsLoggedIn(false);
+    setDropdownOpen(false);
+    router.push("/login");
+  };
 
   return (
-    <header className={`w-full py-6 relative`}>
-      <div className="container  ">
-        <div
-          className={` items-center justify-between lg:flex hidden flex-row lg:py-2 lg:px-[30px] w-full h-[98px] rounded-xl bg-grey  `}
-        >
+    <header className="w-full py-6 relative">
+      <div className="container">
+        {/* Desktop Header */}
+        <div className="items-center justify-between lg:flex hidden flex-row lg:py-2 lg:px-[30px] w-full h-[98px] rounded-xl bg-grey">
+          {/* Logo */}
           <Link href="/" className="relative lg:h-[54px] lg:w-[142px]">
             <Image src={logo} alt="Logo" className="object-contain" fill />
           </Link>
+
+          {/* Search Bar */}
           <div className="hidden lg:flex flex-1 max-w-2xl mx-6">
             <div className="flex items-center w-full bg-white rounded-xl overflow-hidden">
               <input
@@ -37,17 +59,19 @@ export default function Header() {
               </button>
             </div>
           </div>
+
+          {/* Right Section */}
           <div className="flex flex-row items-center gap-3">
             <Link className="btn btnSmall secBtn w-28" href="/contact">
               Contact
             </Link>
+
             {/* Cart */}
             <Link
               href="/cart"
               className="text-black relative flex items-center justify-center h-11 w-11 bg-primary rounded-full"
             >
               <ShoppingCart size={22} />
-              {/* Badge */}
               <span className="absolute -top-1 -right-1 bg-secondary text-xs h-5 w-5 text-white font-medium rounded-full flex items-center justify-center">
                 2
               </span>
@@ -63,59 +87,63 @@ export default function Header() {
                   <User size={22} />
                 </button>
               ) : (
-                <Link href="/login" className="btn btnSmall pryBtn w-28 ">
+                <Link href="/login" className="btn btnSmall pryBtn w-28">
                   Sign In
                 </Link>
               )}
             </div>
           </div>
+
           {/* Dropdown */}
-          {dropdownOpen && (
-            <div className="absolute inset-0  z-40 container">
+          {dropdownOpen && isLoggedIn && (
+            <div className="absolute inset-0 z-40 container">
               <div
-                className="fixed inset-0 z-40  h-screen w-full "
+                className="fixed inset-0 z-40 h-screen w-full"
                 onClick={() => setDropdownOpen(false)}
               ></div>
-              <div className="absolute z-50 right-5 top-28 w-80 bg-apgCream rounded-xl shadow-lg  ">
-                <div className="relative h-full w-max divide-y-[0.5px] divide-black px-11 py-11 flex flex-col ">
+              <div className="absolute z-50 right-[21px] top-[142px] w-80 bg-apgCream rounded-[30px] shadow-lg">
+                <div className="relative h-full w-max divide-y-[0.5px] divide-black px-11 py-11 flex flex-col">
                   <Link
                     href="/account"
-                    className="flex items-center gap-3 py-4.5 hover:text-primary "
+                    className="flex items-center gap-3 py-4.5 hover:text-primary"
                   >
-                    <span className="h-11 w-11 border-primary border bg-white rounded-full text-primary items-center flex justify-center">
+                    <span className="h-11 w-11 border-primary border bg-white rounded-full text-primary flex items-center justify-center">
                       <FaUser size={24} />
-                    </span>{" "}
+                    </span>
                     <span className="text-xl font-semibold text-black">
-                      My Account{" "}
+                      My Account
                     </span>
                   </Link>
+
                   <Link
                     href="/wishlist"
-                    className="flex items-center gap-3 py-4.5 hover:text-primary "
+                    className="flex items-center gap-3 py-4.5 hover:text-primary"
                   >
-                    <span className="h-11 w-11 border-primary border bg-white rounded-full text-primary items-center flex justify-center">
+                    <span className="h-11 w-11 border-primary border bg-white rounded-full text-primary flex items-center justify-center">
                       <FaHeart size={24} />
                     </span>
                     <span className="text-xl font-semibold text-black">
                       WishList
                     </span>
                   </Link>
+
                   <Link
                     href="/orders"
-                    className="flex items-center gap-3 py-4.5 hover:text-primary "
+                    className="flex items-center gap-3 py-4.5 hover:text-primary"
                   >
-                    <span className="h-11 w-11 border-primary border bg-white rounded-full text-primary items-center flex justify-center">
+                    <span className="h-11 w-11 border-primary border bg-white rounded-full text-primary flex items-center justify-center">
                       <BsBagCheckFill size={24} />
                     </span>
                     <span className="text-xl font-semibold text-black">
                       My Orders
                     </span>
                   </Link>
+
                   <Link
                     href="/reviews"
-                    className="flex items-center gap-3 py-4.5 hover:text-primary "
+                    className="flex items-center gap-3 py-4.5 hover:text-primary"
                   >
-                    <span className="h-11 w-11 border-primary border bg-white rounded-full text-primary items-center flex justify-center">
+                    <span className="h-11 w-11 border-primary border bg-white rounded-full text-primary flex items-center justify-center">
                       <RiChatAiFill size={24} />
                     </span>
                     <span className="text-xl font-semibold text-black">
@@ -124,19 +152,18 @@ export default function Header() {
                   </Link>
 
                   <button
-                    onClick={() => setIsLoggedIn(false)}
+                    onClick={handleLogout}
                     className="text-apgRed flex items-center justify-between gap-[90px] py-4.5 font-bold"
                   >
-                    <span className="text-xl  ">Log Out</span>
-                    <span className="">
-                      <RiLogoutCircleRLine size={24} />
-                    </span>
+                    <span className="text-xl">Log Out</span>
+                    <RiLogoutCircleRLine size={24} />
                   </button>
                 </div>
               </div>
             </div>
           )}
         </div>
+
         {/* Mobile Header */}
         <div className="flex items-center justify-between lg:hidden w-full px-4 py-3 bg-gray-200 rounded-xl">
           <div className="relative h-10 w-20">

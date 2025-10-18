@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
+import Cookies from "js-cookie";
 import { apiFetch } from "@/lib/api/api";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
@@ -9,16 +10,32 @@ import { FcGoogle } from "react-icons/fc";
 export default function LoginPage() {
   const [form, setForm] = useState({ email_or_phone: "", password: "" });
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/";
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+
     try {
-      await apiFetch("/api/login", {
+      const res = await apiFetch("/api/login", {
         method: "POST",
         body: JSON.stringify(form),
       });
+
+      const { token, user } = res;
+
+      Cookies.set("apg_token", token, {
+        expires: 7, // days
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "Lax",
+      });
+
+      Cookies.set("user", JSON.stringify(user), { expires: 7 });
+
       toast.success("Logged in successfully!");
-      router.push("/"); // change to your app's landing page
+
+      // Redirect to intended page
+      router.push(redirectTo);
     } catch (err) {
       if (err instanceof Error) {
         toast.error(err.message);
@@ -27,7 +44,6 @@ export default function LoginPage() {
       }
     }
   };
-
   return (
     <div className="flex flex-col items-center justify-center text-black pb-8">
       <form onSubmit={handleLogin} className="px-2  w-full max-w-sm space-y-4">

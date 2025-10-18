@@ -22,3 +22,6 @@ export interface Product {
 export interface ProductsResponse {
   data: Product[];
 }
+
+
+

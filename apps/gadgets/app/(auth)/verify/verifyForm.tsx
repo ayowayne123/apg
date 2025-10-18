@@ -3,13 +3,14 @@
 import { useState, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import Cookies from "js-cookie";
 import { apiFetch } from "@/lib/api/api";
 
 export default function VerifyForm() {
   const [otp, setOtp] = useState(Array(6).fill(""));
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
   const params = useSearchParams();
-  const email = params.get("email");
+  const email_or_phone = params.get("email");
   const router = useRouter();
 
   const handleChange = (value: string, index: number) => {
@@ -36,14 +37,28 @@ export default function VerifyForm() {
 
   const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
-    const code = otp.join("");
+    const verification_code = otp.join("");
+
     try {
-      await apiFetch("/api/verify", {
+      const res = await apiFetch("/api/verify", {
         method: "POST",
-        body: JSON.stringify({ email, code }),
+        body: JSON.stringify({ email_or_phone, verification_code }),
       });
-      toast.success("Account verified! Please login.");
-      router.push("/login");
+
+      // add token
+      if (res?.token) {
+        Cookies.set("apg_token", res.token, {
+          expires: 7, // days
+          sameSite: "strict",
+          secure: process.env.NODE_ENV === "production",
+        });
+
+        toast.success("Account verified & logged in!");
+        router.push("/"); // redirect to homepage or dashboard
+      } else {
+        toast.success("Account verified! Please login.");
+        router.push("/login");
+      }
     } catch (err) {
       if (err instanceof Error) {
         toast.error(err.message);

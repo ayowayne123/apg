@@ -7,6 +7,7 @@
   --color-apgCream: #fffadf;
   --color-apgRed: #ff6e6e;
   --color-apgLightPurple: #f1eaff;
+  --color-apgLightYellow: #fffadf;
   --color-apgTurqoise: #19cfdc;
   --color-apgGrey: #f3f3f3;
   --color-grey: #f4f4f4;
@@ -82,4 +83,8 @@ h1 {
   lg:pl-[calc((100vw-1024px)/2+24px)]
   xl:pl-[calc((100vw-1280px)/2+20px)]
   2xl:pl-[calc((100vw-1536px)/2+2.5rem)] lg:pr-40 md:pr-40 sm:max-w-full container;
+}
+
+.input {
+  @apply w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-yellow-400;
 }

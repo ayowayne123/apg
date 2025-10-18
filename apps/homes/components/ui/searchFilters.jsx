@@ -26,7 +26,7 @@ export default function SearchFilters({
     PAGES[0];
 
   return (
-    <div className="sticky top-0 z-40 bg-white py-4 border-b shadow-sm">
+    <div className="sticky top-0 z-40 bg-white py-4 shadow-sm">
       <div className="container mx-auto px-4 flex items-center gap-3">
         {/* Left: Page selector */}
         <div className="relative">
