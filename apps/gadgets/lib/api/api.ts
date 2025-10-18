@@ -1,4 +1,5 @@
 // api.ts
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import api from "./axios";
 
 export async function apiFetch<T = any>(
