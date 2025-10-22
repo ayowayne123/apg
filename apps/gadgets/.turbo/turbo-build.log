@@ -1,0 +1,55 @@
+
+> gadgets@0.1.0 build C:\Users\USER\Desktop\Workspace\apg\apg\apps\gadgets
+> next build
+
+   ▲ Next.js 15.4.6
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 107s
+   Linting and checking validity of types ...
+
+./app/(auth)/signup/page.tsx
+6:10  Warning: 'apiFetch' is defined but never used.  @typescript-eslint/no-unused-vars
+97:13  Warning: 'data' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./app/(main)/(profile)/layout.tsx
+4:8  Warning: 'Link' is defined but never used.  @typescript-eslint/no-unused-vars
+5:8  Warning: 'Image' is defined but never used.  @typescript-eslint/no-unused-vars
+8:24  Warning: 'RiLogoutCircleRLine' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./app/(main)/home/hero.tsx
+80:6  Warning: React Hook useEffect has a missing dependency: 'nextSlide'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./app/(main)/page.tsx
+1:8  Warning: 'Image' is defined but never used.  @typescript-eslint/no-unused-vars
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+   Collecting page data ...
+   Generating static pages (0/12) ...
+   Generating static pages (3/12) 
+   Generating static pages (6/12) 
+   Generating static pages (9/12) 
+ ✓ Generating static pages (12/12)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ○ /                                     5.7 kB         141 kB
+├ ○ /_not-found                            123 B         100 kB
+├ ○ /account                             1.47 kB         107 kB
+├ ○ /forgot-password                     1.08 kB         127 kB
+├ ○ /login                               3.19 kB         133 kB
+├ ○ /reset-password                      1.28 kB         127 kB
+├ ○ /signup                              2.67 kB         112 kB
+├ ○ /test                                  736 B         121 kB
+└ ○ /verify                              2.18 kB         128 kB
++ First Load JS shared by all             100 kB
+  ├ chunks/274-afa05ab8e0973f79.js       44.1 kB
+  ├ chunks/fb521855-360f788827d72256.js  54.1 kB
+  └ other shared chunks (total)          1.99 kB
+
+
+ƒ Middleware                             33.1 kB
+
+○  (Static)  prerendered as static content
+

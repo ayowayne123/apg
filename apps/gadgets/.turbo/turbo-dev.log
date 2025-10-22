@@ -1,0 +1,34 @@
+
+> gadgets@0.1.0 dev C:\Users\USER\Desktop\Workspace\apg\apg\apps\gadgets
+> next dev
+
+ ⚠ Port 3000 is in use by process 413292, using available port 3001 instead.
+   ▲ Next.js 15.4.6
+   - Local:        http://localhost:3001
+   - Network:      http://192.168.56.1:3001
+
+ ✓ Starting...
+ ✓ Ready in 18.8s
+ ○ Compiling / ...
+ ✓ Compiled / in 38.3s (1744 modules)
+ GET / 200 in 48324ms
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /favicon.ico in 7.5s (1014 modules)
+ GET /favicon.ico 200 in 8870ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 3.3s (1765 modules)
+ GET /contact 404 in 4339ms
+ GET /contact 404 in 392ms
+ GET /contact 404 in 2137ms
+ GET /favicon.ico 200 in 65ms
+ GET / 200 in 1231ms
+ GET /favicon.ico 200 in 24ms
+ GET /cart 404 in 70ms
+ GET /cart 404 in 233ms
+ GET /favicon.ico 200 in 24ms
+ GET / 200 in 468ms
+ GET /favicon.ico 200 in 21ms
+ GET /Accessories 404 in 55ms
+ GET /Accessories 404 in 207ms
+ GET /favicon.ico 200 in 22ms
+ GET / 200 in 500ms
