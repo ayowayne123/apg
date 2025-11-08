@@ -8,7 +8,7 @@ import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 
 export default function LoginPage() {
-  const [form, setForm] = useState({ email_or_phone: "", password: "" });
+  const [form, setForm] = useState({ login: "", password: "" });
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirect") || "/";
@@ -61,10 +61,8 @@ export default function LoginPage() {
             type="text"
             placeholder="yourId@email.com"
             className="w-full py-2  mt-2 px-5 h-[52px] focus:outline-primary rounded-lg bg-[#F2F2F2] text-sm placeholder:text-[#A0A3BD] mb-3"
-            value={form.email_or_phone}
-            onChange={(e) =>
-              setForm({ ...form, email_or_phone: e.target.value })
-            }
+            value={form.login}
+            onChange={(e) => setForm({ ...form, login: e.target.value })}
           />
         </div>
         <div className="w-full ">
