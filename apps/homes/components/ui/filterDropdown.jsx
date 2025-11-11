@@ -62,7 +62,7 @@ export default function FilterDropdown({
       <button
         type="button"
         onClick={() => setOpen((s) => !s)}
-        className="flex items-center justify-between border rounded-md px-4 py-2 bg-white hover:bg-gray-50 min-w-[120px]"
+        className="flex items-center justify-between cursor-pointer rounded-md px-4 py-2 bg-[#F4F4F4] hover:bg-gray-50 min-w-[120px]"
       >
         <span className="truncate">{renderLabel()}</span>
         <FiChevronDown
@@ -71,8 +71,8 @@ export default function FilterDropdown({
       </button>
 
       {open && (
-        <div className="absolute left-0 mt-2 w-56 bg-white border rounded-md shadow-lg z-50">
-          <div className="p-2 border-b">
+        <div className="absolute left-0 mt-2 w-56 bg-white  rounded-md shadow-lg z-50">
+          <div className="p-2">
             <div className="flex justify-between items-center">
               <div className="text-sm font-medium">{label}</div>
               <button

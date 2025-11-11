@@ -21,7 +21,6 @@ const slides = [
     ),
     text: "Book fully-furnished shortlet apartments in prime locations—perfect for business trips, vacations, or weekend getaways.",
   },
-
   {
     id: 2,
     image: hero2,
@@ -33,7 +32,6 @@ const slides = [
     ),
     text: "From budget-friendly flats to upscale apartments, we connect you to verified rental spaces that match your lifestyle and budget.",
   },
-
   {
     id: 3,
     image: hero3,
@@ -45,7 +43,6 @@ const slides = [
     ),
     text: "Explore secure property options in fast-growing neighborhoods—ideal for living, investment, or retirement.",
   },
-
   {
     id: 4,
     image: hero4,
@@ -61,21 +58,17 @@ const slides = [
 
 export default function HeroSlider() {
   const router = useRouter();
-  const [current, setCurrent] = useState(1);
+  const [current, setCurrent] = useState(0);
 
-  const prevSlide = () => {
+  // Slide controls
+  const prevSlide = () =>
     setCurrent(current === 0 ? slides.length - 1 : current - 1);
-  };
-
-  const nextSlide = () => {
+  const nextSlide = () =>
     setCurrent(current === slides.length - 1 ? 0 : current + 1);
-  };
 
   // Auto-play every 6s
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 6000);
+    const interval = setInterval(nextSlide, 6000);
     return () => clearInterval(interval);
   }, [current]);
 
@@ -85,49 +78,60 @@ export default function HeroSlider() {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [bedrooms, setBedrooms] = useState("");
+  const [error, setError] = useState("");
 
   const handleSearch = () => {
+    // Validation: Must select type
+    if (!type) {
+      setError("Please select a type before searching.");
+      return;
+    }
+
+    // Build query params
     const params = new URLSearchParams();
-    if (location) params.append("location", location);
-    if (type) params.append("type", type);
+    if (location) params.append("address", location);
     if (minPrice) params.append("minPrice", minPrice);
     if (maxPrice) params.append("maxPrice", maxPrice);
     if (bedrooms) params.append("bedrooms", bedrooms);
 
-    router.push(`/listings?${params.toString()}`);
+    // Reset error and redirect
+    setError("");
+    router.push(`/${type}?${params.toString()}`);
   };
 
   return (
-    <div className="relative  h-[300px] md:h-[500px] lg:h-[700px] overflow-hidden rounded-4xl lg:rounded-[35px] w-full">
-      {/* All slides stacked */}
+    <div className="relative h-[300px] md:h-[500px] lg:h-[700px] overflow-hidden rounded-4xl lg:rounded-[35px] w-full">
+      {/* Slides */}
       {slides.map((slide, index) => (
         <div
           key={slide.id}
-          className={`absolute inset-0 transition-all duration-500 ${
+          className={`absolute inset-0 transition-all duration-700 ${
             index === current ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
         >
-          {/* Background Image */}
           <Image
             src={slide.image}
-            alt={slide.title}
+            alt="Hero Image"
             fill
             className="object-cover"
             priority
           />
-
-          {/* Text Content */}
-          <div className="absolute inset-0 w-full h-full text-white ">
-            <div className="px-16 pt-16 pb-8 flex flex-col h-full">
-              <h1 className="text-primary">{slide.title}</h1>
-              <p className="lg:mt-4 lg:text-xl lg:max-w-[568px] text-heroText lg:tracking-[-1.2px] font-medium">
+          <div className="absolute inset-0 w-full h-full text-white">
+            <div className="px-8 md:px-16 pt-16 pb-8 flex flex-col h-full">
+              <h1 className="text-primary text-3xl md:text-5xl font-semibold">
+                {slide.title}
+              </h1>
+              <p className="mt-3 md:mt-4 text-sm md:text-xl max-w-[600px] text-heroText">
                 {slide.text}
               </p>
-              <div className="flex gap-6 items-center mt-9">
-                <Link className="btn secBtn btnBig lg:w-[178px] " href="/about">
+              <div className="flex gap-4 items-center mt-6 md:mt-9">
+                <Link
+                  className="btn secBtn btnBig lg:w-[178px]"
+                  href="/listings"
+                >
                   Browse Listings
                 </Link>
-                <Link className="btn pryBtn btnBig lg:w-[178px] " href="/about">
+                <Link className="btn pryBtn btnBig lg:w-[178px]" href="/about">
                   Contact Sales
                 </Link>
               </div>
@@ -136,8 +140,8 @@ export default function HeroSlider() {
         </div>
       ))}
 
-      {/* Buttons */}
-      <div className="absolute lg:bottom-[190px] right-16 flex gap-3 z-20">
+      {/* Slider Buttons */}
+      <div className="absolute lg:bottom-[190px] right-6 md:right-16 flex gap-3 z-20">
         <button
           onClick={prevSlide}
           className="p-2 rounded-full border-2 border-white hover:bg-white/40 transition"
@@ -152,7 +156,7 @@ export default function HeroSlider() {
         </button>
       </div>
 
-      {/* Search */}
+      {/* Search Form */}
       <div className="absolute lg:bottom-8 w-full px-6 lg:px-16 z-20">
         <div className="backdrop-blur-2xl lg:h-[130px] bg-white/20 border border-white/40 rounded-2xl p-4 lg:px-7 lg:py-6 grid lg:grid-cols-4 gap-4">
           {/* Location */}
@@ -173,29 +177,14 @@ export default function HeroSlider() {
             <select
               value={type}
               onChange={(e) => setType(e.target.value)}
-              className="focus:outline-none text-heroText placeholder:text-placeholderText bg-transparent"
+              className="focus:outline-none text-heroText bg-transparent"
             >
-              <option value="" className="text-placeholderText" disabled>
+              <option value="" disabled>
                 Select type
               </option>
-              <option
-                value="apartment"
-                className="bg-white text-heroText hover:bg-gray-100"
-              >
-                Apartment
-              </option>
-              <option
-                value="shortlet"
-                className="bg-white text-heroText hover:bg-gray-100"
-              >
-                Shortlet
-              </option>
-              <option
-                value="house"
-                className="bg-white text-heroText hover:bg-gray-100"
-              >
-                House
-              </option>
+              <option value="rentals">Rentals</option>
+              <option value="shortlets">Shortlets</option>
+              <option value="sales">Sales</option>
             </select>
           </div>
 
@@ -240,6 +229,11 @@ export default function HeroSlider() {
             </button>
           </div>
         </div>
+
+        {/* Error Message */}
+        {error && (
+          <p className="text-red-500 text-sm mt-2 px-4 lg:px-16">{error}</p>
+        )}
       </div>
     </div>
   );

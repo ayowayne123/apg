@@ -31,28 +31,28 @@ export default function Footer() {
           <div>
             <ul className="space-y-1">
               <li>
-                <Link href="#" className="hover:text-primary">
-                  About Us
+                <Link href="/shortlets" className="hover:text-primary">
+                  Shortlets
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-primary">
-                  Gadgets
+                <Link href="/rentals" className="hover:text-primary">
+                  Rentals
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-primary">
-                  Real Estate
+                <Link href="/sales" className="hover:text-primary">
+                  Sales
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-primary">
-                  FAQs
+                <Link href="/listings" className="hover:text-primary">
+                  Listings
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-primary">
-                  Blog/Insights
+                <Link href="/joint-ventures" className="hover:text-primary">
+                  Joint Venture
                 </Link>
               </li>
             </ul>
@@ -108,8 +108,27 @@ export default function Footer() {
         <hr className="my-8 border-black" />
 
         {/* Bottom Text */}
-        <div className="">
-          © 2025 Articulate Business Hub. All rights reserved.
+        <div className="flex flex-row justify-between items-center">
+          <div className="flex items-center gap-3 flex-wrap justify-center">
+            <span className="text-gray-600">Go back to</span>
+            <div className="flex gap-2">
+              <Link
+                href="https://apgbusinesshub.com/"
+                className="bg-[#731F8E] text-white px-8 py-5 rounded-full text-sm hover:bg-[#6520c0] transition"
+              >
+                Articulate Business Hub
+              </Link>
+              <Link
+                href="https://gadgets.apgbusinesshub.com/"
+                className="bg-[#F1CB00] text-black px-8 py-5  rounded-full text-sm hover:bg-[#d8aa00] transition"
+              >
+                Articulate Plugs & Gadgets
+              </Link>
+            </div>
+          </div>
+          <div className="">
+            © 2025 Articulate Business Hub. All rights reserved.
+          </div>
         </div>
       </div>
     </footer>

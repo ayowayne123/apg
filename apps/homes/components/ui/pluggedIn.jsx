@@ -26,9 +26,14 @@ function PluggedIn() {
       <div className="h-full w-full  flex items-center justify-center bg-primary/70 z-20 absolute text-white">
         <div className="container ">
           <div className="grid grid-cols-2 w-full lg:px-36 xl:px-48 lg:gap-12">
-            <h2 className="tracking-tighter">
-              Stay plugged in. Get deals, listings, and news.
-            </h2>
+            <div>
+              <h2 className="tracking-tighter">Stay Informed.</h2>
+              <p className="text-xl tracking-tighter mr-4">
+                Subscribe to get new listings, rental deals, and investment tips
+                delivered straight to your inbox.
+              </p>
+            </div>
+
             <div>
               <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <input

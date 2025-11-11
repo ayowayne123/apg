@@ -2,7 +2,7 @@ import { apiFetch } from "@/lib/api/api";
 
 // Get user profile
 export async function getUserProfile() {
-  return apiFetch("/api/user/profile", {
+  return apiFetch("/api/user", {
     method: "GET",
     withCredentials: true,
   });
@@ -10,9 +10,15 @@ export async function getUserProfile() {
 
 // Update user profile
 export async function updateUserProfile(data: {
-  dob?: string;
-  gender?: string;
-  name?: string;
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+  phone?: string;
+  billing_house_number?: string;
+  billing_street?: string;
+  billing_city?: string;
+  billing_state?: string;
+  billing_landmark?: string;
 }) {
   return apiFetch("/api/user/profile", {
     method: "PUT",

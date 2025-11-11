@@ -1,6 +1,7 @@
 // api.ts
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import api from "./axios";
+import Cookies from "js-cookie";
 
 export async function apiFetch<T = any>(
   path: string,
@@ -19,6 +20,17 @@ export async function apiFetch<T = any>(
   } = {}
 ): Promise<T> {
   try {
+    // ✅ Read token from cookies
+    const token = Cookies.get("apg_token");
+
+    // ✅ Merge Authorization header if token exists
+    if (token) {
+      headers = {
+        ...headers,
+        Authorization: `Bearer ${token}`,
+      };
+    }
+
     const response = await api({
       url: path,
       method,
@@ -27,6 +39,7 @@ export async function apiFetch<T = any>(
       params,
       withCredentials,
     });
+
     return response.data;
   } catch (error: any) {
     throw new Error(error.message);
