@@ -7,7 +7,7 @@ function BlogCard({ blog }) {
     <div className="w-full overflow-hidden rounded-t-2xl bg-grey my-2">
       <div className="h-40 lg:h-[206px] relative bg-red-300 w-full">
         <Image
-          src={blog.cover_photo.url}
+          src={blog?.cover_photo?.url}
           alt={blog.cover_photo.alt || "Blog Cover"}
           className="object-cover"
           fill
