@@ -8,7 +8,7 @@ function BlogCard({ blog }) {
       <div className="h-40 lg:h-[206px] relative bg-red-300 w-full">
         <Image
           src={blog?.cover_photo?.url}
-          alt={blog.cover_photo.alt || "Blog Cover"}
+          alt={blog?.cover_photo?.alt || "Blog Cover"}
           className="object-cover"
           fill
         />
@@ -16,14 +16,14 @@ function BlogCard({ blog }) {
 
       <div className="p-7 ">
         <h4 className="text-xl font-medium mb-1 tracking-tighter leading-[22px] line-clamp-2  h-12  ">
-          {blog.title}
+          {blog?.title}
         </h4>
         <p className="text-sm text-[#272727] font-light tracking-tighter h-16 line-clamp-3">
-          {blog.description}
+          {blog?.description}
         </p>
         <div className="flex text-sm  justify-between mt-4 font-light">
           <p>Posted on</p>
-          <Link href={`/blog/${blog.id}`} className="text-primary">
+          <Link href={`/blog/${blog?.id}`} className="text-primary">
             Go
           </Link>
         </div>
