@@ -29,14 +29,17 @@ export default function Details({ listing }) {
     currency,
   } = listing;
 
+  const mergedGallery = cover_photo
+    ? [{ url: cover_photo?.url, alt: cover_photo?.alt || title }, ...gallery]
+    : gallery;
   return (
     <div className="container">
       <div className="  mx-auto">
         {/* Hero Section */}
         <div className="relative h-80 lg:h-[469px] rounded-2xl overflow-hidden">
           <Image
-            src={cover_photo.url || "/images/house-hero.jpg"}
-            alt={cover_photo.alt || title}
+            src={cover_photo?.url || "/images/house-hero.jpg"}
+            alt={cover_photo?.alt || title}
             fill
             className="object-cover"
           />
@@ -63,16 +66,16 @@ export default function Details({ listing }) {
               <MapPin size={20} className="text-secondary" />
             </span>
             <span className="leading-tight lg:text-xl">
-              {address}, {city}, {state}, {country}
+              {address}, {city}, {state}
             </span>
           </span>
 
           {/* Type */}
-          <span className="flex items-center gap-2">
-            <span className="w-10 h-10 flex items-center justify-center rounded-full bg-white">
+          <span className="flex items-center gap-2 capitalize">
+            <span className="w-10 h-10 flex items-center justify-center rounded-full bg-white ">
               <Home size={20} className="text-secondary" />
             </span>
-            {listing.type}
+            {listing?.type}
           </span>
 
           {/* Price */}
@@ -82,7 +85,8 @@ export default function Details({ listing }) {
             </span>
             {currency === "USD" ? "$" : "₦"}
             {Number(price).toLocaleString()}{" "}
-            {listing.listing_type !== "sale" && `/${listing.payment_frequency}`}
+            {listing?.listing_type !== "sale" &&
+              `/${listing?.payment_frequency}`}
           </span>
 
           {/* Bedrooms */}
@@ -110,9 +114,9 @@ export default function Details({ listing }) {
           </span>
 
           {/* Last Updated (only for shortlets/rentals) */}
-          {["rent", "shortlet"].includes(listing.listing_type) && (
+          {["rent", "shortlet"].includes(listing?.listing_type) && (
             <span className="block text-gray-500 text-sm mt-4 w-full text-right">
-              Last updated: {new Date(listing.updatedAt).toLocaleDateString()}
+              Last updated: {new Date(listing?.updatedAt).toLocaleDateString()}
             </span>
           )}
         </div>
@@ -132,17 +136,18 @@ export default function Details({ listing }) {
           <h3 className="text-primary font-bold text-xl lg:text-2xl xl:text-[32px] tracking-tighter lg:-tracking-[1.9px] ">
             Key Features
           </h3>
-          {/* Intro paragraph */}
-          <p className=" mt-3 text-2xl text-greyText font-medium lg:tracking-[-1.5px]  leading-relaxed">
-            These exist
+
+          <p className="mt-3 text-2xl text-greyText font-medium lg:tracking-[-1.5px] leading-relaxed">
+            Amenities available in this property:
           </p>
 
-          {/* Features list */}
-          {/* <ul className=" list-disc pl-6 space-y-2 mt-3 text-2xl text-greyText font-medium lg:tracking-[-1.5px] ">
+          <ul className="list-disc pl-6 space-y-2 mt-3 text-xl text-greyText font-medium">
             {amenities?.map((feature, i) => (
-              <li key={i}>{feature}</li>
+              <li key={i} className="capitalize">
+                {feature.replace(/_/g, " ")}
+              </li>
             ))}
-          </ul> */}
+          </ul>
         </section>
 
         {/* Property Details */}
@@ -152,18 +157,18 @@ export default function Details({ listing }) {
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-4 rounded-2xl  ">
-            {listing._id && (
+            {listing?._id && (
               <div className="flex justify-between border-b border-gray-100 pb-2">
                 <span className="font-medium text-gray-700">Property Ref:</span>
-                <span>{listing._id}</span>
+                <span>{listing?._id}</span>
               </div>
             )}
-            {listing.type && (
+            {listing?.type && (
               <div className="flex justify-between border-b border-gray-100 pb-2">
                 <span className="font-medium text-gray-700">
                   Property Type:
                 </span>
-                <span className="capitalize">{listing.type}</span>
+                <span className="capitalize">{listing?.type}</span>
               </div>
             )}
             {bedrooms && (
@@ -184,12 +189,12 @@ export default function Details({ listing }) {
                 <span>{toilets}</span>
               </div>
             )}
-            {listing.parking_spaces && (
+            {listing?.parking_spaces && (
               <div className="flex justify-between border-b border-gray-100 pb-2">
                 <span className="font-medium text-gray-700">
                   Parking Spaces:
                 </span>
-                <span>{listing.parking_spaces}</span>
+                <span>{listing?.parking_spaces}</span>
               </div>
             )}
             {furnishing && (
@@ -198,29 +203,29 @@ export default function Details({ listing }) {
                 <span className="capitalize">{furnishing}</span>
               </div>
             )}
-            {listing.servicing && (
+            {listing?.servicing && (
               <div className="flex justify-between border-b border-gray-100 pb-2">
                 <span className="font-medium text-gray-700">Servicing:</span>
-                <span className="capitalize">{listing.servicing}</span>
+                <span className="capitalize">{listing?.servicing}</span>
               </div>
             )}
-            {listing.listing_type && (
+            {listing?.listing_type && (
               <div className="flex justify-between border-b border-gray-100 pb-2">
                 <span className="font-medium text-gray-700">Listing Type:</span>
-                <span className="capitalize">{listing.listing_type}</span>
+                <span className="capitalize">{listing?.listing_type}</span>
               </div>
             )}
-            {listing.updatedAt && (
+            {listing?.updatedAt && (
               <div className="flex justify-between border-b border-gray-100 pb-2">
                 <span className="font-medium text-gray-700">Last Updated:</span>
-                <span>{new Date(listing.updatedAt).toLocaleDateString()}</span>
+                <span>{new Date(listing?.updatedAt).toLocaleDateString()}</span>
               </div>
             )}
           </div>
         </section>
 
         {/* Gallery */}
-        <DetailsGallery gallery={gallery} />
+        <DetailsGallery gallery={mergedGallery} />
 
         <PropertyMap lat={latitude} lng={longitude} />
 

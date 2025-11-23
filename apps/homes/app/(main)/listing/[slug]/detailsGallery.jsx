@@ -58,7 +58,7 @@ function DetailsGallery({ gallery }) {
           onClick={() => handleOpen(0)}
         >
           <Image
-            src={gallery[0].url}
+            src={gallery[0]?.url}
             alt="house"
             fill
             className="object-cover"
@@ -75,7 +75,7 @@ function DetailsGallery({ gallery }) {
               className="relative w-full h-full rounded-xl overflow-hidden cursor-pointer"
               onClick={() => handleOpen(i)}
             >
-              <Image src={img.url} alt="house" fill className="object-cover" />
+              <Image src={img?.url} alt="house" fill className="object-cover" />
             </div>
           ))}
         </div>
@@ -90,7 +90,7 @@ function DetailsGallery({ gallery }) {
               className="relative w-full h-full rounded-xl overflow-hidden cursor-pointer"
               onClick={() => handleOpen(i)}
             >
-              <Image src={img.url} alt="house" fill className="object-cover" />
+              <Image src={img?.url} alt="house" fill className="object-cover" />
             </div>
           ))}
         </div>
@@ -105,7 +105,7 @@ function DetailsGallery({ gallery }) {
               className="relative w-full h-full rounded-xl overflow-hidden cursor-pointer"
               onClick={() => handleOpen(i)}
             >
-              <Image src={img.url} alt="house" fill className="object-cover" />
+              <Image src={img?.url} alt="house" fill className="object-cover" />
             </div>
           ))}
         </div>
@@ -120,7 +120,7 @@ function DetailsGallery({ gallery }) {
               onClick={() => handleOpen(0)}
             >
               <Image
-                src={gallery[0].url}
+                src={gallery[0]?.url}
                 alt="house"
                 fill
                 className="object-cover"
@@ -131,7 +131,7 @@ function DetailsGallery({ gallery }) {
               onClick={() => handleOpen(1)}
             >
               <Image
-                src={gallery[1].url}
+                src={gallery[1]?.url}
                 alt="house"
                 fill
                 className="object-cover"
@@ -144,7 +144,7 @@ function DetailsGallery({ gallery }) {
               onClick={() => handleOpen(2)}
             >
               <Image
-                src={gallery[2].url}
+                src={gallery[2]?.url}
                 alt="house"
                 fill
                 className="object-cover"
@@ -157,7 +157,7 @@ function DetailsGallery({ gallery }) {
               onClick={() => handleOpen(3)}
             >
               <Image
-                src={gallery[3].url}
+                src={gallery[3]?.url}
                 alt="house"
                 fill
                 className="object-cover"
@@ -168,7 +168,7 @@ function DetailsGallery({ gallery }) {
               onClick={() => handleOpen(4)}
             >
               <Image
-                src={gallery[4].url}
+                src={gallery[4]?.url}
                 alt="house"
                 fill
                 className="object-cover"
@@ -187,7 +187,7 @@ function DetailsGallery({ gallery }) {
               onClick={() => handleOpen(0)}
             >
               <Image
-                src={displayGallery[0].url}
+                src={displayGallery[0]?.url}
                 alt="house"
                 fill
                 className="object-cover"
@@ -198,7 +198,7 @@ function DetailsGallery({ gallery }) {
               onClick={() => handleOpen(1)}
             >
               <Image
-                src={displayGallery[1].url}
+                src={displayGallery[1]?.url}
                 alt="house"
                 fill
                 className="object-cover"
@@ -211,7 +211,7 @@ function DetailsGallery({ gallery }) {
               onClick={() => handleOpen(2)}
             >
               <Image
-                src={displayGallery[2].url}
+                src={displayGallery[2]?.url}
                 alt="house"
                 fill
                 className="object-cover"
@@ -224,7 +224,7 @@ function DetailsGallery({ gallery }) {
               onClick={() => handleOpen(3)}
             >
               <Image
-                src={displayGallery[3].url}
+                src={displayGallery[3]?.url}
                 alt="house"
                 fill
                 className="object-cover"
@@ -235,7 +235,7 @@ function DetailsGallery({ gallery }) {
               onClick={() => handleOpen(4)}
             >
               <Image
-                src={displayGallery[4].url}
+                src={displayGallery[4]?.url}
                 alt="house"
                 fill
                 className="object-cover brightness-75"
@@ -279,8 +279,8 @@ function DetailsGallery({ gallery }) {
 
             {/* Draggable Image */}
             <motion.img
-              key={gallery[selectedIndex].url}
-              src={gallery[selectedIndex].url}
+              key={gallery[selectedIndex]?.url}
+              src={gallery[selectedIndex]?.url}
               alt="Slide"
               className="max-w-[95vw] max-h-[90vh] rounded-xl object-contain"
               initial={{ x: direction > 0 ? 300 : -300, opacity: 0 }}
