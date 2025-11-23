@@ -86,7 +86,7 @@ export default function HouseRules({ rules }) {
 
   return (
     <section className="mt-12">
-      <h3 className="text-primary font-bold text-xl lg:text-2xl xl:text-[32px] mb-4">
+      <h3 className="text-primary font-bold text-xl lg:text-2xl xl:text-[32px] lg:-tracking-[1.9px] mb-4">
         House Rules
       </h3>
 

@@ -35,7 +35,7 @@ export default function Details({ listing }) {
     : gallery;
   return (
     <div className="container">
-      <div className="  mx-auto">
+      <div className="  mx-auto tracking-tighter">
         {/* Hero Section */}
         <div className="relative h-80 lg:h-[469px] rounded-2xl overflow-hidden">
           <Image
@@ -52,7 +52,10 @@ export default function Details({ listing }) {
                   Home/Rentals/{title}
                 </div>
               </div>
-              <Link href="/" className="btn secBtn btnBig lg:w-[187px]">
+              <Link
+                href="/"
+                className="btn secBtn btnBig lg:w-[187px] shrink-0"
+              >
                 Contact Sales
               </Link>
             </div>
@@ -127,7 +130,7 @@ export default function Details({ listing }) {
           <h3 className="text-primary font-bold text-xl lg:text-2xl xl:text-[32px] tracking-tighter lg:-tracking-[1.9px] ">
             About the property
           </h3>
-          <p className="mt-3 text-2xl text-greyText font-medium lg:tracking-[-1.5px] leading-relaxed">
+          <p className="mt-3 text-2xl text-greyText font-medium  leading-relaxed">
             {description}
           </p>
         </section>
@@ -138,7 +141,7 @@ export default function Details({ listing }) {
             Key Features
           </h3>
 
-          <p className="mt-3 text-2xl text-greyText font-medium lg:tracking-[-1.5px] leading-relaxed">
+          <p className="mt-3 text-2xl text-greyText font-medium  leading-relaxed">
             Amenities available in this property:
           </p>
 
@@ -158,7 +161,7 @@ export default function Details({ listing }) {
             Property Details
           </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-4 rounded-2xl  ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-4 rounded-2xl text-lg ">
             {listing?._id && (
               <div className="flex justify-between border-b border-gray-100 pb-2">
                 <span className="font-medium text-gray-700">Property Ref:</span>
@@ -233,9 +236,12 @@ export default function Details({ listing }) {
 
         {/* Back Button */}
         <div className="mt-20 text-center mb-6 lg:mb-32">
-          <button className="btn secBtn btnBig w-[220px]">
+          <Link
+            href={`/${listing?.listing_type}`}
+            className="btn secBtn btnBig w-[220px] cursor-pointer"
+          >
             Back to Listings
-          </button>
+          </Link>
         </div>
       </div>
     </div>

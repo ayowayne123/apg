@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Loading() {
   return (
-    <div className="h-screen flex flex-col items-center justify-center bg-white text-black fixed z-50 inset-0 w-full">
+    <div className="h-screen flex flex-col items-center justify-center bg-white text-primary fixed z-50 inset-0 w-full">
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -13,7 +13,7 @@ export default function Loading() {
         className="mb-6"
       >
         <Image
-          src="/images/logo.svg"
+          src="/icons/apg-homes.png"
           alt="Loading"
           width={90}
           height={90}
