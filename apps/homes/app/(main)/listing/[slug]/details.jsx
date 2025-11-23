@@ -6,6 +6,7 @@ import Link from "next/link";
 import React from "react";
 import DetailsGallery from "./detailsGallery";
 import PropertyMap from "./propertyMap";
+import HouseRules from "./houseRules";
 
 export default function Details({ listing }) {
   const {
@@ -149,6 +150,7 @@ export default function Details({ listing }) {
             ))}
           </ul>
         </section>
+        <HouseRules rules={listing?.house_rules} />
 
         {/* Property Details */}
         <section className="mt-10">
