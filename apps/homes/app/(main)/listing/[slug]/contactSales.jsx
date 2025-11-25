@@ -33,9 +33,11 @@ export default function ContactSalesButton({ listing }) {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="btn secBtn btnBig lg:w-[187px] shrink-0"
+        className="btn secBtn btnBig lg:w-[187px] w-32 shrink-0 mt-2 self-end"
       >
-        Contact Sales
+        {listing?.listing_type === "shortlet" && "Book Shortlet"}
+        {listing?.listing_type === "rent" && "Make Enquires"}
+        {listing?.listing_type === "sale" && "Contact Sales"}
       </button>
 
       {isOpen && (

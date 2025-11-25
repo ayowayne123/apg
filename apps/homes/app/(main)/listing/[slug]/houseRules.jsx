@@ -85,12 +85,12 @@ export default function HouseRules({ rules }) {
   };
 
   return (
-    <section className="mt-12">
+    <section className="lg:mt-10 mt-6">
       <h3 className="text-primary font-bold text-xl lg:text-2xl xl:text-[32px] lg:-tracking-[1.9px] mb-4">
         House Rules
       </h3>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5">
         {Object.entries(rules).map(([key, value]) => {
           const rule = ruleDefinitions[key];
           if (!rule) return null;
@@ -103,12 +103,14 @@ export default function HouseRules({ rules }) {
           return (
             <div
               key={key}
-              className="flex items-center gap-4 bg-secondaryLight p-4 rounded-[15px]"
+              className="flex items-center gap-4 bg-secondaryLight p-2 md:p-3 lg:p-4 rounded-[15px]"
             >
-              <span className="w-12 h-12 flex items-center justify-center bg-white rounded-full">
-                <Icon size={24} className="text-secondary" />
+              <span className="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                <Icon size={20} className="text-secondary" />
               </span>
-              <span className="text-lg font-medium">{text}</span>
+              <span className="lg:text-lg text-sm md:text-base font-medium">
+                {text}
+              </span>
             </div>
           );
         })}
