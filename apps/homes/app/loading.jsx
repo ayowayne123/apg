@@ -17,7 +17,7 @@ export default function Loading() {
           alt="Loading"
           width={90}
           height={90}
-          className="rounded-full"
+          className="object-contain"
         />
       </motion.div>
 

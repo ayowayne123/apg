@@ -2,11 +2,13 @@
 import Image from "next/image";
 import { MapPin, Home, Ruler, Bath } from "lucide-react";
 import { LuBedDouble } from "react-icons/lu";
+import { IoMdPricetag } from "react-icons/io";
 import Link from "next/link";
 import React from "react";
 import DetailsGallery from "./detailsGallery";
 import PropertyMap from "./propertyMap";
 import HouseRules from "./houseRules";
+import ContactSalesButton from "./contactSales";
 
 export default function Details({ listing }) {
   const {
@@ -52,12 +54,7 @@ export default function Details({ listing }) {
                   Home/Rentals/{title}
                 </div>
               </div>
-              <Link
-                href="/"
-                className="btn secBtn btnBig lg:w-[187px] shrink-0"
-              >
-                Contact Sales
-              </Link>
+              <ContactSalesButton listing={listing} />
             </div>
           </div>
         </div>
@@ -85,7 +82,7 @@ export default function Details({ listing }) {
           {/* Price */}
           <span className="flex items-center gap-2">
             <span className="w-10 h-10 flex items-center justify-center rounded-full bg-white">
-              💰
+              <IoMdPricetag size={20} className="text-secondary" />
             </span>
             {currency === "USD" ? "$" : "₦"}
             {Number(price).toLocaleString()}{" "}
@@ -98,7 +95,7 @@ export default function Details({ listing }) {
             <span className="w-10 h-10 flex items-center justify-center rounded-full bg-white">
               <LuBedDouble size={20} className="text-secondary" />
             </span>
-            {bedrooms} bd
+            {bedrooms} bed
           </span>
 
           {/* Bathrooms */}
@@ -106,7 +103,7 @@ export default function Details({ listing }) {
             <span className="w-10 h-10 flex items-center justify-center rounded-full bg-white">
               <Bath size={20} className="text-secondary" />
             </span>
-            {bathrooms} ba
+            {bathrooms} bath
           </span>
 
           {/* Size */}
@@ -118,11 +115,11 @@ export default function Details({ listing }) {
           </span>
 
           {/* Last Updated (only for shortlets/rentals) */}
-          {["rent", "shortlet"].includes(listing?.listing_type) && (
-            <span className="block text-gray-500 text-sm mt-4 w-full text-right">
+          {/* {["rent", "shortlet"].includes(listing?.listing_type) && (
+            <span className="block text-gray-500 text-sm mt-2 w-full text-right">
               Last updated: {new Date(listing?.updatedAt).toLocaleDateString()}
             </span>
-          )}
+          )} */}
         </div>
 
         {/* About Section */}
