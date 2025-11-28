@@ -53,7 +53,7 @@ export const FILTER_FIELDS = {
     {
       key: "type",
       label: "Property Type",
-      options: ["Studio", "Apartment", "Mini-flat"],
+      options: ["Studio", "Apartment", "Duplex", "Mini-flat"],
     },
     {
       key: "price_min",
@@ -65,10 +65,6 @@ export const FILTER_FIELDS = {
       label: "Max/Night",
       options: ["₦50k", "₦100k", "₦300k+"],
     },
-    {
-      key: "furnishing",
-      label: "Furnishing",
-      options: ["Furnished", "Semi-furnished"],
-    },
+    { key: "bedrooms", label: "Bedrooms", options: ["1", "2", "3", "4+"] },
   ],
 };

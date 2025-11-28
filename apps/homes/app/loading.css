@@ -2,8 +2,8 @@
 .loader {
   width: 40px;
   aspect-ratio: 1;
-  --c: linear-gradient(#000 0 0);
-  --m: radial-gradient(farthest-side, #000 92%, #0000);
+  --c: linear-gradient(#3e07a3 0 0);
+  --m: radial-gradient(farthest-side, #3e07a3 92%, #3e07a300);
   background: var(--c), var(--m), var(--c), var(--m), var(--c), var(--m);
   background-size: 8px 12px, 8px 8px;
   background-repeat: no-repeat;

@@ -53,7 +53,7 @@ export default function Details({ listing }) {
           {Number(price).toLocaleString()}
           {listing_type !== "sale" && (
             <span className="text-lg font-medium text-greyText">
-              /{listing.payment_frequency}
+              /{listing?.payment_frequency}
             </span>
           )}
         </div>
@@ -147,7 +147,7 @@ export default function Details({ listing }) {
       {/* Meta + Contact */}
       <div className="mt-10 flex flex-col lg:flex-row justify-between items-center border-t border-gray-200 pt-6">
         <p className="text-gray-500 text-sm">
-          Property Ref: {listing._id || "—"} • Last updated:{" "}
+          Property Ref: {listing?._id || "—"} • Last updated:{" "}
           {new Date(updatedAt).toLocaleDateString()}
         </p>
         <Link

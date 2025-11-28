@@ -28,8 +28,11 @@ export default function ListingCard({ listing }) {
           <h3 className="text-xl font-bold text-primary tracking-tighter line-clamp-2  leading-tight ">
             {listing.title}
           </h3>
-          <p className="text-lg font-bold">
-            {listing.currency} {listing.price}
+          <p className="text-lg font-bold capitalize">
+            {listing.currency === "USD" ? "$" : "₦"}
+            {Number(listing.price).toLocaleString()}
+            {listing?.listing_type !== "sale" &&
+              `/${listing?.payment_frequency}`}
           </p>
           <p className="text-sm text-greyText flex items-center gap-2">
             {listing.city}

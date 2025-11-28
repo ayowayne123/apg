@@ -42,7 +42,7 @@ export default function RentalsPage() {
       <SearchFilters fields={FILTER_FIELDS.rentals} />
 
       {/* Listings Grid */}
-      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="my-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {loading ? (
           Array.from({ length: 8 }).map((_, i) => (
             <ListingCardSkeleton key={i} />

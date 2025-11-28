@@ -6,7 +6,7 @@ import Integrity from "./home/integrity";
 import Stories from "./home/stories";
 
 export const metadata = {
-  title: "APG Business Hub ",
+  title: "APG Homes  ",
   description:
     "APG Business Hub is your one-stop destination for high-quality gadgets and trusted real estate solutions. We focus on innovation, integrity, and lifestyle enhancement — bridging the gap between technology and property.",
   keywords: [

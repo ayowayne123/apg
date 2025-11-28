@@ -16,16 +16,16 @@ export async function generateMetadata({ params }) {
     }
 
     return {
-      title: `${listing.title} | APG Homes`,
+      title: `${listing?.title} | APG Homes`,
       description:
-        listing.description?.slice(0, 160) || "View property details.",
+        listing?.description?.slice(0, 160) || "View property details.",
       openGraph: {
-        title: listing.title,
-        description: listing.description?.slice(0, 160),
+        title: listing?.title,
+        description: listing?.description?.slice(0, 160),
         images: [
           {
-            url: listing.cover_photo?.url || "/default-image.jpg",
-            alt: listing.title,
+            url: listing?.cover_photo?.url || "/default-image.jpg",
+            alt: listing?.title,
           },
         ],
       },
@@ -59,7 +59,7 @@ export default async function Listing({ params }) {
     console.error("Failed to load listing:", error);
     return (
       <div className="py-20 text-center text-gray-500">
-        Failed to load listing. Please try again later.
+        Failed to load listing?. Please try again later.
       </div>
     );
   }

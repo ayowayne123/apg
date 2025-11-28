@@ -29,7 +29,7 @@
 }
 
 .btnBig {
-  @apply py-7 text-[18px] font-medium tracking-tighter;
+  @apply lg:py-7 py-3 lg:text-[18px] font-medium tracking-tighter;
 }
 @utility container {
   margin-inline: auto;
@@ -52,7 +52,7 @@ h2 {
 }
 
 h1 {
-  @apply text-3xl md:text-5xl lg:text-6xl  xl:text-[64px] font-bold tracking-tighter leading-[130%] lg:leading-[100%];
+  @apply text-3xl md:text-3xl lg:text-6xl  xl:text-[64px] font-bold tracking-tighter leading-[130%] md:leading-[110%] lg:leading-[100%];
 }
 
 .no-scrollbar::-webkit-scrollbar {
