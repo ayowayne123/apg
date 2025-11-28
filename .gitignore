@@ -1,1 +1,8 @@
 node_modules
+
+# Turbo build cache
+.turbo
+apps/*/.turbo
+
+# NPM lockfile (we use pnpm instead)
+package-lock.json
