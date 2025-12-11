@@ -53,7 +53,7 @@ export default function SignupPage() {
   // };
 
   const [form, setForm] = useState({
-    email_or_phone: "",
+    login: "",
     password: "",
     confirm: "",
   });
@@ -82,7 +82,7 @@ export default function SignupPage() {
         },
 
         body: JSON.stringify({
-          email_or_phone: form.email_or_phone,
+          login: form.login,
           password: form.password,
           password_confirmation: form.confirm,
         }),
@@ -96,7 +96,7 @@ export default function SignupPage() {
 
       const data = await res.json();
       toast.success("Account created successfully!");
-      router.push(`/verify?email=${form.email_or_phone}`);
+      router.push(`/verify?email=${form.login}`);
     } catch (err: any) {
       console.error("Error:", err);
       setErrors({
@@ -131,15 +131,13 @@ export default function SignupPage() {
             type="text"
             placeholder="yourId@email.com or 08123456789"
             className={`w-full py-2 mt-2 px-5 h-[52px] focus:outline-primary rounded-lg bg-[#F2F2F2] text-sm placeholder:text-[#A0A3BD] mb-1 ${
-              errors.email_or_phone ? "border border-red-400" : ""
+              errors.login ? "border border-red-400" : ""
             }`}
-            value={form.email_or_phone}
-            onChange={(e) =>
-              setForm({ ...form, email_or_phone: e.target.value })
-            }
+            value={form.login}
+            onChange={(e) => setForm({ ...form, login: e.target.value })}
           />
-          {errors.email_or_phone && (
-            <p className="text-red-500 text-xs">{errors.email_or_phone}</p>
+          {errors.login && (
+            <p className="text-red-500 text-xs">{errors.login}</p>
           )}
         </div>
 

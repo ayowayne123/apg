@@ -16,12 +16,19 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   // Login Checker
   useEffect(() => {
     const token = Cookies.get("apg_token");
     setIsLoggedIn(!!token);
   }, []);
+
+  const handleSearch = () => {
+    if (!searchValue.trim()) return;
+
+    router.push(`/products?search=${encodeURIComponent(searchValue.trim())}`);
+  };
 
   // Close Dropdown
   useEffect(() => {
@@ -51,10 +58,13 @@ export default function Header() {
             <div className="flex items-center w-full bg-white rounded-xl overflow-hidden">
               <input
                 type="text"
-                placeholder="Search gadgets..."
+                placeholder="What are you looking for?"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 className="flex-1 px-4 py-2 text-sm outline-none"
               />
-              <button className="px-4 text-gray-600">
+              <button onClick={handleSearch} className="px-4 text-gray-600">
                 <Search size={20} />
               </button>
             </div>

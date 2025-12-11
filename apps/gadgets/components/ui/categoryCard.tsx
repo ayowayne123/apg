@@ -5,12 +5,14 @@ import Link from "next/link";
 interface CategoryCardProps {
   name: string;
   image: string;
+  slug: string;
 }
 
-export default function CategoryCard({ name, image }: CategoryCardProps) {
+export default function CategoryCard({ name, image, slug }: CategoryCardProps) {
+  const url = slug || name.toLowerCase().replace(/\s+/g, "-");
   return (
     <Link
-      href={`/${name}`}
+      href={`/${url}`}
       className=" h-[350px] group  odd:bg-apgCream even:bg-apgGrey rounded-2xl p-4 hover:shadow-md transition cursor-pointer"
     >
       <div className="relative w-full h-[256px] rounded-2xl overflow-hidden group-hover:grayscale transition">

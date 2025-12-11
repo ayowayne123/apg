@@ -72,7 +72,7 @@ export interface ProductDetail {
   laptop_specifications?: Record<string, string>;
   accessory_specifications?: Record<string, string>;
   rating_average: string;
-  rating_count: string;
+  rating_count: number;
   rating_breakdown: number[];
   tags: string[];
   created_at: string;

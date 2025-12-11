@@ -10,8 +10,10 @@ import ProfileSidebar from "@/components/ui/profileSideBar";
 
 export default function ProfileLayout({
   children,
+  wishlistCount,
 }: {
   children: React.ReactNode;
+  wishlistCount?: number;
 }) {
   const pathname = usePathname();
 
@@ -39,7 +41,13 @@ export default function ProfileLayout({
 
   return (
     <section className=" container py-10 ">
-      <h4 className="text-2xl lg:text-3xl font-bold ">{currentPage}</h4>
+      <h4 className="text-2xl lg:text-3xl font-bold ">
+        {" "}
+        {currentPage}{" "}
+        {currentPage === "WishList" && wishlistCount
+          ? `(${wishlistCount})`
+          : ""}
+      </h4>
       <div className="min-h-screen flex flex-col lg:flex-row mt-10 gap-9">
         {/* Side Bar */}
         <ProfileSidebar />
