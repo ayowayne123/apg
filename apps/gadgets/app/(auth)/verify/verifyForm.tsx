@@ -10,7 +10,7 @@ export default function VerifyForm() {
   const [otp, setOtp] = useState(Array(6).fill(""));
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
   const params = useSearchParams();
-  const email_or_phone = params.get("email");
+  const login = params.get("email");
   const router = useRouter();
 
   const handleChange = (value: string, index: number) => {
@@ -42,7 +42,7 @@ export default function VerifyForm() {
     try {
       const res = await apiFetch("/api/verify", {
         method: "POST",
-        body: JSON.stringify({ email_or_phone, verification_code }),
+        body: JSON.stringify({ login, verification_code }),
       });
 
       // add token

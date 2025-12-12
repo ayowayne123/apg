@@ -3,6 +3,7 @@ const categories = [
     id: 1,
     name: "Smartphones",
     image: "/images/phones.jpg",
+    slug: "smartphones",
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ const categories = [
     id: 4,
     name: "Gadgets",
     image: "/images/phones.jpg",
+    slug: "products",
   },
 ];
 

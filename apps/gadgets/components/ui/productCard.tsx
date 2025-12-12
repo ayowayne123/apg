@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import type { Product } from "@/lib/types/productTypes";
 
 export default function ProductCard({
+  index,
   id,
   title,
   short_description,
@@ -14,7 +15,7 @@ export default function ProductCard({
   price,
   currency,
   discount_percentage,
-}: Product) {
+}: Product & { index: number }) {
   const [favourited, setFavourited] = useState(false);
 
   const toggleFavourite = () => {
@@ -32,7 +33,7 @@ export default function ProductCard({
   return (
     <div
       className={`border border-apgGrey rounded-2xl p-4 flex flex-col hover:shadow-md transition ${
-        id % 2 === 0 ? "bg-apgGrey" : "bg-apgCream"
+        index % 2 !== 0 ? "bg-apgGrey" : "bg-apgCream"
       }`}
     >
       {/* Image */}

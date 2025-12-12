@@ -71,7 +71,7 @@ export default function MyAccountForm() {
     <form onSubmit={handleSubmit} className="space-y-12">
       {/* Banner */}
       <div className="h-[200px] w-full bg-primary rounded-2xl relative ">
-        <div className="absolute -bottom-16 left-12 bg-apgLightYellow rounded-3xl flex items-center justify-center h-[170px] w-[160px] shadow-md">
+        <div className="absolute -bottom-12 left-12 bg-apgLightYellow rounded-3xl flex items-center justify-center h-[170px] w-[160px] shadow-md">
           <div className="relative h-[120px] w-[120px]">
             <Image
               src="/images/vrMan.png"
@@ -85,7 +85,7 @@ export default function MyAccountForm() {
 
       {/* Personal details */}
       <section>
-        <h4 className="text-xl font-semibold mb-4">Personal details</h4>
+        <h4 className="text-xl font-semibold pt-4 mb-4">Personal details</h4>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {[
             { label: "First name", name: "firstName" },
