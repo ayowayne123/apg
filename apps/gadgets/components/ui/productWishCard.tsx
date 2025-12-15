@@ -3,12 +3,26 @@
 import Image from "next/image";
 import { FaTrash } from "react-icons/fa6";
 
+type ProductImage = {
+  url: string;
+  alt?: string | null;
+};
+
+type Product = {
+  id: number;
+  title: string;
+  color: string;
+  price: number | string;
+  stock_availability: "in_stock" | "out_of_stock" | string;
+  cover_photo?: ProductImage;
+};
+
 export default function ProductWishCard({
   product,
   onRemove,
   onAddToCart,
 }: {
-  product: any;
+  product: Product;
   onRemove: (id: number) => void;
   onAddToCart: (id: number) => void;
 }) {
@@ -17,14 +31,14 @@ export default function ProductWishCard({
   return (
     <div
       className={
-        "w-full flex items-center gap-6 p-4 relative  h-52 " +
+        "w-full flex items-center gap-6 p-4 relative h-52 " +
         (outOfStock ? "opacity-50 grayscale" : "")
       }
     >
-      <div className="relative  h-full w-72">
+      <div className="relative h-full w-72">
         <Image
-          src={product?.cover_photo?.url}
-          alt={product.title}
+          src={product.cover_photo?.url ?? "/placeholder.png"}
+          alt={product.cover_photo?.alt || product.title}
           fill
           className="rounded-lg object-contain"
         />
@@ -37,20 +51,19 @@ export default function ProductWishCard({
         </div>
 
         {outOfStock ? (
-          <p className="mt-1 text-red-600 font-bold"></p>
+          <p className="mt-1 text-red-600 font-bold">Out of stock</p>
         ) : (
           <div>
             <p className="mt-1 font-semibold">Price:</p>
-            <p className=" text-gray-800 font-bold text-xl">${product.price}</p>
+            <p className="text-gray-800 font-bold text-xl">${product.price}</p>
           </div>
         )}
       </div>
+
       <div className="self-end flex flex-row gap-2 items-center">
         <button
           disabled={outOfStock}
-          onClick={() => {
-            onAddToCart(product.id);
-          }}
+          onClick={() => onAddToCart(product.id)}
           className={
             "h-12 rounded-full flex items-center justify-center w-[120px] text-sm font-medium tracking-tighter " +
             (outOfStock
@@ -60,6 +73,7 @@ export default function ProductWishCard({
         >
           {outOfStock ? "Out of Stock" : "Add to Cart"}
         </button>
+
         <button
           onClick={() => onRemove(product.id)}
           className="cursor-pointer text-[#F64E60] bg-[#FFEFF0] h-12 w-12 flex items-center justify-center rounded-full hover:text-red-700"

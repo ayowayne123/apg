@@ -6,11 +6,20 @@ import StarRating from "@/components/ui/starRating";
 import bg from "@/public/icons/contourBg.png";
 import { HiBadgeCheck } from "react-icons/hi";
 
-type Props = { params: { slug: string } };
+type ProductImage = {
+  id: number;
+  url: string;
+  alt?: string | null;
+};
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
   try {
-    const product = await getProductBySlug(params.slug);
+    const product = await getProductBySlug(slug);
 
     if (!product?.data) {
       return { title: "Product Not Found | Articulate Plugs and Gadgets" };
@@ -25,8 +34,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function ProductDetailsPage({ params }: Props) {
-  const { slug } = params;
+export default async function ProductDetailsPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
 
   let res;
   try {
@@ -53,7 +66,6 @@ export default async function ProductDetailsPage({ params }: Props) {
     phone_specifications,
     accessory_specifications,
     rating_breakdown,
-    gadget_type,
   } = product;
 
   const allSpecs = {
@@ -104,7 +116,7 @@ export default async function ProductDetailsPage({ params }: Props) {
 
         {/* Right: Gallery */}
         <div className="grid grid-cols-2 gap-4">
-          {gallery?.map((img: any) => (
+          {gallery?.map((img: ProductImage) => (
             <div
               key={img.id}
               className="relative h-full w-full bg-[#EFEFEF] rounded-lg "
