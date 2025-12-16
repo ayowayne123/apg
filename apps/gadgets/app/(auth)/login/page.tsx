@@ -100,7 +100,7 @@ export default function LoginPage() {
       </Link>
 
       <div className="max-w-sm w-full text-center mt-5">
-        Don't have an Account?{" "}
+        Dont have an Account?{" "}
         <Link
           href="/signup"
           className="text-primary hover:text-apgRed font-medium"

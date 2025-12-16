@@ -1,49 +1,39 @@
-const CART_KEY = "apg_guest_cart";
-
-// Get guest cart
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export function getGuestCart() {
   if (typeof window === "undefined") return [];
-  try {
-    return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-  } catch {
-    return [];
-  }
+  return JSON.parse(localStorage.getItem("guest_cart") || "[]");
 }
 
-// Save guest cart
 export function saveGuestCart(cart: any[]) {
   if (typeof window === "undefined") return;
-  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  localStorage.setItem("guest_cart", JSON.stringify(cart));
 }
 
-// Add item
-export function addGuestItem(product: any, qty: number = 1) {
+export function addGuestItem(product: any, qty = 1) {
   const cart = getGuestCart();
   const existing = cart.find((item: any) => item.id === product.id);
 
-  if (existing) {
-    existing.quantity += qty;
-  } else {
-    cart.push({
-      ...product,
-      quantity: qty,
-    });
-  }
+  if (existing) existing.quantity += qty;
+  else cart.push({ ...product, quantity: qty });
 
   saveGuestCart(cart);
   return cart;
 }
 
-// Remove item
-export function removeGuestItem(productId: string) {
-  const cart = getGuestCart().filter((i: any) => i.id !== productId);
+export function removeGuestItem(id: number | string) {
+  const cart = getGuestCart().filter((item: any) => item.id !== id);
   saveGuestCart(cart);
   return cart;
 }
 
-// Clear cart (after merging during login)
+export function updateGuestQuantity(id: number | string, qty: number) {
+  const cart = getGuestCart();
+  const item = cart.find((i: any) => i.id === id);
+  if (item) item.quantity = qty;
+  saveGuestCart(cart);
+  return cart;
+}
+
 export function clearGuestCart() {
-  if (typeof window !== "undefined") {
-    localStorage.removeItem(CART_KEY);
-  }
+  saveGuestCart([]);
 }

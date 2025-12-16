@@ -1,19 +1,16 @@
 "use client";
 import React from "react";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
+
 import { FaUser, FaHeart } from "react-icons/fa6";
 import { BsBagCheckFill } from "react-icons/bs";
-import { RiChatAiFill, RiLogoutCircleRLine } from "react-icons/ri";
+import { RiChatAiFill } from "react-icons/ri";
 import ProfileSidebar from "@/components/ui/profileSideBar";
 
 export default function ProfileLayout({
   children,
-  wishlistCount,
 }: {
   children: React.ReactNode;
-  wishlistCount?: number;
 }) {
   const pathname = usePathname();
 
@@ -41,13 +38,7 @@ export default function ProfileLayout({
 
   return (
     <section className=" container py-10 ">
-      <h4 className="text-2xl lg:text-3xl font-bold ">
-        {" "}
-        {currentPage}{" "}
-        {currentPage === "WishList" && wishlistCount
-          ? `(${wishlistCount})`
-          : ""}
-      </h4>
+      <h4 className="text-2xl lg:text-3xl font-bold "> {currentPage} </h4>
       <div className="min-h-screen flex flex-col lg:flex-row mt-10 gap-9">
         {/* Side Bar */}
         <ProfileSidebar />

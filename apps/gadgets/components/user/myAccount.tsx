@@ -5,17 +5,33 @@ import Image from "next/image";
 import toast from "react-hot-toast";
 import { getUserProfile, updateUserProfile } from "@calls/userCalls";
 
+type UserProfileForm = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  password: string;
+  houseNumber: string;
+  street: string;
+  city: string;
+  state: string;
+  landmark: string;
+};
+
 export default function MyAccountForm() {
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<any>(null);
-  const [originalUser, setOriginalUser] = useState<any>(null);
+  const [user, setUser] = useState<UserProfileForm | null>(null);
+  const [originalUser, setOriginalUser] = useState<UserProfileForm | null>(
+    null
+  );
 
   useEffect(() => {
     async function fetchUser() {
       try {
         const data = await getUserProfile();
-        const formatted = {
+
+        const formatted: UserProfileForm = {
           firstName: data.first_name || "",
           lastName: data.last_name || "",
           email: data.email || "",
@@ -27,10 +43,15 @@ export default function MyAccountForm() {
           state: data.billing_state || "",
           landmark: data.billing_landmark || "",
         };
+
         setUser(formatted);
         setOriginalUser(formatted);
-      } catch (err: any) {
-        toast.error(err.message || "Failed to load user info");
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          toast.error(err.message);
+        } else {
+          toast.error("Failed to load user info");
+        }
       } finally {
         setLoading(false);
       }
@@ -40,11 +61,15 @@ export default function MyAccountForm() {
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    setUser((prev) => (prev ? { ...prev, [name]: value } : prev));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!user) return;
+
     try {
       await updateUserProfile({
         first_name: user.firstName,
@@ -57,10 +82,15 @@ export default function MyAccountForm() {
         billing_state: user.state,
         billing_landmark: user.landmark,
       });
+
       toast.success("Profile updated successfully");
       setIsEditing(false);
-    } catch (err: any) {
-      toast.error(err.message || "Failed to update profile");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error("Failed to update profile");
+      }
     }
   };
 
@@ -70,7 +100,7 @@ export default function MyAccountForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-12">
       {/* Banner */}
-      <div className="h-[200px] w-full bg-primary rounded-2xl relative ">
+      <div className="h-[200px] w-full bg-primary rounded-2xl relative">
         <div className="absolute -bottom-12 left-12 bg-apgLightYellow rounded-3xl flex items-center justify-center h-[170px] w-[160px] shadow-md">
           <div className="relative h-[120px] w-[120px]">
             <Image
@@ -86,6 +116,7 @@ export default function MyAccountForm() {
       {/* Personal details */}
       <section>
         <h4 className="text-xl font-semibold pt-4 mb-4">Personal details</h4>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {[
             { label: "First name", name: "firstName" },
@@ -99,7 +130,7 @@ export default function MyAccountForm() {
               </label>
               <input
                 name={name}
-                value={user[name] || ""}
+                value={user[name as keyof UserProfileForm]}
                 onChange={handleChange}
                 disabled={!isEditing}
                 className="input"
@@ -112,6 +143,7 @@ export default function MyAccountForm() {
       {/* Billing details */}
       <section>
         <h4 className="text-xl font-semibold mb-4">Billing details</h4>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {[
             { label: "House Number", name: "houseNumber" },
@@ -126,7 +158,7 @@ export default function MyAccountForm() {
               </label>
               <input
                 name={name}
-                value={user[name] || ""}
+                value={user[name as keyof UserProfileForm]}
                 onChange={handleChange}
                 disabled={!isEditing}
                 className="input"
@@ -140,7 +172,7 @@ export default function MyAccountForm() {
       {!isEditing ? (
         <div
           onClick={() => setIsEditing(true)}
-          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-3 rounded-full transition-all duration-300 w-40 flex items-center justify-center hover:cursor-pointer"
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-3 rounded-full w-40 flex items-center justify-center cursor-pointer"
         >
           Edit profile
         </div>
@@ -148,7 +180,7 @@ export default function MyAccountForm() {
         <>
           <button
             type="submit"
-            className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-full transition-all duration-300 w-40 flex items-center justify-center hover:cursor-pointer"
+            className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-full w-40"
           >
             Update profile
           </button>
@@ -158,7 +190,7 @@ export default function MyAccountForm() {
               setUser(originalUser);
               setIsEditing(false);
             }}
-            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 rounded-full transition-all duration-300 w-40 flex items-center justify-center hover:cursor-pointer"
+            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 rounded-full w-40 flex items-center justify-center cursor-pointer"
           >
             Cancel
           </div>

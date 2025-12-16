@@ -3,9 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface CategoryCardProps {
+  id: number;
   name: string;
   image: string;
-  slug: string;
+  slug?: string;
 }
 
 export default function CategoryCard({ name, image, slug }: CategoryCardProps) {

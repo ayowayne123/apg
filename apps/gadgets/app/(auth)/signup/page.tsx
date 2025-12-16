@@ -3,7 +3,6 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { apiFetch } from "@/lib/api/api";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 
@@ -94,7 +93,6 @@ export default function SignupPage() {
         throw new Error(errorData?.message || "Signup failed");
       }
 
-      const data = await res.json();
       toast.success("Account created successfully!");
       router.push(`/verify?email=${form.login}`);
     } catch (err: any) {

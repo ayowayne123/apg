@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { FaHeart } from "react-icons/fa";
 import { useState } from "react";
+import { useCart } from "@/lib/cart/useCart";
 import toast from "react-hot-toast";
 import type { Product } from "@/lib/types/productTypes";
 
@@ -17,6 +18,23 @@ export default function ProductCard({
   discount_percentage,
 }: Product & { index: number }) {
   const [favourited, setFavourited] = useState(false);
+
+  const { add } = useCart();
+
+  const handleAdd = async () => {
+    await add(
+      {
+        id,
+        title,
+        price: Number(price),
+        currency,
+        cover_photo,
+      },
+      1
+    );
+
+    toast.success(`${title} added to cart`);
+  };
 
   const toggleFavourite = () => {
     setFavourited(!favourited);
@@ -58,11 +76,11 @@ export default function ProductCard({
           {title}
         </h3>
 
-        {/* Price */}
         <div className="mt-1 flex flex-row gap-1">
           <p className="font-bold text-lg tracking-tight">
-            {parseFloat(price).toFixed(2)} {currency}
+            {Number(price).toFixed(2)} {currency}
           </p>
+
           {hasDiscount && (
             <p className="text-apgRed text-sm font-semibold">
               -{discount_percentage}% off
@@ -70,15 +88,16 @@ export default function ProductCard({
           )}
         </div>
 
-        {/* Description */}
         <p className="text-greyText text-sm mt-3 line-clamp-3 tracking-tight">
           {short_description}
         </p>
       </div>
 
-      {/* Buttons */}
       <div className="flex justify-between items-center mt-4">
-        <button className="btn btnSmall pryBtn w-[134px]">Add to Cart</button>
+        <button onClick={handleAdd} className="btn btnSmall pryBtn w-[134px]">
+          Add to Cart
+        </button>
+
         <button
           onClick={toggleFavourite}
           className={`text-xl rounded-full flex items-center justify-center h-[53px] w-[53px] 
