@@ -26,7 +26,7 @@ export default function ProductWishCard({
   onRemove: (id: number) => void;
   onAddToCart: (id: number) => void;
 }) {
-  const outOfStock = product.stock_availability !== "in_stock";
+  const outOfStock = product?.stock_availability !== "in_stock";
 
   return (
     <div

@@ -7,6 +7,7 @@ import { FaUser, FaHeart } from "react-icons/fa6";
 import { BsBagCheckFill } from "react-icons/bs";
 import { RiChatAiFill, RiLogoutCircleRLine } from "react-icons/ri";
 import Cookies from "js-cookie";
+import { getGuestSessionId } from "@/lib/cart/session";
 import logo from "@/public/icons/apg-gadgets.png";
 import Link from "next/link";
 
@@ -22,6 +23,12 @@ export default function Header() {
   useEffect(() => {
     const token = Cookies.get("apg_token");
     setIsLoggedIn(!!token);
+  }, []);
+
+  //Session Id Creator
+  useEffect(() => {
+    const token = Cookies.get("apg_token");
+    if (!token) getGuestSessionId();
   }, []);
 
   const handleSearch = () => {
@@ -126,7 +133,7 @@ export default function Header() {
                   </Link>
 
                   <Link
-                    href="/wishlist"
+                    href="/account/wishlist"
                     className="flex items-center gap-3 py-4.5 hover:text-primary"
                   >
                     <span className="h-11 w-11 border-primary border bg-white rounded-full text-primary flex items-center justify-center">
@@ -138,7 +145,7 @@ export default function Header() {
                   </Link>
 
                   <Link
-                    href="/orders"
+                    href="/account/orders"
                     className="flex items-center gap-3 py-4.5 hover:text-primary"
                   >
                     <span className="h-11 w-11 border-primary border bg-white rounded-full text-primary flex items-center justify-center">
@@ -150,7 +157,7 @@ export default function Header() {
                   </Link>
 
                   <Link
-                    href="/reviews"
+                    href="/account/reviews"
                     className="flex items-center gap-3 py-4.5 hover:text-primary"
                   >
                     <span className="h-11 w-11 border-primary border bg-white rounded-full text-primary flex items-center justify-center">

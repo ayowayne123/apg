@@ -12,7 +12,7 @@ export async function apiFetch<T = any>(
     params,
     withCredentials = false,
   }: {
-    method?: "GET" | "POST" | "PUT" | "DELETE";
+    method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
     body?: any;
     headers?: Record<string, string>;
     params?: Record<string, any>;

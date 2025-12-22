@@ -13,13 +13,12 @@ export default function PhonesSearch() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
+  const search = searchParams.get("search") || "";
   const brand = searchParams.get("brand")?.split(",") || [];
   const color = searchParams.get("color")?.split(",") || [];
   const priceFrom = searchParams.get("minPrice") || "";
   const priceTo = searchParams.get("maxPrice") || "";
   const page = Number(searchParams.get("page") || 1);
-  const search = searchParams.get("search") || "";
 
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
@@ -33,12 +32,12 @@ export default function PhonesSearch() {
     setLoading(true);
 
     const res = await getSearchedSmartPhones({
+      search,
       page,
       brand,
       color,
       priceFrom,
       priceTo,
-      search,
     });
 
     setProducts(res.data);
@@ -65,8 +64,11 @@ export default function PhonesSearch() {
     <div className="flex gap-6 py-6">
       <SearchFilters
         categories={[
-          { name: "New Phones", href: "/smartphones/brand-new" },
-          { name: "Uk Used Phones", href: "/smartphones/uk-used" },
+          { name: "All Gadgets", href: "/products" },
+          { name: "Android Phones", href: "/smartphones/android" },
+          { name: "iPhones", href: "/smartphones/iphone" },
+          { name: "UK Used Phones", href: "/smartphones/uk-used" },
+          { name: "Gaming Phones", href: "/smartphones/gaming-phones" },
         ]}
         brands={["Apple", "Samsung", "Tecno", "Infinix", "Xiaomi"]}
         colors={["Black", "White", "Blue", "Gold", "Red"]}

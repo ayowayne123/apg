@@ -78,8 +78,8 @@ export default function ProductsSearch() {
       {/* LEFT FILTER SIDEBAR */}
       <SearchFilters
         categories={[
-          { name: "Phones", href: "/phones" },
-          { name: "Computers", href: "/laptops" },
+          { name: "Phones", href: "/smartphones" },
+          { name: "Computers", href: "/computers" },
           { name: "Accessories", href: "/accessories" },
         ]}
         brands={["Apple", "Samsung", "Huawei", "HP", "Dell"]}
