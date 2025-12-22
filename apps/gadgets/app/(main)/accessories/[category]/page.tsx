@@ -1,11 +1,16 @@
 import { notFound } from "next/navigation";
 import { CATEGORY_CONFIG } from "@/app/config/categories";
 import AccessoriesCategory from "./category";
+import { Suspense } from "react";
 
 export async function generateStaticParams() {
   return CATEGORY_CONFIG.accessories.map((c) => ({
     category: c.slug,
   }));
+}
+
+function Fallback() {
+  return <>loading...</>;
 }
 
 export default async function AccessoriesCategoryPage({
@@ -20,7 +25,9 @@ export default async function AccessoriesCategoryPage({
 
   return (
     <div className="container">
-      <AccessoriesCategory config={config} />
+      <Suspense fallback={<Fallback />}>
+        <AccessoriesCategory config={config} />
+      </Suspense>
     </div>
   );
 }

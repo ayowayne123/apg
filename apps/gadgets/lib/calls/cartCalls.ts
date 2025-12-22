@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { apiFetch } from "@/lib/api/api";
 import Cookies from "js-cookie";
 import { getGuestSessionId } from "@/lib/cart/session";

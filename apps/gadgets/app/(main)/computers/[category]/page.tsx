@@ -1,11 +1,16 @@
 import { notFound } from "next/navigation";
 import { CATEGORY_CONFIG } from "@/app/config/categories";
 import ComputersCategory from "./category";
+import { Suspense } from "react";
 
 export async function generateStaticParams() {
   return CATEGORY_CONFIG.computers.map((c) => ({
     category: c.slug,
   }));
+}
+
+function Fallback() {
+  return <>loading...</>;
 }
 
 export default async function ComputersCategoryPage({
@@ -20,7 +25,9 @@ export default async function ComputersCategoryPage({
 
   return (
     <div className="container">
-      <ComputersCategory config={config} />
+      <Suspense fallback={<Fallback />}>
+        <ComputersCategory config={config} />
+      </Suspense>
     </div>
   );
 }

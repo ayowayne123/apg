@@ -52,32 +52,19 @@ export default function SmartPhonesCategory({ config }: any) {
           { name: "All SmartPhones", href: "/smartphones" },
         ]}
         enabled={config.filters}
-        brands={["Apple", "Samsung", "Oraimo", "Anker", "Baseus"]}
-        colors={["Black", "White", "Red", "Blue"]}
-        powerOptions={["5W", "10W", "15W", "20W", "30W", "65W", "100W"]}
-        connectivityOptions={[
-          "USB-A",
-          "USB-C",
-          "Lightning",
-          "Wireless",
-          "Bluetooth",
-          "Aux",
-        ]}
-        materialOptions={[
-          "Silicone",
-          "Leather",
-          "Plastic",
-          "Glass",
-          "TPU",
-          "Fabric",
-        ]}
-        compatibilityOptions={[
-          "iPhone",
+        brands={[
+          "Apple",
           "Samsung",
           "Tecno",
           "Infinix",
-          "Universal",
+          "Xiaomi",
+          "Oppo",
+          "Vivo",
         ]}
+        colors={["Black", "White", "Silver", "Gold", "Blue", "Green", "Purple"]}
+        storageOptions={["64GB", "128GB", "256GB", "512GB", "1TB"]}
+        ramOptions={["2GB", "3GB", "4GB", "6GB", "8GB", "12GB", "16GB"]}
+        conditionOptions={["Brand New", "UK Used", "Refurbished"]}
       />
 
       <div className="flex-1">

@@ -1,11 +1,15 @@
 import { notFound } from "next/navigation";
 import { CATEGORY_CONFIG } from "@/app/config/categories";
 import SmartPhonesCategory from "./category";
+import { Suspense } from "react";
 
 export async function generateStaticParams() {
   return CATEGORY_CONFIG.smartphones.map((c) => ({
     category: c.slug,
   }));
+}
+function Fallback() {
+  return <>loading...</>;
 }
 
 export default async function SmartPhonesCategoryPage({
@@ -20,7 +24,9 @@ export default async function SmartPhonesCategoryPage({
 
   return (
     <div className="container">
-      <SmartPhonesCategory config={config} />
+      <Suspense fallback={<Fallback />}>
+        <SmartPhonesCategory config={config} />
+      </Suspense>
     </div>
   );
 }

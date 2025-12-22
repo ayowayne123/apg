@@ -5,9 +5,10 @@ import ProductWishCard from "@/components/ui/productWishCard";
 import toast from "react-hot-toast";
 import { getWishlist, removeFromWishlist } from "@/lib/calls/userCalls";
 import { addToCart } from "@/lib/calls/cartCalls";
+import { Product } from "@/lib/types/productTypes";
 
 export default function WishlistPage() {
-  const [wishlist, setWishlist] = useState<any[]>([]);
+  const [wishlist, setWishlist] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Fetch wishlist
