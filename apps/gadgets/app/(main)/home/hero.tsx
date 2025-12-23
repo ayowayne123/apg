@@ -101,7 +101,7 @@ export default function HeroSlider() {
             </p>
             <div className="flex md:flex-row flex-col gap-6 mt-6 lg:mt-16">
               <Link
-                href="/"
+                href="/products"
                 className={`btn btnBig  w-[187px] transition ${
                   slide.id % 2 === 0 ? "pryBtn" : "altBtn"
                 }`}

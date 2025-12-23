@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import SearchFilters from "@/components/ui/categoryFilters";
-import SortSelect from "@/components/ui/sortSelect";
 import { getSearchedComputers } from "@/lib/calls/productCalls";
 import ProductCard from "@/components/ui/productCard";
 import type { Product } from "@/lib/types/productTypes";
+import ProductHeader from "@/components/ui/productHeader";
 
 export default function ComputersCategory({ config }: any) {
   const searchParams = useSearchParams();
@@ -61,13 +61,16 @@ export default function ComputersCategory({ config }: any) {
       />
 
       <div className="flex-1">
-        <div className="flex justify-between items-center">
-          <h4 className="text-2xl font-semibold mb-1">{config.title}</h4>
-          <SortSelect />
-        </div>
-        <p className="text-gray-600 mb-6">
-          {loading ? "Loading..." : `${meta.total || 0} results found`}
-        </p>
+        <ProductHeader
+          search={search}
+          title={config.title}
+          mainCategory="Computers"
+          mainHref="/computers"
+          subCategory={config.title}
+          subHref={config.slug}
+          loading={loading}
+          total={meta.total}
+        />
 
         {!loading && products.length === 0 && (
           <div className="text-center py-20 text-gray-500">

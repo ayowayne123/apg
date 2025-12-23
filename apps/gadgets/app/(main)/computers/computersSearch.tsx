@@ -7,12 +7,14 @@ import SearchFilters from "@/components/ui/searchFilters";
 import { getSearchedComputers } from "@/lib/calls/productCalls";
 import ProductCard from "@/components/ui/productCard";
 import type { Product } from "@/lib/types/productTypes";
+import ProductHeader from "@/components/ui/productHeader";
 
 export default function ComputersSearch() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const search = searchParams.get("search") || "";
+  const sort = searchParams.get("sort") || "";
   const brand = searchParams.get("brand")?.split(",") || [];
   const priceFrom = searchParams.get("minPrice") || "";
   const priceTo = searchParams.get("maxPrice") || "";
@@ -35,6 +37,7 @@ export default function ComputersSearch() {
       brand,
       priceFrom,
       priceTo,
+      sort,
     });
 
     setProducts(res.data);
@@ -75,11 +78,14 @@ export default function ComputersSearch() {
       />
 
       <div className="flex-1">
-        <h4 className="text-2xl font-semibold mb-1">Computers</h4>
-
-        <p className="text-gray-600 mb-6">
-          {loading ? "Loading..." : `${meta.total || 0} results found`}
-        </p>
+        <ProductHeader
+          search={search}
+          title="Computers"
+          mainCategory="Computers"
+          mainHref="/computers"
+          loading={loading}
+          total={meta.total}
+        />
 
         {!loading && products.length === 0 && (
           <div className="text-center py-20 text-gray-500">

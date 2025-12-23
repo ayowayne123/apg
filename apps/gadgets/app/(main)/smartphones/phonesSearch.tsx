@@ -3,17 +3,18 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import Link from "next/link";
 import SearchFilters from "@/components/ui/searchFilters";
 import { getSearchedSmartPhones } from "@/lib/calls/productCalls";
 import ProductCard from "@/components/ui/productCard";
 import type { Product } from "@/lib/types/productTypes";
+import ProductHeader from "@/components/ui/productHeader";
 
 export default function PhonesSearch() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const search = searchParams.get("search") || "";
+  const sort = searchParams.get("sort") || "";
   const brand = searchParams.get("brand")?.split(",") || [];
   const color = searchParams.get("color")?.split(",") || [];
   const priceFrom = searchParams.get("minPrice") || "";
@@ -36,6 +37,7 @@ export default function PhonesSearch() {
       page,
       brand,
       color,
+      sort,
       priceFrom,
       priceTo,
     });
@@ -77,15 +79,14 @@ export default function PhonesSearch() {
 
       {/* RIGHT SIDE */}
       <div className="flex-1">
-        <div className="text-sm text-gray-500 mb-3">
-          <Link href="/">Home</Link> / <span>Phones</span>
-        </div>
-
-        <h4 className="text-2xl font-semibold mb-1">Phones</h4>
-
-        <p className="text-gray-600 mb-6">
-          {loading ? "Loading..." : `${meta.total || 0} results found`}
-        </p>
+        <ProductHeader
+          search={search}
+          title="Phones"
+          mainCategory="Smartphones"
+          mainHref="/smartphones"
+          loading={loading}
+          total={meta.total}
+        />
 
         {!loading && products.length === 0 && (
           <div className="text-center py-20 text-gray-500">

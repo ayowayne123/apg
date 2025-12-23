@@ -8,12 +8,13 @@ import SearchFilters from "@/components/ui/searchFilters";
 import { getSearchedProducts } from "@/lib/calls/productCalls";
 import ProductCard from "@/components/ui/productCard";
 import type { Product } from "@/lib/types/productTypes";
+import ProductHeader from "@/components/ui/productHeader";
 
 export default function ProductsSearch() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
+  const sort = searchParams.get("sort") || "";
   const search = searchParams.get("search") || "";
   const brand = searchParams.get("brand")?.split(",") || [];
   const color = searchParams.get("color")?.split(",") || [];
@@ -37,6 +38,7 @@ export default function ProductsSearch() {
       page,
       search,
       brand,
+      sort,
       color,
       priceFrom,
       priceTo,
@@ -89,27 +91,12 @@ export default function ProductsSearch() {
 
       {/* RIGHT SIDE */}
       <div className="flex-1">
-        {/* Breadcrumb */}
-        <div className="text-sm text-gray-500 mb-3">
-          <Link href="/" className=" hover:text-primary">
-            Home
-          </Link>
-          /
-          <Link href="/products" className=" hover:text-primary">
-            Products
-          </Link>
-          {search && <span>/ {search}</span>}
-        </div>
-
-        {/* Title */}
-        <h4 className="text-2xl font-semibold tracking-tighter mb-1">
-          Showing Results {search && <>for {search}</>}
-        </h4>
-
-        {/* Results count */}
-        <p className="text-gray-600 mb-6">
-          {loading ? "Loading..." : `${meta.total || 0} results found`}
-        </p>
+        <ProductHeader
+          search={search}
+          title="Products"
+          loading={loading}
+          total={meta.total}
+        />
 
         {/* No results */}
         {!loading && products.length === 0 && (

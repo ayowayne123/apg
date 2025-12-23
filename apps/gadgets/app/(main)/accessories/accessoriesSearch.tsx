@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import SearchFilters from "@/components/ui/searchFilters";
 import { getSearchedAccessories } from "@/lib/calls/productCalls";
 import ProductCard from "@/components/ui/productCard";
 import type { Product } from "@/lib/types/productTypes";
+import ProductHeader from "@/components/ui/productHeader";
 
 export default function AccessoriesSearch() {
   const router = useRouter();
@@ -16,6 +16,7 @@ export default function AccessoriesSearch() {
   const brand = searchParams.get("brand")?.split(",") || [];
   const color = searchParams.get("color")?.split(",") || [];
   const priceFrom = searchParams.get("minPrice") || "";
+  const sort = searchParams.get("sort") || "";
   const priceTo = searchParams.get("maxPrice") || "";
   const page = Number(searchParams.get("page") || 1);
 
@@ -35,6 +36,7 @@ export default function AccessoriesSearch() {
       search,
       page,
       brand,
+      sort,
       color,
       priceFrom,
       priceTo,
@@ -80,12 +82,14 @@ export default function AccessoriesSearch() {
       />
 
       <div className="flex-1">
-        <h4 className="text-2xl font-semibold mb-1">Accessories</h4>
-
-        <p className="text-gray-600 mb-6">
-          {loading ? "Loading..." : `${meta.total || 0} results found`}
-        </p>
-
+        <ProductHeader
+          search={search}
+          title="Accessories"
+          mainCategory="Accessories"
+          mainHref="/accessories"
+          loading={loading}
+          total={meta.total}
+        />
         {!loading && products.length === 0 && (
           <div className="text-center py-20 text-gray-500">
             No accessories found.
