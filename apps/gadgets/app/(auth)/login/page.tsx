@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import { apiFetch } from "@/lib/api/api";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
+import { getGuestSessionId } from "@/lib/cart/session";
 
 export default function LoginPage() {
   const [form, setForm] = useState({ login: "", password: "" });
@@ -15,11 +16,15 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    const guestSessionId = getGuestSessionId();
     try {
       const res = await apiFetch("/api/login", {
         method: "POST",
         body: JSON.stringify(form),
+        headers: {
+          "Content-Type": "application/json",
+          ...(guestSessionId && { "X-SESSION-ID": guestSessionId }),
+        },
       });
 
       const { token, user } = res;

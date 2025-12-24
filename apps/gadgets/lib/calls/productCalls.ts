@@ -13,6 +13,7 @@ function buildSearchParams(
   {
     page = 1,
     search = "",
+    sort = "",
     brand = [],
     color = [],
     storage = [],
@@ -20,9 +21,11 @@ function buildSearchParams(
     size = [],
     priceFrom = "",
     priceTo = "",
+    item_subtype = "",
   }: {
     page?: number;
     search?: string;
+    sort?: string;
     brand?: string[];
     color?: string[];
     storage?: string[];
@@ -30,7 +33,9 @@ function buildSearchParams(
     size?: string[];
     priceFrom?: string | number;
     priceTo?: string | number;
+    item_subtype?: string;
   },
+
   extraParams: Record<string, string> = {}
 ) {
   const params = new URLSearchParams();
@@ -40,6 +45,9 @@ function buildSearchParams(
 
   // Basic search
   if (search) params.append("search", search);
+  if (sort) params.append("sort", sort);
+
+  if (item_subtype) params.append("item_subtype", item_subtype);
 
   // Multi-select arrays
   if (brand.length > 0) params.append("brand", brand.join(","));
@@ -87,6 +95,7 @@ export async function getSearchedProducts(filters: {
   size?: string[];
   priceFrom?: string | number;
   priceTo?: string | number;
+  sort?: string;
 }): Promise<PaginatedProductsResponse> {
   const query = buildSearchParams(filters);
 
@@ -109,6 +118,8 @@ export async function getSearchedSmartPhones(filters: {
   size?: string[];
   priceFrom?: string | number;
   priceTo?: string | number;
+  item_subtype?: string;
+  sort?: string;
 }): Promise<PaginatedProductsResponse> {
   const query = buildSearchParams(filters, {
     gadget_type: "smartphone",
@@ -126,6 +137,7 @@ export async function getSearchedSmartPhones(filters: {
 export async function getSearchedAccessories(filters: {
   page?: number;
   search?: string;
+  sort?: string;
   brand?: string[];
   color?: string[];
   storage?: string[];
@@ -133,6 +145,7 @@ export async function getSearchedAccessories(filters: {
   size?: string[];
   priceFrom?: string | number;
   priceTo?: string | number;
+  item_subtype?: string;
 }): Promise<PaginatedProductsResponse> {
   const query = buildSearchParams(filters, {
     gadget_type: "accessory",
@@ -152,11 +165,13 @@ export async function getSearchedComputers(filters: {
   search?: string;
   brand?: string[];
   color?: string[];
+  sort?: string;
   storage?: string[];
   ram?: string[];
   size?: string[];
   priceFrom?: string | number;
   priceTo?: string | number;
+  item_subtype?: string;
 }): Promise<PaginatedProductsResponse> {
   const query = buildSearchParams(filters, {
     gadget_type: "computer",

@@ -29,7 +29,7 @@ export async function updateUserProfile(data: {
 
 // Get user wishlist
 export async function getWishlist() {
-  return apiFetch("/api/user/wishlist", {
+  return apiFetch("/api/favorites", {
     method: "GET",
     withCredentials: true,
   });
@@ -37,16 +37,15 @@ export async function getWishlist() {
 
 // Add product to wishlist
 export async function addToWishlist(productId: string) {
-  return apiFetch("/api/user/wishlist", {
+  return apiFetch(`/api/products/${productId}/favorite`, {
     method: "POST",
-    body: JSON.stringify({ product_id: productId }),
     withCredentials: true,
   });
 }
 
 // Remove product from wishlist
 export async function removeFromWishlist(productId: string) {
-  return apiFetch(`/api/user/wishlist/${productId}`, {
+  return apiFetch(`/api/products/${productId}/favorite`, {
     method: "DELETE",
     withCredentials: true,
   });

@@ -12,7 +12,10 @@ export interface Product {
     hotspot: string | null;
   };
   price: string;
+  color: string;
+  brand: string;
   currency: string;
+  stock_availability: string;
   discount_percentage: string;
   created_at: string;
   updated_at: string;

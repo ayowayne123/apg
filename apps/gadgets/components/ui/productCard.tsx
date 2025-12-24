@@ -3,9 +3,17 @@
 import Image from "next/image";
 import { FaHeart } from "react-icons/fa";
 import { useState } from "react";
-import { useCart } from "@/lib/cart/useCart";
 import toast from "react-hot-toast";
 import type { Product } from "@/lib/types/productTypes";
+import { addToCart } from "@/lib/calls/cartCalls";
+import Cookies from "js-cookie";
+import { addToWishlist, removeFromWishlist } from "@/lib/calls/userCalls";
+import { useRouter } from "next/navigation";
+
+interface ProductCardProps extends Product {
+  index: number;
+  sessionId?: string; // optional for guest users
+}
 
 export default function ProductCard({
   index,
@@ -16,32 +24,46 @@ export default function ProductCard({
   price,
   currency,
   discount_percentage,
-}: Product & { index: number }) {
+}: ProductCardProps) {
   const [favourited, setFavourited] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-  const { add } = useCart();
+  const isLoggedIn = Boolean(Cookies.get("apg_token"));
 
-  const handleAdd = async () => {
-    await add(
-      {
-        id,
-        title,
-        price: Number(price),
-        currency,
-        cover_photo,
-      },
-      1
-    );
+  const toggleFavourite = async () => {
+    if (!isLoggedIn) {
+      toast.error("Please log in to use Wishlist");
+      router.push(`/login?redirect=/products`);
+      return;
+    }
 
-    toast.success(`${title} added to cart`);
+    try {
+      if (favourited) {
+        await removeFromWishlist(String(id));
+        toast.success(`${title} removed from Wishlist`);
+      } else {
+        await addToWishlist(String(id));
+        toast.success(`${title} added to WishList`);
+      }
+
+      setFavourited((prev) => !prev);
+    } catch (error) {
+      console.error("Wishlist error:", error);
+      toast.error("Could not update favourites");
+    }
   };
 
-  const toggleFavourite = () => {
-    setFavourited(!favourited);
-    if (!favourited) {
-      toast.success(`${title} added to favourites`);
-    } else {
-      toast.error(`${title} removed from favourites`);
+  const handleAddToCart = async () => {
+    setLoading(true);
+    try {
+      await addToCart({ productId: id, quantity: 1 });
+      toast.success(`${title} added to cart`);
+    } catch (error) {
+      console.error("Add to cart error:", error);
+      toast.error(`Failed to add ${title} to cart`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -54,7 +76,7 @@ export default function ProductCard({
         index % 2 !== 0 ? "bg-apgGrey" : "bg-apgCream"
       }`}
     >
-      {/* Image */}
+      {/* Product Image */}
       <div className="relative w-full h-64 bg-white border border-borderGrey rounded-2xl overflow-hidden">
         {cover_photo?.url ? (
           <Image
@@ -70,13 +92,13 @@ export default function ProductCard({
         )}
       </div>
 
-      {/* Info */}
+      {/* Product Info */}
       <div className="mt-4 flex flex-col flex-grow">
         <h3 className="font-bold tracking-[-1.44px] text-xl line-clamp-2">
           {title}
         </h3>
 
-        <div className="mt-1 flex flex-row gap-1">
+        <div className="mt-1 flex flex-row gap-2 items-center">
           <p className="font-bold text-lg tracking-tight">
             {Number(price).toFixed(2)} {currency}
           </p>
@@ -88,14 +110,23 @@ export default function ProductCard({
           )}
         </div>
 
-        <p className="text-greyText text-sm mt-3 line-clamp-3 tracking-tight">
-          {short_description}
-        </p>
+        {short_description && (
+          <p className="text-greyText text-sm mt-3 line-clamp-3 tracking-tight">
+            {short_description}
+          </p>
+        )}
       </div>
 
+      {/* Actions */}
       <div className="flex justify-between items-center mt-4">
-        <button onClick={handleAdd} className="btn btnSmall pryBtn w-[134px]">
-          Add to Cart
+        <button
+          onClick={handleAddToCart}
+          disabled={loading}
+          className={`btn btnSmall pryBtn w-[134px] ${
+            loading ? "opacity-60 cursor-not-allowed" : ""
+          }`}
+        >
+          {loading ? "Adding..." : "Add to Cart"}
         </button>
 
         <button
