@@ -9,6 +9,7 @@ import { addToCart } from "@/lib/calls/cartCalls";
 import Cookies from "js-cookie";
 import { addToWishlist, removeFromWishlist } from "@/lib/calls/userCalls";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface ProductCardProps extends Product {
   index: number;
@@ -20,6 +21,7 @@ export default function ProductCard({
   id,
   title,
   short_description,
+  slug,
   cover_photo,
   price,
   currency,
@@ -77,7 +79,7 @@ export default function ProductCard({
       }`}
     >
       {/* Product Image */}
-      <div className="relative w-full h-64 bg-white border border-borderGrey rounded-2xl overflow-hidden">
+      <div className="relative w-full h-64 lg:h-48 xl:h-64 bg-white border border-borderGrey rounded-2xl overflow-hidden">
         {cover_photo?.url ? (
           <Image
             src={cover_photo.url}

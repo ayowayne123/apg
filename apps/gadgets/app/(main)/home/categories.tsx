@@ -4,11 +4,11 @@ import CategoryCard from "@/components/ui/categoryCard";
 
 export default function BrowseCategories() {
   return (
-    <section className="my-16">
+    <section className="lg:my-16 my-12">
       <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
         Browse by categories
       </h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4 xl:gap-6">
         {categories.map((cat) => (
           <CategoryCard key={cat.id} {...cat} />
         ))}
