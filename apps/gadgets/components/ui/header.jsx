@@ -10,6 +10,7 @@ import Cookies from "js-cookie";
 import { getGuestSessionId } from "@/lib/cart/session";
 import logo from "@/public/icons/apg-gadgets.png";
 import Link from "next/link";
+import { useCart } from "@/components/context/cartContext";
 
 export default function Header() {
   const pathname = usePathname();
@@ -18,6 +19,7 @@ export default function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const { count } = useCart();
 
   // Login Checker
   useEffect(() => {
@@ -89,9 +91,11 @@ export default function Header() {
               className="text-black relative flex items-center justify-center h-11 w-11 bg-primary rounded-full"
             >
               <ShoppingCart size={22} />
-              <span className="absolute -top-1 -right-1 bg-secondary text-xs h-5 w-5 text-white font-medium rounded-full flex items-center justify-center">
-                2
-              </span>
+              {count > 0 && (
+                <span className="absolute -top-1 -right-1 bg-secondary text-xs h-5 w-5 text-white font-medium rounded-full flex items-center justify-center">
+                  {count}
+                </span>
+              )}
             </Link>
 
             {/* User dropdown / login */}

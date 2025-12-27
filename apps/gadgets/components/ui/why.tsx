@@ -6,8 +6,8 @@ import vr from "@/public/images/vrMan.png";
 function Why() {
   return (
     <section className=" my-12 container">
-      <div className="px-16 lg:h-[722px]">
-        <div className="bg-[#F5F5F5] rounded-2xl h-full px-24 py-16 items-center relative">
+      <div className="lg:px-16 lg:h-[722px]">
+        <div className="bg-[#F5F5F5] rounded-2xl h-full lg;px-24 LG:py-16 items-center relative">
           {/* Text Section */}
           <div className=" mt-3">
             <div>

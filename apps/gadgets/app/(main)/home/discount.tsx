@@ -5,7 +5,7 @@ import Image from "next/image";
 function Discount() {
   return (
     <section className="my-8 text-greyText xl:py-20 lg:py-16 py-12">
-      <div className="bg-primary relative px-12 lg:px-12 xl:px-20 flex h-[500px] xl:h-[350px] lg:h-[320px] pt-32 lg:py-12  xl:py-[60px] lg:mt-32 rounded-[30px]">
+      <div className="bg-primary relative px-12 pt-12 lg:px-12 xl:px-20 flex h-[450px] xl:h-[350px] lg:h-[320px] lg:py-12  xl:py-[60px] lg:mt-32 rounded-[30px]">
         <div className="shrink-0 max-w-[270px]">
           <p className="text-2xl font-semibold uppercase tracking-[1.96px]">
             Happy hour deal
@@ -33,12 +33,12 @@ function Discount() {
           </div>
         </div>
         {/* Phone Image View */}
-        <div className="absolute flex lg:hidden -top-[70px] left-0 right-0  h-80 w-full ">
+        <div className="absolute flex lg:hidden bottom-0 -left-[3%] -right-[3%]  h-80 w-[106%] ">
           <div className="relative h-full w-full ">
             <Image
               src={phoneUp}
               alt="Phone side up"
-              className="object-contain  object-center shadow-lg"
+              className="object-contain  object-bottom shadow-lg"
               fill
             />
           </div>

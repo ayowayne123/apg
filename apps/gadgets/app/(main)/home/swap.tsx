@@ -5,8 +5,8 @@ import Link from "next/link";
 
 function Swap() {
   return (
-    <div className="flex flex-row h-[568px] ">
-      <div className="w-5/12 py-16">
+    <div className="flex md:flex-row flex-col lg:h-[568px] ">
+      <div className="md:w-5/12 py-16">
         <h3 className="lg:text-[48px] lg:leading-[100%] font-bold lg:tracking-[-2.88px]">
           Swap Smart. Upgrade Without the Hassle.
         </h3>
@@ -19,7 +19,7 @@ function Swap() {
           Contact Sales
         </Link>
       </div>
-      <div className="w-7/12 relative">
+      <div className="md:w-7/12 relative min-h-60">
         <Image
           src={silverGold}
           alt="silver and Gold revolving arrows"
