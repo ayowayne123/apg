@@ -187,15 +187,42 @@ export default function Header() {
 
         {/* Mobile Header */}
         <div className="flex items-center justify-between lg:hidden w-full px-4 py-3 bg-gray-200 rounded-xl">
-          <div className="relative h-10 w-20">
+          {/* Logo */}
+          <Link href="/" className="relative h-10 w-20">
             <Image src={logo} alt="Logo" className="object-contain" fill />
+          </Link>
+
+          {/* Right Icons */}
+          <div className="flex items-center gap-3">
+            {/* Search */}
+            <button
+              onClick={() => setOpen(true)}
+              className="h-10 w-10 flex items-center justify-center bg-white rounded-full"
+            >
+              <Search size={20} />
+            </button>
+
+            {/* Cart */}
+            <Link
+              href="/cart"
+              className="relative h-10 w-10 flex items-center justify-center bg-primary rounded-full"
+            >
+              <ShoppingCart size={20} />
+              {count > 0 && (
+                <span className="absolute -top-1 -right-1 bg-secondary text-xs h-5 w-5 text-white rounded-full flex items-center justify-center">
+                  {count}
+                </span>
+              )}
+            </Link>
+
+            {/* Menu */}
+            <button
+              onClick={() => setOpen(!open)}
+              className="h-10 w-10 flex items-center justify-center bg-white rounded-full"
+            >
+              {open ? <X size={22} /> : <Menu size={22} />}
+            </button>
           </div>
-          <button
-            onClick={() => setOpen(!open)}
-            className="text-primary focus:outline-none"
-          >
-            {open ? <X size={28} /> : <Menu size={28} />}
-          </button>
         </div>
 
         {/* Mobile Menu */}
@@ -213,9 +240,54 @@ export default function Header() {
             </button>
           </div>
           <nav className="flex flex-col gap-4 mt-6 px-6">
+            {/* Search */}
+            <div className="flex items-center bg-gray-100 rounded-xl overflow-hidden">
+              <input
+                type="text"
+                placeholder="Search products..."
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                className="flex-1 px-4 py-3 text-sm outline-none bg-transparent"
+              />
+              <button onClick={handleSearch} className="px-4">
+                <Search size={18} />
+              </button>
+            </div>
+
+            {/* Account */}
+            {isLoggedIn ? (
+              <>
+                <Link href="/account" onClick={() => setOpen(false)}>
+                  My Account
+                </Link>
+                <Link href="/account/wishlist" onClick={() => setOpen(false)}>
+                  Wishlist
+                </Link>
+                <Link href="/account/orders" onClick={() => setOpen(false)}>
+                  My Orders
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="text-red-600 text-left"
+                >
+                  Log Out
+                </button>
+              </>
+            ) : (
+              <Link
+                href="/login"
+                className="btn pryBtn w-full text-center"
+                onClick={() => setOpen(false)}
+              >
+                Sign In
+              </Link>
+            )}
+
+            {/* Contact */}
             <Link
               href="/contact"
-              className="btn btnSmall pryBtn w-full text-center"
+              className="btn secBtn w-full text-center"
               onClick={() => setOpen(false)}
             >
               Contact
