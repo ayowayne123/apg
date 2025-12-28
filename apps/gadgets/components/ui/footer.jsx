@@ -105,11 +105,31 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <hr className="my-8 border-black" />
+        <hr className="lg:my-8 my-6 border-black" />
 
         {/* Bottom Text */}
-        <div className="">
-          © 2025 Articulate Business Hub. All rights reserved.
+        {/* Bottom Text */}
+        <div className="flex lg:flex-row flex-col justify-between items-center gap-3">
+          <div className="flex items-center gap-3 flex-wrap justify-center">
+            <span className="text-gray-600">Go back to :</span>
+            <div className="flex gap-2">
+              <Link
+                href="https://apgbusinesshub.com/"
+                className="bg-[#731F8E] text-white lg:px-8 px-5 py-3 lg:py-5 rounded-full text-sm hover:bg-[#6520c0] transition"
+              >
+                Articulate Business Hub
+              </Link>
+              <Link
+                href="https://homes.apgbusinesshub.com/"
+                className="bg-[#3e07a3] text-white lg:px-8 px-5 py-3 lg:py-5  rounded-full text-sm hover:bg-[#2f057c] transition"
+              >
+                Articulate Homes
+              </Link>
+            </div>
+          </div>
+          <div className="lg:text-base text-sm">
+            © 2025 Articulate Business Hub. All rights reserved.
+          </div>
         </div>
       </div>
     </footer>

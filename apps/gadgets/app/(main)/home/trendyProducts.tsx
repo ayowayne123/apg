@@ -25,8 +25,8 @@ export default function TrendyProducts() {
   }, []);
 
   return (
-    <section className="my-16">
-      <h2 className="text-2xl md:text-3xl font-bold mb-12 text-center">
+    <section className="lg:my-16 my-12">
+      <h2 className="text-2xl md:text-3xl font-bold lg:mb-12 mb-8 text-center">
         Trendy Products
       </h2>
 
@@ -35,7 +35,7 @@ export default function TrendyProducts() {
           <div className="w-10 h-10 border-4 border-gray-300 border-t-primary rounded-full animate-spin"></div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4 xl:gap-6">
           {products.length > 0 ? (
             products.map((product, index) => (
               <ProductCard key={index} {...product} index={index} />

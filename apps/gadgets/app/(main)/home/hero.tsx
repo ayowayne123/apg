@@ -80,7 +80,7 @@ export default function HeroSlider() {
   }, [current]);
 
   return (
-    <section className="relative h-[720px] md:h-[600px] lg:h-[760px] w-full overflow-hidden rounded-3xl lg:rounded-[35px]">
+    <section className="relative h-[650px] md:h-[600px] lg:h-[760px] w-full overflow-hidden rounded-3xl lg:rounded-[35px]">
       {slides.map((slide, index) => (
         <div
           key={slide.id}
@@ -90,25 +90,28 @@ export default function HeroSlider() {
         >
           {/* Text + Buttons */}
           <div className="relative z-20 flex flex-col h-full items-center pt-16 lg:pt-12">
-            <p className="lg:text-2xl font-semibold tracking-wide lg:tracking-wider">
+            <p className="lg:text-2xl md:text-xl text-lg font-semibold tracking-wide lg:tracking-wider">
               ARTICULATE PLUGS & GADGETS
             </p>
-            <h3 className="px-1 text-black text-center leading-[100%] text-[31px] md:text-4xl lg:text-5xl font-bold  tracking-[-1.92px] lg:tracking-[-2.88px] mt-5 ">
+            <h3 className="px-1 text-black text-center leading-[100%] text-[30px] md:text-4xl lg:text-5xl font-bold  tracking-[-1.92px] lg:tracking-[-2.88px] mt-5 ">
               {slide.title}
             </h3>
-            <p className="mt-5 text-[19px] sm:text-xl  text-greyText max-w-xl px-1 text-center tracking-[-1.2px]">
+            <p className="md:mt-5 mt-3 text-[18px] sm:text-xl  text-greyText max-w-xl px-1 text-center tracking-[-1.2px]">
               {slide.text}
             </p>
-            <div className="flex md:flex-row flex-col gap-6 mt-6 lg:mt-16">
+            <div className="flex sm:flex-row flex-col gap-6 mt-6 lg:mt-16">
               <Link
                 href="/products"
-                className={`btn btnBig  w-[187px] transition ${
+                className={`btn btnBig  w-40 lg:w-[187px] transition ${
                   slide.id % 2 === 0 ? "pryBtn" : "altBtn"
                 }`}
               >
                 Shop Now
               </Link>
-              <Link href="/" className="btn btnBig secBtn w-[187px] transition">
+              <Link
+                href="/"
+                className="btn btnBig secBtn w-40 lg:w-[187px] transition"
+              >
                 Contact Sales
               </Link>
             </div>
@@ -128,7 +131,7 @@ export default function HeroSlider() {
       ))}
 
       {/* Navigation Arrows */}
-      <div className="absolute inset-y-0 left-4 lg:left-12 flex items-center   z-30">
+      <div className="absolute inset-y-0 left-4 lg:left-12 hidden md:flex items-center   z-30">
         <button
           onClick={prevSlide}
           className="p-2 rounded-full border-2 border-black  hover:bg-black hover:text-white transition"
@@ -136,7 +139,7 @@ export default function HeroSlider() {
           <ChevronLeft className="lg:w-6 w-4 h-4 lg:h-6" />
         </button>
       </div>
-      <div className="absolute inset-y-0 right-4 lg:right-12 flex items-center z-30">
+      <div className="absolute inset-y-0 right-4 lg:right-12 hidden md:flex  items-center z-30">
         <button
           onClick={nextSlide}
           className="p-2 rounded-full border-2 border-black  hover:bg-black hover:text-white transition"

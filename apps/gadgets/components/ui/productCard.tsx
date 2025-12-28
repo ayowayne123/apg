@@ -9,6 +9,8 @@ import { addToCart } from "@/lib/calls/cartCalls";
 import Cookies from "js-cookie";
 import { addToWishlist, removeFromWishlist } from "@/lib/calls/userCalls";
 import { useRouter } from "next/navigation";
+import { useCart } from "@/components/context/cartContext";
+import Link from "next/link";
 
 interface ProductCardProps extends Product {
   index: number;
@@ -20,6 +22,7 @@ export default function ProductCard({
   id,
   title,
   short_description,
+  slug,
   cover_photo,
   price,
   currency,
@@ -28,6 +31,7 @@ export default function ProductCard({
   const [favourited, setFavourited] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { refreshCart } = useCart();
 
   const isLoggedIn = Boolean(Cookies.get("apg_token"));
 
@@ -58,6 +62,7 @@ export default function ProductCard({
     setLoading(true);
     try {
       await addToCart({ productId: id, quantity: 1 });
+      await refreshCart();
       toast.success(`${title} added to cart`);
     } catch (error) {
       console.error("Add to cart error:", error);
@@ -77,7 +82,7 @@ export default function ProductCard({
       }`}
     >
       {/* Product Image */}
-      <div className="relative w-full h-64 bg-white border border-borderGrey rounded-2xl overflow-hidden">
+      <div className="relative w-full h-64 lg:h-48 xl:h-64 bg-white border border-borderGrey rounded-2xl overflow-hidden">
         {cover_photo?.url ? (
           <Image
             src={cover_photo.url}
