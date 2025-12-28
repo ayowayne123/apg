@@ -277,7 +277,7 @@ export default function Header() {
             ) : (
               <Link
                 href="/login"
-                className="btn pryBtn w-full text-center"
+                className="btn btnSmall pryBtn w-full text-center"
                 onClick={() => setOpen(false)}
               >
                 Sign In
@@ -287,7 +287,7 @@ export default function Header() {
             {/* Contact */}
             <Link
               href="/contact"
-              className="btn secBtn w-full text-center"
+              className="btn btnSmall secBtn w-full text-center"
               onClick={() => setOpen(false)}
             >
               Contact
