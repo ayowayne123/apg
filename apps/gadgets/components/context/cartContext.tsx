@@ -2,13 +2,14 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { getCart, updateCartItem, removeCartItem } from "@/lib/calls/cartCalls";
+import { Product } from "@/lib/types";
 
 type CartItem = {
   id: number;
   quantity: string;
   unit_price: string;
   subtotal: number;
-  product: any;
+  product: Product;
 };
 
 type CartContextType = {
@@ -82,7 +83,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       if (qty <= 0) await removeCartItem(id);
       else await updateCartItem(id, qty);
     } catch {
-      // ❌ rollback if server fails
       recalc(prevItems);
       throw new Error("Cart update failed");
     }

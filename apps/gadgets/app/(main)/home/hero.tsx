@@ -131,7 +131,7 @@ export default function HeroSlider() {
       ))}
 
       {/* Navigation Arrows */}
-      <div className="absolute inset-y-0 left-4 lg:left-12 flex items-center   z-30">
+      <div className="absolute inset-y-0 left-4 lg:left-12 hidden md:flex items-center   z-30">
         <button
           onClick={prevSlide}
           className="p-2 rounded-full border-2 border-black  hover:bg-black hover:text-white transition"
@@ -139,7 +139,7 @@ export default function HeroSlider() {
           <ChevronLeft className="lg:w-6 w-4 h-4 lg:h-6" />
         </button>
       </div>
-      <div className="absolute inset-y-0 right-4 lg:right-12 flex items-center z-30">
+      <div className="absolute inset-y-0 right-4 lg:right-12 hidden md:flex  items-center z-30">
         <button
           onClick={nextSlide}
           className="p-2 rounded-full border-2 border-black  hover:bg-black hover:text-white transition"
