@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import { apiFetch } from "@/lib/api/api";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
+import { Eye, EyeOff } from "lucide-react";
 import { getGuestSessionId } from "@/lib/cart/session";
 
 export default function LoginPage() {
@@ -13,9 +14,14 @@ export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirect") || "/";
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
+
+    setLoading(true);
     const guestSessionId = getGuestSessionId();
     try {
       const res = await apiFetch("/api/login", {
@@ -47,6 +53,7 @@ export default function LoginPage() {
       } else {
         toast.error("Something went wrong");
       }
+      setLoading(false);
     }
   };
   return (
@@ -64,31 +71,49 @@ export default function LoginPage() {
           </label>
           <input
             type="text"
+            disabled={loading}
             placeholder="yourId@email.com"
             className="w-full py-2  mt-2 px-5 h-[52px] focus:outline-primary rounded-lg bg-[#F2F2F2] text-sm placeholder:text-[#A0A3BD] mb-3"
             value={form.login}
             onChange={(e) => setForm({ ...form, login: e.target.value })}
           />
         </div>
-        <div className="w-full ">
-          <label htmlFor="password" className=" font-light">
-            Password
-          </label>
-
+        <div className="relative w-full">
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
+            disabled={loading}
             placeholder="Pass1234#"
-            className="w-full py-2 px-5 mt-2 h-[52px] focus:outline-primary rounded-lg bg-[#F2F2F2] text-sm placeholder:text-[#A0A3BD] mb-3"
+            className="w-full py-2 px-5 mt-2 h-[52px] focus:outline-primary rounded-lg bg-[#F2F2F2] text-sm placeholder:text-[#A0A3BD] mb-3 pr-12"
             value={form.password}
             onChange={(e) => setForm({ ...form, password: e.target.value })}
           />
+
+          <button
+            type="button"
+            aria-pressed={showPassword}
+            aria-label={showPassword ? "Hide password" : "Show password"}
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+          >
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </button>
         </div>
 
         <button
           type="submit"
-          className="w-full bg-primary text-black h-12 flex items-center justify-center text-center rounded-lg font-medium capitalize text-lg"
+          disabled={loading}
+          className={`w-full h-12 flex items-center justify-center rounded-lg font-medium text-lg transition
+    ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-primary text-black"}
+  `}
         >
-          Login
+          {loading ? (
+            <span className="flex items-center gap-2">
+              <span className="h-4 w-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
+              Signing in...
+            </span>
+          ) : (
+            "Login"
+          )}
         </button>
       </form>
       <div className="flex px-2  items-center my-6 max-w-sm w-full">
