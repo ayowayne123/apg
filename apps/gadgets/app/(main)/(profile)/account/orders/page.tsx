@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OrderCard from "@/components/ui/orderCard";
 import { useRouter } from "next/navigation";
+import { getOrders } from "@/lib/calls/userCalls";
 
 type OrderStatus = "Delivered" | "Processing" | "Cancelled";
 
@@ -19,57 +20,58 @@ type Order = {
   ordered_at: string;
 };
 
-const demoOrders: Order[] = [
-  {
-    id: 1,
-    product: {
-      id: 101,
-      title: "AirPods Max",
-      image: "/images/airpods.png",
-      price: 480,
-      currency: "USD",
-    },
-    status: "Delivered",
-    ordered_at: "Oct 12, 2025",
-  },
-  {
-    id: 2,
-    product: {
-      id: 102,
-      title: "Sony WH-1000XM5",
-      image: "/images/ps5.png",
-      price: 399,
-      currency: "USD",
-    },
-    status: "Processing",
-    ordered_at: "Oct 18, 2025",
-  },
-  {
-    id: 3,
-    product: {
-      id: 132,
-      title: "JBL Speakers",
-      image: "/images/jblSpeaker.png",
-      price: 30000,
-      currency: "NGN",
-    },
-    status: "Cancelled",
-    ordered_at: "Jun 18, 2025",
-  },
-];
-
 export default function OrdersPage() {
-  const [orders, setOrders] = useState<Order[]>(demoOrders);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [activeTab, setActiveTab] = useState<OrderStatus | "All">("All");
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const res = await getOrders();
+        const rawOrders = res?.data?.data || res?.data || [];
+
+        const mappedOrders: Order[] = rawOrders.flatMap((order: any) =>
+          order.items.map((item: any) => ({
+            id: order.id,
+            product: {
+              id: item.product.id,
+              title: item.product.title,
+              image: item.product.cover_photo_url,
+              price: Number(item.unit_price),
+              currency: item.product.currency,
+            },
+            status: mapOrderStatus(order.status),
+            ordered_at: new Date(order.created_at).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            }),
+          }))
+        );
+
+        setOrders(mappedOrders);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, []);
 
   const filteredOrders =
     activeTab === "All" ? orders : orders.filter((o) => o.status === activeTab);
 
   const handleAddToCart = (productId: number) => {
-    console.log("Add to cart:", productId);
-    router.push("/cart");
+    router.push(`/product/${productId}`);
   };
+
+  if (loading) {
+    return <p className="text-center text-gray-500">Loading orders…</p>;
+  }
 
   return (
     <div className="space-y-6">
@@ -90,12 +92,12 @@ export default function OrdersPage() {
         ))}
       </div>
 
-      {/* Order Cards */}
+      {/* Orders */}
       <div className="flex flex-col gap-4">
-        {filteredOrders.length > 0 ? (
-          filteredOrders.map((order) => (
+        {filteredOrders.length ? (
+          filteredOrders.map((order, idx) => (
             <OrderCard
-              key={order.id}
+              key={`${order.id}-${idx}`}
               order={order}
               onAddToCart={handleAddToCart}
             />
@@ -107,3 +109,19 @@ export default function OrdersPage() {
     </div>
   );
 }
+
+/* ---------- helpers ---------- */
+
+const mapOrderStatus = (status: string): OrderStatus => {
+  switch (status) {
+    case "completed":
+      return "Delivered";
+    case "pending":
+    case "processing":
+      return "Processing";
+    case "cancelled":
+      return "Cancelled";
+    default:
+      return "Processing";
+  }
+};

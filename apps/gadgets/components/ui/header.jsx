@@ -47,6 +47,7 @@ export default function Header() {
   // Logout
   const handleLogout = () => {
     Cookies.remove("apg_token");
+    Cookies.remove("user");
     setIsLoggedIn(false);
     setDropdownOpen(false);
     router.push("/login");
