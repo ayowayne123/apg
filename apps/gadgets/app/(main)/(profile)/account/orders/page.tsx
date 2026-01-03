@@ -20,6 +20,25 @@ type Order = {
   ordered_at: string;
 };
 
+type Product = {
+  id: number;
+  title: string;
+  cover_photo_url: string;
+  currency: string;
+};
+
+type Item = {
+  unit_price: number | string;
+  product: Product;
+};
+
+type NewOrder = {
+  id: number;
+  status: OrderStatus;
+  created_at: string;
+  items: Item[];
+};
+
 export default function OrdersPage() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [activeTab, setActiveTab] = useState<OrderStatus | "All">("All");
@@ -32,8 +51,8 @@ export default function OrdersPage() {
         const res = await getOrders();
         const rawOrders = res?.data?.data || res?.data || [];
 
-        const mappedOrders: Order[] = rawOrders.flatMap((order: any) =>
-          order.items.map((item: any) => ({
+        const mappedOrders: Order[] = rawOrders.flatMap((order: NewOrder) =>
+          order.items.map((item: Item) => ({
             id: order.id,
             product: {
               id: item.product.id,
