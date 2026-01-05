@@ -50,3 +50,11 @@ export async function removeFromWishlist(productId: string) {
     withCredentials: true,
   });
 }
+
+// Get user Orders
+export async function getOrders() {
+  return apiFetch("/api/orders", {
+    method: "GET",
+    withCredentials: true,
+  });
+}

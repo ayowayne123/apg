@@ -5,10 +5,28 @@ import { FiTrash2 } from "react-icons/fi";
 import toast from "react-hot-toast";
 import { useCart } from "@/components/context/cartContext";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function CartPage() {
   const { items, total, loading, updateQtyOptimistic } = useCart();
   const [updating, setUpdating] = useState<Record<number, boolean>>({});
+  const router = useRouter();
+
+  const isLoggedIn = !!Cookies.get("apg_token");
+
+  const handleCheckout = () => {
+    if (!items.length) {
+      toast.error("Your cart is empty");
+      return;
+    }
+
+    if (isLoggedIn) {
+      router.push("/checkout");
+    } else {
+      router.push("/login?redirect=/checkout");
+    }
+  };
 
   if (loading) {
     return (
@@ -103,7 +121,9 @@ export default function CartPage() {
       <div className="mt-10 flex justify-between">
         <p className="text-2xl font-bold">Total: {total.toFixed(2)} USD</p>
 
-        <button className="btn pryBtn px-8 py-3">Proceed to Checkout</button>
+        <button onClick={handleCheckout} className="btn pryBtn px-8 py-3">
+          Proceed to Checkout
+        </button>
       </div>
     </div>
   );
