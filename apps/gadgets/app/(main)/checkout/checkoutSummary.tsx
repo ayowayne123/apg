@@ -71,7 +71,7 @@ export default function CheckoutSummary({ form }: Props) {
       const handler = window.PaystackPop.setup({
         key: public_key,
         email: paystackEmail,
-        amount: Math.round(amount),
+        amount: Math.round(amount), // already kobo
         reference,
         metadata: {
           order_id,
@@ -79,8 +79,8 @@ export default function CheckoutSummary({ form }: Props) {
         },
 
         // ✅ MUST be sync
-        callback: function () {
-          verifyPayment(reference, order_id);
+        callback: function (response: any) {
+          verifyPayment(response.reference, order_id);
         },
 
         onClose: function () {
