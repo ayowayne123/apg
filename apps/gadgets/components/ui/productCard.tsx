@@ -76,7 +76,8 @@ export default function ProductCard({
     discount_percentage && parseFloat(discount_percentage) > 0;
 
   return (
-    <div
+    <Link
+      href={`/${slug}`}
       className={`border border-apgGrey rounded-2xl p-4 flex flex-col hover:shadow-md transition ${
         index % 2 !== 0 ? "bg-apgGrey" : "bg-apgCream"
       }`}
@@ -125,7 +126,11 @@ export default function ProductCard({
       {/* Actions */}
       <div className="flex justify-between items-center mt-4">
         <button
-          onClick={handleAddToCart}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleAddToCart();
+          }}
           disabled={loading}
           className={`btn btnSmall pryBtn w-[134px] ${
             loading ? "opacity-60 cursor-not-allowed" : ""
@@ -135,13 +140,17 @@ export default function ProductCard({
         </button>
 
         <button
-          onClick={toggleFavourite}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleFavourite();
+          }}
           className={`text-xl rounded-full flex items-center justify-center h-[53px] w-[53px] 
             ${favourited ? "bg-apgRed" : "bg-primary"}`}
         >
           <FaHeart className="text-white" />
         </button>
       </div>
-    </div>
+    </Link>
   );
 }

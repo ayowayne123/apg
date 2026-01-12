@@ -71,7 +71,7 @@ export default function CheckoutSummary({ form }: Props) {
       const handler = window.PaystackPop.setup({
         key: public_key,
         email: paystackEmail,
-        amount: Math.round(amount), // already kobo
+        amount: Math.round(amount),
         reference,
         metadata: {
           order_id,
