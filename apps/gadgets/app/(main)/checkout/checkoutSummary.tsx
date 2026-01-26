@@ -79,8 +79,8 @@ export default function CheckoutSummary({ form }: Props) {
         },
 
         // ✅ MUST be sync
-        callback: function () {
-          verifyPayment(reference, order_id);
+        callback: function (response: any) {
+          verifyPayment(response.reference, order_id);
         },
 
         onClose: function () {
