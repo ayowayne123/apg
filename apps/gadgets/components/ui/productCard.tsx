@@ -89,7 +89,7 @@ export default function ProductCard({
             src={cover_photo.url}
             alt={cover_photo.alt || title}
             fill
-            className="object-contain p-8"
+            className="object-contain p-4 sm:p-6 lg:p-8"
           />
         ) : (
           <div className="flex items-center justify-center h-full text-gray-400">
@@ -100,12 +100,12 @@ export default function ProductCard({
 
       {/* Product Info */}
       <div className="mt-4 flex flex-col flex-grow">
-        <h3 className="font-bold tracking-[-1.44px] text-xl line-clamp-2">
+        <h3 className="font-bold tracking-tight text-base sm:text-lg lg:text-xl line-clamp-2">
           {title}
         </h3>
 
         <div className="mt-1 flex flex-row gap-2 items-center">
-          <p className="font-bold text-lg tracking-tight">
+          <p className="tracking-tight font-bold text-base sm:text-lg">
             {Number(price).toFixed(2)} {currency}
           </p>
 
@@ -124,7 +124,7 @@ export default function ProductCard({
       </div>
 
       {/* Actions */}
-      <div className="flex justify-between items-center mt-4">
+      <div className="flex flex-col sm:flex-row gap-3 justify-between items-center mt-4">
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -132,7 +132,7 @@ export default function ProductCard({
             handleAddToCart();
           }}
           disabled={loading}
-          className={`btn btnSmall pryBtn w-[134px] ${
+          className={`btn btnSmall pryBtn w-full sm:w-[134px] ${
             loading ? "opacity-60 cursor-not-allowed" : ""
           }`}
         >
@@ -145,7 +145,7 @@ export default function ProductCard({
             e.stopPropagation();
             toggleFavourite();
           }}
-          className={`text-xl rounded-full flex items-center justify-center h-[53px] w-[53px] 
+          className={` rounded-full flex items-center justify-center text-lg sm:text-xl h-11 w-11 sm:h-[53px] sm:w-[53px] 
             ${favourited ? "bg-apgRed" : "bg-primary"}`}
         >
           <FaHeart className="text-white" />

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { addReview } from "@/lib/calls/userCalls";
 
 type OrderStatus = "Delivered" | "Processing" | "Cancelled";
 
@@ -20,6 +21,39 @@ type Order = {
   ordered_at: string;
 };
 
+const ratingOptions = [
+  {
+    emoji: "😡",
+    label: "Terrible",
+    stars: 1,
+    color: "bg-red-50 border-red-400",
+  },
+  {
+    emoji: "😕",
+    label: "Poor",
+    stars: 2,
+    color: "bg-orange-50 border-orange-400",
+  },
+  {
+    emoji: "😐",
+    label: "Okay",
+    stars: 3,
+    color: "bg-yellow-50 border-yellow-400",
+  },
+  {
+    emoji: "🙂",
+    label: "Good",
+    stars: 4,
+    color: "bg-green-50 border-green-400",
+  },
+  {
+    emoji: "😍",
+    label: "Excellent",
+    stars: 5,
+    color: "bg-emerald-50 border-emerald-500",
+  },
+];
+
 export default function OrderCard({
   order,
   onAddToCart,
@@ -31,18 +65,31 @@ export default function OrderCard({
   const [showReview, setShowReview] = useState(false);
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
   const [reviewText, setReviewText] = useState("");
+  const selectedOption = ratingOptions.find((r) => r.stars === selectedRating);
   const router = useRouter();
+  const [reviewTitle, setReviewTitle] = useState("");
 
   const handleBuyAgain = () => {
     onAddToCart(order.product.id);
     router.push("/cart");
   };
 
-  const handleSendReview = () => {
-    console.log("Order ID:", order.id);
-    console.log("Rating:", selectedRating);
-    console.log("Review:", reviewText);
-    toast.success("Review submitted!");
+  const handleSendReview = async () => {
+    if (!selectedRating) return;
+
+    const selectedOption = ratingOptions.find(
+      (r) => r.stars === selectedRating
+    );
+
+    await addReview({
+      product_id: order.product.id,
+      order_id: order.id,
+      rating: selectedRating,
+      title: selectedOption?.label || "Review",
+      review: reviewText,
+    });
+
+    toast.success("Thanks for your feedback!");
     setShowReview(false);
     setSelectedRating(null);
     setReviewText("");
@@ -133,50 +180,78 @@ export default function OrderCard({
 
       {/* Review Modal */}
       {showReview && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white p-6 rounded-xl w-96 flex flex-col gap-4">
-            <h3 className="font-bold text-xl">
-              How would you rate your experience?
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="bg-white p-6 rounded-2xl w-96 flex flex-col gap-5 shadow-2xl animate-fadeIn">
+            <h3 className="font-bold text-xl text-center">
+              How was this product?
             </h3>
 
             {/* Emoji Ratings */}
-            <div className="flex gap-2 text-2xl justify-center">
-              {["😡", "😕", "😐", "🙂", "😍"].map((emoji, idx) => (
+            <div className="flex justify-between">
+              {ratingOptions.map((r) => (
                 <button
-                  key={idx}
-                  onClick={() => setSelectedRating(idx + 1)}
-                  className={`${
-                    selectedRating === idx + 1 ? "scale-125" : ""
-                  } transition-transform`}
+                  key={r.stars}
+                  onClick={() => setSelectedRating(r.stars)}
+                  className={`text-3xl p-3 rounded-xl border-2 transition-all duration-200
+              ${
+                selectedRating === r.stars
+                  ? `${r.color} scale-110 shadow-md`
+                  : "border-transparent hover:scale-110 hover:bg-gray-100"
+              }`}
                 >
-                  {emoji}
+                  {r.emoji}
                 </button>
               ))}
             </div>
 
-            {/* Review Text */}
-            {selectedRating && (
-              <textarea
-                placeholder="Add a review (optional)"
-                className="border p-2 rounded-md w-full resize-none"
-                value={reviewText}
-                onChange={(e) => setReviewText(e.target.value)}
-              />
+            {/* Label Feedback */}
+            {selectedOption && (
+              <p className="text-center font-semibold text-gray-700 animate-fadeIn">
+                {selectedOption.label} choice!
+              </p>
             )}
 
-            <div className="flex gap-2 justify-end">
+            {/* Stars */}
+            {selectedRating && (
+              <div className="flex justify-center text-yellow-400 text-2xl tracking-wide">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <span key={i} className="transition-all">
+                    {i < selectedRating ? "★" : "☆"}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* Review Box */}
+            {selectedRating && (
+              <div className="flex flex-col gap-2">
+                <textarea
+                  placeholder={`Tell us why it's ${selectedOption?.label.toLowerCase()}...`}
+                  className="border rounded-lg p-3 resize-none focus:ring-2 focus:ring-primary outline-none"
+                  value={reviewText}
+                  onChange={(e) => setReviewText(e.target.value)}
+                  maxLength={300}
+                />
+                <span className="text-xs text-gray-400 self-end">
+                  {reviewText.length}/300
+                </span>
+              </div>
+            )}
+
+            {/* Buttons */}
+            <div className="flex gap-2 justify-end pt-2">
               <button
                 onClick={() => setShowReview(false)}
-                className="px-4 py-2 bg-gray-300 rounded-full"
+                className="px-4 py-2 bg-gray-200 rounded-full hover:bg-gray-300"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSendReview}
                 disabled={!selectedRating}
-                className="px-4 py-2 bg-blue-600 text-white rounded-full disabled:bg-blue-300"
+                className="px-4 py-2 bg-primary text-white rounded-full disabled:opacity-40 hover:scale-105 transition"
               >
-                Send
+                Submit Review
               </button>
             </div>
           </div>

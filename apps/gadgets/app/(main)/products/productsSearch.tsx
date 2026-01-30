@@ -76,7 +76,7 @@ export default function ProductsSearch() {
   };
 
   return (
-    <div className="flex gap-6 py-6">
+    <div className="flex flex-col lg:flex-row gap-6 py-4 lg:py-6">
       {/* LEFT FILTER SIDEBAR */}
       <SearchFilters
         categories={[
@@ -91,6 +91,14 @@ export default function ProductsSearch() {
 
       {/* RIGHT SIDE */}
       <div className="flex-1">
+        <div className="lg:hidden mb-4">
+          <button
+            onClick={() => router.push(`${pathname}?filters=open`)}
+            className="w-full border rounded-xl py-2 font-medium"
+          >
+            Filters
+          </button>
+        </div>
         <ProductHeader
           search={search}
           title="Products"
@@ -106,7 +114,7 @@ export default function ProductsSearch() {
         )}
 
         {/* Product Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
           {!loading &&
             products.map((product: any, idx: number) => (
               <ProductCard key={idx} {...product} index={idx} />
