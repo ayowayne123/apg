@@ -80,7 +80,20 @@ export default function SearchFilters({
   };
 
   return (
-    <div className="space-y-6 p-4 w-60">
+    <div
+      className="
+    fixed inset-x-0 bottom-0 z-60
+    bg-white rounded-t-2xl shadow-lg
+    p-4 space-y-6
+    lg:static lg:w-60 lg:rounded-none lg:shadow-none
+  "
+    >
+      <div className="flex justify-between items-center lg:hidden">
+        <h3 className="font-semibold text-lg">Filters</h3>
+        <button onClick={() => router.back()} className="text-sm">
+          Close
+        </button>
+      </div>
       {/* ---------------- CATEGORY ---------------- */}
       {categories.length > 0 && (
         <div>
@@ -111,7 +124,10 @@ export default function SearchFilters({
                 searchParams.get("brand")?.split(",") || [];
 
               return (
-                <label key={brand} className="flex items-center gap-2 text-sm">
+                <label
+                  key={brand}
+                  className="flex items-center gap-3 text-sm py-1"
+                >
                   <input
                     type="checkbox"
                     checked={selectedBrands.includes(brand)}
@@ -136,7 +152,10 @@ export default function SearchFilters({
                 searchParams.get("color")?.split(",") || [];
 
               return (
-                <label key={color} className="flex items-center gap-2 text-sm">
+                <label
+                  key={color}
+                  className="flex items-center gap-3 text-sm py-1"
+                >
                   <input
                     type="checkbox"
                     checked={selectedColors.includes(color)}

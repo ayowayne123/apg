@@ -58,3 +58,26 @@ export async function getOrders() {
     withCredentials: true,
   });
 }
+
+// Get user reviews
+export async function getMyReviews() {
+  return apiFetch("/api/myreviews", {
+    method: "GET",
+    withCredentials: true,
+  });
+}
+
+// Add a review
+export async function addReview(data: {
+  product_id: number;
+  order_id: number;
+  rating: number;
+  title: string;
+  review: string;
+}) {
+  return apiFetch("/api/reviews", {
+    method: "POST",
+    body: JSON.stringify(data),
+    withCredentials: true,
+  });
+}

@@ -58,13 +58,15 @@ function ProductHeader({
       </div>
 
       {/* Title */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
         {!mainCategory || !subCategory ? (
           <h4 className="text-2xl font-semibold tracking-tighter mb-1">
             Showing Results {search && <>for {search}</>}
           </h4>
         ) : (
-          <h4 className="text-2xl font-semibold mb-1">{title}</h4>
+          <h4 className="text-xl sm:text-2xl font-semibold tracking-tight mb-1">
+            {title}
+          </h4>
         )}
         <SortSelect />
       </div>
