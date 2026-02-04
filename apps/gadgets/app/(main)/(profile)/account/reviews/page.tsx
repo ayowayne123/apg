@@ -41,12 +41,12 @@ export default function ReviewsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">My Reviews</h1>
+      <h3 className="text-2xl font-bold">My Reviews</h3>
 
       {reviews.length ? (
         reviews.map((r) => (
           <div key={r.id} className="flex gap-4 p-4  rounded-xl bg-white">
-            <div className="relative w-24 h-24">
+            <div className="relative h-40 w-72 rounded-xl overflow-hidden bg-apgGrey">
               <Image
                 src={r.product.cover_photo.url}
                 alt={r.product.title}
@@ -74,7 +74,7 @@ export default function ReviewsPage() {
           </div>
         ))
       ) : (
-        <p>You haven't reviewed any products yet.</p>
+        <p>You have not reviewed any products yet.</p>
       )}
     </div>
   );

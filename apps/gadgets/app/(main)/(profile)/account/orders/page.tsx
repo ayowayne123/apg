@@ -137,6 +137,7 @@ const mapOrderStatus = (status: string): OrderStatus => {
       return "Delivered";
     case "pending":
     case "processing":
+    case "paid":
       return "Processing";
     case "cancelled":
       return "Cancelled";
