@@ -19,10 +19,10 @@ function Why() {
   ];
 
   return (
-    <section className="flex flex-row bg-grey relative my-12 rounded-[35px]">
+    <section className="flex flex-col lg:flex-row bg-grey relative my-12 rounded-[35px]">
       {/* Floating Ribbon */}
       <motion.div
-        className="rounded-full h-32 w-32 bg-[#FCF3FF] absolute lg:top-28 -left-7 z-20 p-8"
+        className="rounded-full h-16 w-16 lg:h-32 lg:w-32  bg-[#FCF3FF] absolute lg:bottom-0 bottom-24 lg:top-28 lg:right-0 right-4 lg:-left-7 z-20 p-4 lg:p-8"
         animate={{ y: [0, -12, 0] }}
         transition={{ repeat: Infinity, duration: 4 }}
       >
@@ -33,7 +33,7 @@ function Why() {
 
       {/* Floating Guard */}
       <motion.div
-        className="rounded-full h-32 w-32 bg-[#FCF3FF] absolute lg:right-20 -bottom-9 z-20 p-8"
+        className="rounded-full h-16 w-16 lg:h-32 lg:w-32 bg-[#FCF3FF] absolute lg:left-auto left-6 lg:right-20 bottom-80 lg:-bottom-9 z-20 p-4 lg:p-8"
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 5, delay: 0.5 }}
       >
@@ -44,7 +44,7 @@ function Why() {
 
       {/* Floating HandStar */}
       <motion.div
-        className="rounded-full h-32 w-32 bg-[#EEFFFC] absolute lg:top-24 -right-9 z-20 p-8"
+        className="rounded-full h-16 w-16 lg:h-32 lg:w-32 bg-[#EEFFFC] absolute lg:top-24 right-10 top-10 lg:-right-9 z-20 p-4 lg:p-8"
         animate={{ y: [0, -15, 0] }}
         transition={{ repeat: Infinity, duration: 6, delay: 1 }}
       >
@@ -58,7 +58,7 @@ function Why() {
         </div>
       </motion.div>
 
-      <motion.div className="lg:w-[660px] shrink-0 mt-20">
+      <motion.div className="lg:w-[660px] lg:flex hidden  shrink-0 mt-20">
         <div className="w-full h-full min-h-[300px] relative">
           <Image
             src={whyImage}
@@ -71,7 +71,7 @@ function Why() {
 
       {/* Text Content */}
       <motion.div
-        className="text-primary lg:ml-6 xl:ml-20 py-[76px] pr-8 w-full grow"
+        className="text-primary ml-8 lg:ml-6 xl:ml-20 py-[76px] pr-8 w-full grow"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -111,11 +111,23 @@ function Why() {
         </motion.ul>
 
         <Link
-          className="btn pryBtn btnBig lg:w-[198px] lg:mt-5 mt-3 inline-block"
+          className="btn pryBtn btnBig lg:w-[198px] w-[208px] lg:mt-5 mt-3 inline-block"
           href="/about"
         >
           Contact Sales
         </Link>
+      </motion.div>
+
+      {/* Mobile Image */}
+      <motion.div className="lg:w-[660px] flex lg:hidden  shrink-0 mt-7">
+        <div className="w-full h-full min-h-[360px] relative">
+          <Image
+            src={whyImage}
+            alt="man wearing Vr Glasses and a Woman carrying a miniature house"
+            className="object-contain object-bottom"
+            fill
+          />
+        </div>
       </motion.div>
     </section>
   );

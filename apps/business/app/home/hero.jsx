@@ -5,12 +5,16 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import hero2 from "@/public/images/hero2.jpg";
 import hero1 from "@/public/images/hero1.jpg";
+import heromobile1 from "@/public/images/heromobile1.jpg";
+import heromobile2 from "@/public/images/heromobile2.jpg";
+import heromobile3 from "@/public/images/heromobile3.jpg";
 import hero3 from "@/public/images/hero3.jpg";
 
 const slides = [
   {
     id: 1,
     image: hero1,
+    mobile: heromobile1,
     title: (
       <>
         Your Plug for <span className="text-[#F1CB00]">Premium</span>
@@ -24,6 +28,7 @@ const slides = [
   {
     id: 2,
     image: hero2,
+    mobile: heromobile2,
     title: (
       <>
         Empowering Entrepreneurs,
@@ -37,7 +42,7 @@ const slides = [
   {
     id: 3,
     image: hero3,
-
+    mobile: heromobile3,
     title: (
       <>
         Where <span className="text-[#19CFDC]">Comfort</span>
@@ -70,7 +75,7 @@ export default function HeroSlider() {
   }, [current]);
 
   return (
-    <div className="relative  h-[300px] md:h-[500px] lg:h-[590px] overflow-hidden rounded-4xl lg:rounded-[35px] w-full">
+    <div className="relative  h-[calc(100vh_-_80px)] md:h-[500px] lg:h-[590px] overflow-hidden rounded-4xl lg:rounded-[35px] w-full">
       {/* All slides stacked */}
       {slides.map((slide, index) => (
         <div
@@ -84,7 +89,15 @@ export default function HeroSlider() {
             src={slide.image}
             alt={slide.title}
             fill
-            className="object-cover"
+            className="object-cover sm:block hidden"
+            priority
+          />
+          {/* Background Image */}
+          <Image
+            src={slide.mobile}
+            alt={slide.title}
+            fill
+            className="object-cover block sm:hidden"
             priority
           />
 
@@ -94,12 +107,12 @@ export default function HeroSlider() {
           ></div>
 
           {/* Text Content */}
-          <div className="absolute bottom-12 left-6 md:left-12 xl:left-24 text-white ">
-            <h2 className="text-2xl md:text-4xl xl:text-5xl font-bold tracking-tighter">
+          <div className="absolute bottom-32 md:bottom-12 left-10 md:left-12 xl:left-24 text-white ">
+            <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold tracking-tighter">
               {slide.title}
             </h2>
             <p
-              className={`mt-3 text-sm md:text-base xl:text-xl text-[#E8E8E8] tracking-tighter leading-[130%] font-medium ${
+              className={`mr-10 sm:mr-0 mt-3 text-sm md:text-base xl:text-xl text-[#E8E8E8] tracking-tighter leading-[130%] font-medium ${
                 slide.id === 2 && "xl:max-w-[568px] max-w-[500px]"
               } ${slide.id === 1 && "max-w-[513px]"} ${
                 slide.id === 3 && "max-w-[497px]"

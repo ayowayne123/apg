@@ -2,7 +2,7 @@ import { Wix_Madefor_Display } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/ui/header";
 import Footer from "@/components/ui/footer";
-import PluggedIn from "@/components/ui/pluggedIn";
+// import PluggedIn from "@/components/ui/pluggedIn";
 
 const wixFont = Wix_Madefor_Display({
   variable: "--font-wix-madefor-display",
@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
       <body className={`${wixFont.className} antialiased`}>
         <Header />
         {children}
-        <PluggedIn />
+        {/* <PluggedIn /> */}
         <Footer />
       </body>
     </html>
