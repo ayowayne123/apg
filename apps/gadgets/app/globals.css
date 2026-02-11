@@ -38,7 +38,7 @@ body {
 }
 
 .btnSmall {
-  @apply py-3 text-base font-semibold tracking-tighter;
+  @apply sm:py-3 sm:text-base text-sm py-2 font-semibold tracking-tighter;
 }
 
 .btnBig {

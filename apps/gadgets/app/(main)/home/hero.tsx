@@ -93,10 +93,10 @@ export default function HeroSlider() {
             <p className="lg:text-2xl md:text-xl text-lg font-semibold tracking-wide lg:tracking-wider">
               ARTICULATE PLUGS & GADGETS
             </p>
-            <h3 className="px-1 text-black text-center leading-[100%] text-[30px] md:text-4xl lg:text-5xl font-bold  tracking-[-1.92px] lg:tracking-[-2.88px] mt-5 ">
+            <h3 className="px-3 text-black text-center leading-[100%] text-[30px] md:text-4xl lg:text-5xl font-bold  tracking-[-1.92px] lg:tracking-[-2.88px] mt-5 ">
               {slide.title}
             </h3>
-            <p className="md:mt-5 mt-3 text-[18px] sm:text-xl  text-greyText max-w-xl px-1 text-center tracking-[-1.2px]">
+            <p className="md:mt-5 mt-3 text-[18px] sm:text-xl  text-greyText sm:max-w-xl px-5 text-center tracking-[-1.2px]">
               {slide.text}
             </p>
             <div className="flex sm:flex-row flex-col gap-6 mt-6 lg:mt-16">

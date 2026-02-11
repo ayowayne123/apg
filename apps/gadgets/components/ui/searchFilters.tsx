@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 type Category = {
   name: string;
-  href: string; // ex: "/smartphones"
+  href: string;
 };
 
 interface FilterProps {
@@ -13,6 +13,7 @@ interface FilterProps {
   brands?: string[];
   colors?: string[];
   showPrice?: boolean;
+  onClose?: () => void;
 }
 
 export default function SearchFilters({
@@ -20,35 +21,26 @@ export default function SearchFilters({
   brands = [],
   colors = [],
   showPrice = false,
+  onClose,
 }: FilterProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // Convert searchParams into editable URLSearchParams
   const getParams = () => new URLSearchParams(searchParams.toString());
 
   // --------------------------
-  // MULTI SELECT CHECKBOX HELPERS
+  // MULTI SELECT
   // --------------------------
-
   const toggleMultiValue = (key: string, value: string) => {
     const params = getParams();
-
     const current = params.get(key)?.split(",").filter(Boolean) || [];
 
-    let updated: string[] = [];
+    const updated = current.includes(value)
+      ? current.filter((v) => v !== value)
+      : [...current, value];
 
-    if (current.includes(value)) {
-      updated = current.filter((v) => v !== value);
-    } else {
-      updated = [...current, value];
-    }
-
-    if (updated.length === 0) {
-      params.delete(key);
-    } else {
-      params.set(key, updated.join(","));
-    }
+    if (updated.length === 0) params.delete(key);
+    else params.set(key, updated.join(","));
 
     router.push(`?${params.toString()}`);
   };
@@ -56,139 +48,141 @@ export default function SearchFilters({
   // --------------------------
   // PRICE RANGE
   // --------------------------
-
   const updateFilter = (key: string, value: string) => {
     const params = getParams();
-
-    if (value) {
-      params.set(key, value);
-    } else {
-      params.delete(key);
-    }
-
+    if (value) params.set(key, value);
+    else params.delete(key);
     router.push(`?${params.toString()}`);
   };
 
   // --------------------------
-  // CATEGORY NAVIGATION
+  // CATEGORY NAV
   // --------------------------
-
   const goToCategory = (href: string) => {
     const params = getParams().toString();
-    const url = params ? `${href}?${params}` : href;
-    router.push(url);
+    router.push(params ? `${href}?${params}` : href);
+    onClose?.();
   };
 
   return (
-    <div
-      className="
-    fixed inset-x-0 bottom-0 z-60
-    bg-white rounded-t-2xl shadow-lg
-    p-4 space-y-6
-    lg:static lg:w-60 lg:rounded-none lg:shadow-none
-  "
-    >
-      <div className="flex justify-between items-center lg:hidden">
-        <h3 className="font-semibold text-lg">Filters</h3>
-        <button onClick={() => router.back()} className="text-sm">
-          Close
-        </button>
-      </div>
-      {/* ---------------- CATEGORY ---------------- */}
-      {categories.length > 0 && (
-        <div>
-          <h3 className="font-semibold mb-2">Categories</h3>
-
-          <div className="flex flex-col gap-2">
-            {categories.map((cat) => (
-              <button
-                key={cat.name}
-                className="cursor-pointer hover:font-medium text-left"
-                onClick={() => goToCategory(cat.href)}
-              >
-                {cat.name}
-              </button>
-            ))}
-          </div>
-        </div>
+    <>
+      {/* BACKDROP (mobile + tablet) */}
+      {onClose && (
+        <div
+          className="fixed inset-0 bg-black/40 z-40 lg:hidden"
+          onClick={onClose}
+        />
       )}
+      {/* DRAWER / SIDEBAR */}
+      <aside
+        className="
+          fixed bottom-0 inset-x-0 z-50
+          bg-white rounded-t-2xl
+          max-h-[85vh] md:max-h-full overflow-y-auto
+         px-4  space-y-6
+          transition-transform duration-300
 
-      {/* ---------------- BRANDS ---------------- */}
-      {brands.length > 0 && (
-        <div>
-          <h3 className="font-semibold mb-2">Brands</h3>
+          md:left-0 md:top-0 md:bottom-0 md:w-72 md:rounded-none
+          lg:static lg:w-60 lg:max-h-none lg:rounded-none lg:shadow-none lg:translate-y-0 pb-4
+        "
+      >
+        {/* HEADER (mobile + tablet) */}
+        <div className="flex justify-between items-center sticky top-0 bg-white py-4 z-10 lg:hidden ">
+          <h3 className="font-semibold text-lg">Filters</h3>
+          <button onClick={onClose} className="text-sm font-medium">
+            Close
+          </button>
+        </div>
 
-          <div className="space-y-2">
-            {brands.map((brand) => {
-              const selectedBrands =
-                searchParams.get("brand")?.split(",") || [];
-
-              return (
-                <label
-                  key={brand}
-                  className="flex items-center gap-3 text-sm py-1"
+        {/* ---------------- CATEGORY ---------------- */}
+        {categories.length > 0 && (
+          <div>
+            <h3 className="font-semibold mb-3">Categories</h3>
+            <div className="flex flex-col gap-2">
+              {categories.map((cat) => (
+                <button
+                  key={cat.name}
+                  className="text-left hover:font-medium"
+                  onClick={() => goToCategory(cat.href)}
                 >
-                  <input
-                    type="checkbox"
-                    checked={selectedBrands.includes(brand)}
-                    onChange={() => toggleMultiValue("brand", brand)}
-                  />
-                  {brand}
-                </label>
-              );
-            })}
+                  {cat.name}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* ---------------- COLORS ---------------- */}
-      {colors.length > 0 && (
-        <div>
-          <h3 className="font-semibold mb-2">Colors</h3>
+        {/* ---------------- BRANDS ---------------- */}
+        {brands.length > 0 && (
+          <div>
+            <h3 className="font-semibold mb-3">Brands</h3>
+            <div className="space-y-2">
+              {brands.map((brand) => {
+                const selected = searchParams.get("brand")?.split(",") || [];
 
-          <div className="space-y-2">
-            {colors.map((color) => {
-              const selectedColors =
-                searchParams.get("color")?.split(",") || [];
-
-              return (
-                <label
-                  key={color}
-                  className="flex items-center gap-3 text-sm py-1"
-                >
-                  <input
-                    type="checkbox"
-                    checked={selectedColors.includes(color)}
-                    onChange={() => toggleMultiValue("color", color)}
-                  />
-                  {color}
-                </label>
-              );
-            })}
+                return (
+                  <label
+                    key={brand}
+                    className="flex items-center gap-3 text-sm py-1 cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selected.includes(brand)}
+                      onChange={() => toggleMultiValue("brand", brand)}
+                    />
+                    {brand}
+                  </label>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* ---------------- PRICE ---------------- */}
-      {showPrice && (
-        <div>
-          <h3 className="font-semibold mb-2">Price Range</h3>
+        {/* ---------------- COLORS ---------------- */}
+        {colors.length > 0 && (
+          <div>
+            <h3 className="font-semibold mb-3">Colors</h3>
+            <div className="space-y-2">
+              {colors.map((color) => {
+                const selected = searchParams.get("color")?.split(",") || [];
 
-          <input
-            type="number"
-            placeholder="Min Price"
-            className="border p-2 rounded w-full mb-2"
-            onChange={(e) => updateFilter("minPrice", e.target.value)}
-          />
+                return (
+                  <label
+                    key={color}
+                    className="flex items-center gap-3 text-sm py-1 cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selected.includes(color)}
+                      onChange={() => toggleMultiValue("color", color)}
+                    />
+                    {color}
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
-          <input
-            type="number"
-            placeholder="Max Price"
-            className="border p-2 rounded w-full"
-            onChange={(e) => updateFilter("maxPrice", e.target.value)}
-          />
-        </div>
-      )}
-    </div>
+        {/* ---------------- PRICE ---------------- */}
+        {showPrice && (
+          <div>
+            <h3 className="font-semibold mb-3">Price Range</h3>
+            <input
+              type="number"
+              placeholder="Min Price"
+              className="border p-2 rounded w-full mb-2"
+              onChange={(e) => updateFilter("minPrice", e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Max Price"
+              className="border p-2 rounded w-full"
+              onChange={(e) => updateFilter("maxPrice", e.target.value)}
+            />
+          </div>
+        )}
+      </aside>
+    </>
   );
 }
