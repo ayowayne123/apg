@@ -24,6 +24,7 @@ export default function PhonesSearch() {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
   const [meta, setMeta] = useState<any>({});
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     fetchProducts();
@@ -64,18 +65,20 @@ export default function PhonesSearch() {
 
   return (
     <div className="flex gap-6 py-6">
-      <SearchFilters
-        categories={[
-          { name: "All Gadgets", href: "/products" },
-          { name: "Android Phones", href: "/smartphones/android" },
-          { name: "iPhones", href: "/smartphones/iphone" },
-          { name: "UK Used Phones", href: "/smartphones/uk-used" },
-          { name: "Gaming Phones", href: "/smartphones/gaming-phones" },
-        ]}
-        brands={["Apple", "Samsung", "Tecno", "Infinix", "Xiaomi"]}
-        colors={["Black", "White", "Blue", "Gold", "Red"]}
-        showPrice
-      />
+      <div className="hidden lg:block">
+        <SearchFilters
+          categories={[
+            { name: "All Gadgets", href: "/products" },
+            { name: "Android Phones", href: "/smartphones/android" },
+            { name: "iPhones", href: "/smartphones/iphone" },
+            { name: "UK Used Phones", href: "/smartphones/uk-used" },
+            { name: "Gaming Phones", href: "/smartphones/gaming-phones" },
+          ]}
+          brands={["Apple", "Samsung", "Tecno", "Infinix", "Xiaomi"]}
+          colors={["Black", "White", "Blue", "Gold", "Red"]}
+          showPrice
+        />
+      </div>
 
       {/* RIGHT SIDE */}
       <div className="flex-1">
@@ -87,14 +90,26 @@ export default function PhonesSearch() {
           loading={loading}
           total={meta.total}
         />
-
+        <div className="lg:hidden mb-4">
+          <button
+            onClick={() => setShowFilters(true)}
+            className="w-full border rounded-xl py-2 font-medium"
+          >
+            Filters
+          </button>
+        </div>
         {!loading && products.length === 0 && (
           <div className="text-center py-20 text-gray-500">
             No phones found.
           </div>
         )}
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        <div
+          className="grid  [grid-template-columns:repeat(auto-fit,minmax(160px,1fr))]
+        sm:[grid-template-columns:repeat(2,minmax(0,1fr))]
+    lg:[grid-template-columns:repeat(3,minmax(0,1fr))]
+    xl:[grid-template-columns:repeat(4,minmax(0,1fr))] gap-2 sm:gap-4 lg:gap-5"
+        >
           {!loading &&
             products.map((product: any, idx: number) => (
               <ProductCard key={idx} {...product} index={idx} />
@@ -125,6 +140,22 @@ export default function PhonesSearch() {
           </div>
         )}
       </div>
+
+      {showFilters && (
+        <SearchFilters
+          categories={[
+            { name: "All Gadgets", href: "/products" },
+            { name: "Android Phones", href: "/smartphones/android" },
+            { name: "iPhones", href: "/smartphones/iphone" },
+            { name: "UK Used Phones", href: "/smartphones/uk-used" },
+            { name: "Gaming Phones", href: "/smartphones/gaming-phones" },
+          ]}
+          brands={["Apple", "Samsung", "Tecno", "Infinix", "Xiaomi"]}
+          colors={["Black", "White", "Blue", "Gold", "Red"]}
+          showPrice
+          onClose={() => setShowFilters(false)}
+        />
+      )}
     </div>
   );
 }

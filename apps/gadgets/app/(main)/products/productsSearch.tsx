@@ -25,6 +25,7 @@ export default function ProductsSearch() {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
   const [meta, setMeta] = useState<any>({});
+  const [showFilters, setShowFilters] = useState(false);
 
   // --- Fetch products whenever params change ---
   useEffect(() => {
@@ -78,33 +79,35 @@ export default function ProductsSearch() {
   return (
     <div className="flex flex-col lg:flex-row gap-6 py-4 lg:py-6">
       {/* LEFT FILTER SIDEBAR */}
-      <SearchFilters
-        categories={[
-          { name: "Phones", href: "/smartphones" },
-          { name: "Computers", href: "/computers" },
-          { name: "Accessories", href: "/accessories" },
-        ]}
-        brands={["Apple", "Samsung", "Huawei", "HP", "Dell"]}
-        colors={["Black", "White", "Blue", "Pink", "Red"]}
-        showPrice={true}
-      />
+      <div className="hidden lg:block">
+        <SearchFilters
+          categories={[
+            { name: "Phones", href: "/smartphones" },
+            { name: "Computers", href: "/computers" },
+            { name: "Accessories", href: "/accessories" },
+          ]}
+          brands={["Apple", "Samsung", "Huawei", "HP", "Dell"]}
+          colors={["Black", "White", "Blue", "Pink", "Red"]}
+          showPrice
+        />
+      </div>
 
       {/* RIGHT SIDE */}
       <div className="flex-1">
-        <div className="lg:hidden mb-4">
-          <button
-            onClick={() => router.push(`${pathname}?filters=open`)}
-            className="w-full border rounded-xl py-2 font-medium"
-          >
-            Filters
-          </button>
-        </div>
         <ProductHeader
           search={search}
           title="Products"
           loading={loading}
           total={meta.total}
         />
+        <div className="lg:hidden mb-4">
+          <button
+            onClick={() => setShowFilters(true)}
+            className="w-full border rounded-xl py-2 font-medium"
+          >
+            Filters
+          </button>
+        </div>
 
         {/* No results */}
         {!loading && products.length === 0 && (
@@ -114,7 +117,12 @@ export default function ProductsSearch() {
         )}
 
         {/* Product Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
+        <div
+          className="grid  [grid-template-columns:repeat(auto-fit,minmax(160px,1fr))]
+        sm:[grid-template-columns:repeat(2,minmax(0,1fr))]
+    lg:[grid-template-columns:repeat(3,minmax(0,1fr))]
+    xl:[grid-template-columns:repeat(4,minmax(0,1fr))] gap-2 sm:gap-4 lg:gap-5"
+        >
           {!loading &&
             products.map((product: any, idx: number) => (
               <ProductCard key={idx} {...product} index={idx} />
@@ -146,6 +154,19 @@ export default function ProductsSearch() {
           </div>
         )}
       </div>
+      {showFilters && (
+        <SearchFilters
+          categories={[
+            { name: "Phones", href: "/smartphones" },
+            { name: "Computers", href: "/computers" },
+            { name: "Accessories", href: "/accessories" },
+          ]}
+          brands={["Apple", "Samsung", "Huawei", "HP", "Dell"]}
+          colors={["Black", "White", "Blue", "Pink", "Red"]}
+          showPrice
+          onClose={() => setShowFilters(false)}
+        />
+      )}
     </div>
   );
 }

@@ -25,7 +25,7 @@ function PluggedIn() {
       />
       <div className="h-full w-full  flex items-center justify-center bg-secondary/70 z-20 absolute text-white">
         <div className="container ">
-          <div className="grid grid-cols-2 w-full lg:px-36 xl:px-48 lg:gap-12">
+          <div className="grid lg:grid-cols-2 w-full lg:px-36 xl:px-48 lg:gap-12 gap-4">
             <h2 className="tracking-tighter">
               Stay plugged in. Get deals, listings, and news.
             </h2>
@@ -36,12 +36,12 @@ function PluggedIn() {
                   placeholder="Your Email Here"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="p-7 text-xl rounded-md text-white placeholder:text-white focus:outline-none focus:bg-white focus:text-black focus:placeholder:text-black bg-[#F9F9F9]/10 max-w-[353px]"
+                  className="lg:p-7 p-4 text-xl rounded-md text-white placeholder:text-white focus:outline-none focus:bg-white focus:text-black focus:placeholder:text-black bg-[#F9F9F9]/10 max-w-[353px]"
                   required
                 />
                 <button
                   type="submit"
-                  className="btn altBtn btnBig lg:w-[266px]"
+                  className="btn altBtn btnBig lg:w-[266px] w-40"
                 >
                   Subscribe
                 </button>

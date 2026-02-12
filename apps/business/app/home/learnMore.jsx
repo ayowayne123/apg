@@ -50,18 +50,18 @@ function LearnMore() {
         </div>
       </div>
       <div className="text-primary lg:ml-6 xl:ml-20 pt-12 ">
-        <p className="pr-12 xl:pr-20 lg:text-[30px] text-xl leading-[105%] font-medium mt-3 tracking-tighter">
+        <p className="pr-20 lg:pr-12 xl:pr-20 lg:text-[30px] text-2xl leading-[105%] font-medium mt-3 tracking-tighter">
           Articulate Business Hub is your one-stop destination for
         </p>
-        <p className=" lg:text-5xl text-2xl leading-[110%] font-bold tracking-tighter">
+        <p className=" lg:text-5xl text-4xl leading-[110%] font-bold tracking-tighter">
           high-quality gadgets and trusted real estate solutions
         </p>
-        <p className="pr-12 xl:pr-20 mt-4 lg:text-2xl text-lg leading-[130%] font-medium text-[#656565] tracking-tighter">
+        <p className="pr-12 xl:pr-20 lg:mt-4 lg:text-2xl text-xl leading-[130%] font-medium text-[#656565] tracking-tighter">
           With a focus on innovation, integrity, and lifestyle enhancement, we
           bridge the gap between tech and property.”
         </p>
         <Link
-          className="btn pryBtn btnBig lg:w-[178px] lg:mt-11 mt-8"
+          className="btn pryBtn btnBig lg:w-[178px] w-[229px] lg:mt-11 mt-8"
           href="/about"
         >
           Learn More

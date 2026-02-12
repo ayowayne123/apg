@@ -23,7 +23,7 @@ function PluggedIn() {
         className="object-cover z-10"
         priority
       />
-      <div className="h-full w-full  flex items-center justify-center bg-primary/66 z-20 absolute text-white">
+      <div className="h-full w-full  flex flex-col md:flex-row items-center justify-center bg-primary/66 z-20 absolute text-white">
         <div className="container ">
           <div className="grid grid-cols-2 w-full lg:px-36 xl:px-48 lg:gap-12">
             <h2 className="tracking-tighter">

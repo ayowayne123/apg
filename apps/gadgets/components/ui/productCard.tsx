@@ -33,6 +33,13 @@ export default function ProductCard({
   const router = useRouter();
   const { refreshCart } = useCart();
 
+  const formattedPrice = new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: currency || "NGN",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(Number(price));
+
   const isLoggedIn = Boolean(Cookies.get("apg_token"));
 
   const toggleFavourite = async () => {
@@ -78,18 +85,18 @@ export default function ProductCard({
   return (
     <Link
       href={`/${slug}`}
-      className={`border border-apgGrey rounded-2xl p-4 flex flex-col hover:shadow-md transition ${
+      className={`border border-apgGrey rounded-2xl py-3 px-2 md:py-4 md:px-4 flex flex-col hover:shadow-md transition ${
         index % 2 !== 0 ? "bg-apgGrey" : "bg-apgCream"
       }`}
     >
       {/* Product Image */}
-      <div className="relative w-full h-64 lg:h-48 xl:h-64 bg-white border border-borderGrey rounded-2xl overflow-hidden">
+      <div className="relative w-full h-40 md:h-64 lg:h-48 xl:h-64 bg-white border border-borderGrey rounded-2xl overflow-hidden">
         {cover_photo?.url ? (
           <Image
             src={cover_photo.url}
             alt={cover_photo.alt || title}
             fill
-            className="object-contain p-4 sm:p-6 lg:p-8"
+            className="object-contain p-2 sm:p-6 lg:p-8"
           />
         ) : (
           <div className="flex items-center justify-center h-full text-gray-400">
@@ -105,8 +112,8 @@ export default function ProductCard({
         </h3>
 
         <div className="mt-1 flex flex-row gap-2 items-center">
-          <p className="tracking-tight font-bold text-base sm:text-lg">
-            {Number(price).toFixed(2)} {currency}
+          <p className="tracking-tight font-bold text-sm sm:text-base md:text-lg">
+            {formattedPrice}
           </p>
 
           {hasDiscount && (
@@ -117,14 +124,14 @@ export default function ProductCard({
         </div>
 
         {short_description && (
-          <p className="text-greyText text-sm mt-3 line-clamp-3 tracking-tight">
+          <p className="text-greyText text-sm mt-3 line-clamp-3 tracking-tight ">
             {short_description}
           </p>
         )}
       </div>
 
       {/* Actions */}
-      <div className="flex flex-col sm:flex-row gap-3 justify-between items-center mt-4">
+      <div className="flex flex-row gap-3 justify-between items-center mt-4">
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -145,10 +152,10 @@ export default function ProductCard({
             e.stopPropagation();
             toggleFavourite();
           }}
-          className={` rounded-full flex items-center justify-center text-lg sm:text-xl h-11 w-11 sm:h-[53px] sm:w-[53px] 
+          className={` rounded-full flex items-center justify-center text-sm sm:text-xl h-9 w-9 sm:h-[53px] sm:w-[53px] shrink-0
             ${favourited ? "bg-apgRed" : "bg-primary"}`}
         >
-          <FaHeart className="text-white" />
+          <FaHeart className="text-white  " />
         </button>
       </div>
     </Link>

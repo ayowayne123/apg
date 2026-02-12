@@ -77,7 +77,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-1 text-white">
               <Link
-                href="#"
+                href="https://www.tiktok.com/@articulateplugandgadgets?_r=1&_t=ZS-93GLaCgigbg"
                 className="bg-primary items-center justify-center h-8 w-8 flex rounded-full hover:bg-secondary/70 transition"
               >
                 <FaFacebookF size={16} />
