@@ -5,51 +5,21 @@
    ▲ Next.js 15.4.6
 
    Creating an optimized production build ...
- ✓ Compiled successfully in 107s
+ ✓ Compiled successfully in 2.4min
    Linting and checking validity of types ...
+Failed to compile.
 
-./app/(auth)/signup/page.tsx
-6:10  Warning: 'apiFetch' is defined but never used.  @typescript-eslint/no-unused-vars
-97:13  Warning: 'data' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+.next/types/app/(main)/[slug]/page.ts:34:29
+Type error: Type 'Props' does not satisfy the constraint 'PageProps'.
+  Types of property 'params' are incompatible.
+    Type '{ slug: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
 
-./app/(main)/(profile)/layout.tsx
-4:8  Warning: 'Link' is defined but never used.  @typescript-eslint/no-unused-vars
-5:8  Warning: 'Image' is defined but never used.  @typescript-eslint/no-unused-vars
-8:24  Warning: 'RiLogoutCircleRLine' is defined but never used.  @typescript-eslint/no-unused-vars
-
-./app/(main)/home/hero.tsx
-80:6  Warning: React Hook useEffect has a missing dependency: 'nextSlide'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
-
-./app/(main)/page.tsx
-1:8  Warning: 'Image' is defined but never used.  @typescript-eslint/no-unused-vars
-
-info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
-   Collecting page data ...
-   Generating static pages (0/12) ...
-   Generating static pages (3/12) 
-   Generating static pages (6/12) 
-   Generating static pages (9/12) 
- ✓ Generating static pages (12/12)
-   Finalizing page optimization ...
-   Collecting build traces ...
-
-Route (app)                                 Size  First Load JS
-┌ ○ /                                     5.7 kB         141 kB
-├ ○ /_not-found                            123 B         100 kB
-├ ○ /account                             1.47 kB         107 kB
-├ ○ /forgot-password                     1.08 kB         127 kB
-├ ○ /login                               3.19 kB         133 kB
-├ ○ /reset-password                      1.28 kB         127 kB
-├ ○ /signup                              2.67 kB         112 kB
-├ ○ /test                                  736 B         121 kB
-└ ○ /verify                              2.18 kB         128 kB
-+ First Load JS shared by all             100 kB
-  ├ chunks/274-afa05ab8e0973f79.js       44.1 kB
-  ├ chunks/fb521855-360f788827d72256.js  54.1 kB
-  └ other shared chunks (total)          1.99 kB
-
-
-ƒ Middleware                             33.1 kB
-
-○  (Static)  prerendered as static content
-
+[0m [90m 32 |[39m
+ [90m 33 |[39m [90m// Check the prop type of the entry function[39m
+[31m[1m>[22m[39m[90m 34 |[39m checkFields[33m<[39m[33mDiff[39m[33m<[39m[33mPageProps[39m[33m,[39m [33mFirstArg[39m[33m<[39m[33mTEntry[39m[[32m'default'[39m][33m>[39m[33m,[39m [32m'default'[39m[33m>>[39m()
+ [90m    |[39m                             [31m[1m^[22m[39m
+ [90m 35 |[39m
+ [90m 36 |[39m [90m// Check the arguments and return type of the generateMetadata function[39m
+ ELIFECYCLE  Command failed with exit code 1.
+ [90m 37 |[39m [36mif[39m ([32m'generateMetadata'[39m [36min[39m entry) {[0m
+Next.js build worker exited with code: 1 and signal: null
