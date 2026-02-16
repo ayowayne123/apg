@@ -21,10 +21,29 @@ function Team() {
         The Minds Behind the Mission
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 max-w-5xl mx-auto mb-20">
+      <div className="
+        grid 
+        grid-cols-2 
+        md:grid-cols-3 
+        gap-8 md:gap-10 
+        max-w-5xl 
+        mx-auto 
+        px-6 
+        mb-16 md:mb-20
+      ">
         {members.map((member, index) => (
           <div key={index} className="text-center">
-            <div className="w-32 h-32 lg:w-60 lg:h-60 mx-auto relative rounded-full bg-blue-100  overflow-hidden">
+            
+            <div className="
+              w-24 h-24 
+              sm:w-28 sm:h-28 
+              md:w-32 md:h-32 
+              lg:w-60 lg:h-60 
+              mx-auto relative 
+              rounded-full 
+              bg-blue-100 
+              overflow-hidden
+            ">
               <Image
                 src={member.img}
                 alt={member.name}
@@ -32,15 +51,25 @@ function Team() {
                 fill
               />
             </div>
-            <h3 className="mt-4 font-semibold text-2xl text-primary tracking-tight">
+
+            <h3 className="
+              mt-3 md:mt-4 
+              font-semibold 
+              text-lg sm:text-xl md:text-2xl 
+              text-primary 
+              tracking-tight
+            ">
               {member.name}
             </h3>
-            <p className="text-greytext text-sm tracking-tight">
+
+            <p className="text-greytext text-xs sm:text-sm tracking-tight">
               {member.position}
             </p>
+
           </div>
         ))}
       </div>
+
     </div>
   );
 }

@@ -27,11 +27,25 @@ function Insights() {
 
   return (
     <section className="my-20">
-      <h2 className="text-primary mx-auto lg:max-w-[635px] text-center tracking-tighter">
-        Insights, Tips & Trends That Keep You Ahead
+      <h2 className="
+        text-primary 
+        text-2xl sm:text-3xl lg:text-4xl
+        text-center 
+        tracking-tight
+        px-4
+      ">
+          Insights, Tips & Trends That Keep You Ahead
       </h2>
-      <p className="text-2xl text-center mx-auto lg:max-w-[660px] tracking-tighter">
-        Whether you’re a tech lover or a home seeker, our blog is your go-to
+      <p className="
+        text-base sm:text-lg lg:text-2xl
+        text-center 
+        mx-auto 
+        px-4
+        mt-4
+        max-w-[90%] md:max-w-[550px] lg:max-w-[660px]
+        tracking-tight
+        leading-relaxed
+      ">        Whether you’re a tech lover or a home seeker, our blog is your go-to
         resource for smart decisions and better living.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-9 gap-6">

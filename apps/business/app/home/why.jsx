@@ -19,7 +19,7 @@ function Why() {
   ];
 
   return (
-    <section className="flex flex-col lg:flex-row bg-grey relative my-12 rounded-[35px]">
+    <section className="flex flex-col lg:flex-row bg-grey relative my-0 rounded-[35px]">
       {/* Floating Ribbon */}
       <motion.div
         className="rounded-full h-16 w-16 lg:h-32 lg:w-32  bg-[#FCF3FF] absolute lg:bottom-0 bottom-24 lg:top-28 lg:right-0 right-4 lg:-left-7 z-20 p-4 lg:p-8"
@@ -71,7 +71,7 @@ function Why() {
 
       {/* Text Content */}
       <motion.div
-        className="text-primary ml-8 lg:ml-6 xl:ml-20 py-[76px] pr-8 w-full grow"
+        className="text-primary ml-8 lg:ml-6 xl:ml-20 pt-[76px] pb-[30px] pr-8 w-full grow"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -119,7 +119,7 @@ function Why() {
       </motion.div>
 
       {/* Mobile Image */}
-      <motion.div className="lg:w-[660px] flex lg:hidden  shrink-0 mt-7">
+      <motion.div className="lg:w-[660px] flex lg:hidden  shrink-0 mt-0">
         <div className="w-full h-full min-h-[360px] relative">
           <Image
             src={whyImage}

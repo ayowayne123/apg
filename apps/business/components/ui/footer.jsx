@@ -12,12 +12,15 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-white  text-greyText text-xl font-medium tracking-tighter">
-      <div className="container pb-10 pt-36">
+    <footer className="bg-white text-greyText text-base lg:text-xl font-medium tracking-tighter min-h-screen lg:min-h-fit flex flex-col justify-between">
+
+      <div className="container mx-auto px-10 lg:px-0 pt-10 lg:pt-36 pb-10 flex-1">
+        
         {/* Top Section */}
-        <div className="flex lg:flex-row flex-col justify-between xl:gap-28 gap-16">
+        <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-16 xl:gap-28">
+
           {/* Logo + Description */}
-          <div className="w-[311px] shrink-0">
+          <div className="w-full lg:w-[311px] shrink-0">
             <div className="flex items-center gap-2 mb-3">
               <Image
                 src={logo}
@@ -25,7 +28,7 @@ export default function Footer() {
                 className="w-[105px] h-[54px] object-contain"
               />
             </div>
-            <p className="text-greyText tracking-tighter">
+            <p className="tracking-tight leading-relaxed">
               Articulate Business Hub is Nigeria’s trusted destination for
               premium gadgets and reliable real estate solutions.
             </p>
@@ -33,16 +36,16 @@ export default function Footer() {
 
           {/* Links */}
           <div>
-            <ul className="space-y-1">
+            <ul className="space-y-2">
               <li>
-                <Link href="/about" className="hover:text-primary">
+                <Link href="/about" className="hover:text-primary transition">
                   About Us
                 </Link>
               </li>
               <li>
                 <Link
                   href="https://gadgets.apgbusinesshub.com/"
-                  className="hover:text-primary"
+                  className="hover:text-primary transition"
                 >
                   Gadgets
                 </Link>
@@ -50,18 +53,18 @@ export default function Footer() {
               <li>
                 <Link
                   href="https://homes.apgbusinesshub.com/"
-                  className="hover:text-primary"
+                  className="hover:text-primary transition"
                 >
                   Real Estate
                 </Link>
               </li>
               <li>
-                <Link href="/faqs" className="hover:text-primary">
+                <Link href="/faqs" className="hover:text-primary transition">
                   FAQs
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-primary">
+                <Link href="/blog" className="hover:text-primary transition">
                   Blog/Insights
                 </Link>
               </li>
@@ -70,8 +73,8 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-semibold mb-2">Contact Us</h3>
-            <ul className="space-y-1">
+            <h3 className="font-semibold mb-3">Contact Us</h3>
+            <ul className="space-y-2">
               <li>Office address here</li>
               <li>+234 XXX XXX XXXX</li>
               <li>hello@articulatehub.ng</li>
@@ -81,47 +84,35 @@ export default function Footer() {
 
           {/* Socials */}
           <div>
-            <h3 className="font-semibold mb-2">Stay Connected</h3>
-            <p className="mb-3">
+            <h3 className="font-semibold mb-3">Stay Connected</h3>
+            <p className="mb-4 text-sm lg:text-base">
               Follow us for updates, offers, and new listings
             </p>
-            <div className="flex gap-1 text-white">
-              <Link
-                href="#"
-                className="bg-primary items-center justify-center h-8 w-8 flex rounded-full hover:bg-primary/70 transition"
-              >
-                <FaFacebookF size={16} />
-              </Link>
-              <Link
-                href="#"
-                className="bg-primary items-center justify-center h-8 w-8 flex rounded-full hover:bg-primary/70 transition"
-              >
-                <FaInstagram size={16} />
-              </Link>
-              <Link
-                href="#"
-                className="bg-primary items-center justify-center h-8 w-8 flex rounded-full hover:bg-primary/70 transition"
-              >
-                <FaLinkedinIn size={16} />
-              </Link>
-              <Link
-                href="#"
-                className="bg-primary items-center justify-center h-8 w-8 flex rounded-full hover:bg-primary/70 transition"
-              >
-                <FaTwitter size={16} />
-              </Link>
+            <div className="flex gap-2 text-white">
+              {[FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter].map(
+                (Icon, i) => (
+                  <Link
+                    key={i}
+                    href="#"
+                    className="bg-primary h-9 w-9 flex items-center justify-center rounded-full hover:bg-primary/70 transition"
+                  >
+                    <Icon size={16} />
+                  </Link>
+                )
+              )}
             </div>
           </div>
         </div>
 
         {/* Divider */}
-        <hr className="my-8 border-black" />
+        <hr className="my-8 border-black/30" />
 
         {/* Bottom Text */}
-        <div className="">
+        <div className="text-sm lg:text-base text-center lg:text-left">
           © 2025 Articulate Business Hub. All rights reserved.
         </div>
       </div>
+
     </footer>
   );
 }
