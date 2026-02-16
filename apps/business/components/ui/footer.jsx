@@ -12,7 +12,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-white text-greyText text-base lg:text-xl font-medium tracking-tighter min-h-screen lg:min-h-fit flex flex-col justify-between">
+    <footer className="bg-white text-greyText text-base lg:text-xl font-medium tracking-tighter min-h-[100dvh] lg:min-h-fit flex flex-col justify-between">
 
       <div className="container mx-auto px-10 lg:px-0 pt-10 lg:pt-36 pb-10 flex-1">
         
