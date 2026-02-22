@@ -25,19 +25,36 @@ const testimonials = [
 ];
 function Stories() {
   return (
-    <section className="my-24">
-      <h2 className=" mx-auto  text-center tracking-tighter">
+    <section className="my-12">
+      <h2 className=" mx-auto w-[200px] md:w-[100%] text-center tracking-tighter">
         Real Stories. Real Satisfaction.
       </h2>
-      <p className="lg:text-2xl text-xl text-center mx-auto md:max-w-[550px] lg:max-w-[660px] tracking-tighter">
+      <p className="lg:text-2xl text-xl text-center mx-auto px-7 md:max-w-[550px] lg:max-w-[660px] tracking-tighter">
         We don’t just promise excellence, we deliver it. Here’s what our happy
         clients have to say about their experience with Us
       </p>
-      <section className="flex flex-wrap justify-center gap-6 py-6 lg:py-12 lg:px-9 text-[#656565]">
+      <section
+        className="
+          flex lg:flex-wrap flex-nowrap 
+          justify-start lg:justify-center 
+          gap-6 
+          py-6 lg:py-12 lg:px-9 
+          text-[#656565]
+          overflow-x-auto lg:overflow-visible
+          snap-x snap-mandatory
+        "
+      >
         {testimonials.map((t, i) => (
           <div
             key={i}
-            className={`max-w-80 lg:max-w-88 p-5 rounded-xl  ${t.bg}`}
+            className={`
+              min-w-[80%] sm:min-w-[60%] 
+              lg:min-w-0
+              max-w-80 lg:max-w-88
+              p-5 rounded-xl
+              snap-center
+              ${t.bg}
+            `}
           >
             {/* Stars */}
             <div className="mb-3 text-[#F1CB00]">
@@ -46,13 +63,13 @@ function Stories() {
             </div>
 
             {/* Testimonial Text */}
-            <p className="text-xl tracking-tighter font-medium  mb-6">
+            <p className="text-base md:text-lg lg:text-xl tracking-tighter font-medium mb-6">
               {t.text}
             </p>
 
             {/* Name + Location */}
-            <p className="tracking-tighter text-xl ">
-              {t.name},{t.location}
+            <p className="tracking-tighter text-base md:text-lg lg:text-xl">
+              {t.name}, {t.location}
             </p>
           </div>
         ))}

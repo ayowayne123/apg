@@ -13,7 +13,7 @@ import {
 export default function Footer() {
   return (
     <footer className="bg-white  text-greyText text-xl font-medium tracking-tighter">
-      <div className="container pb-10 pt-36">
+      <div className="container pb-10 pt-20">
         {/* Top Section */}
         <div className="flex lg:flex-row flex-col justify-between xl:gap-28 gap-8 lg:gap-16">
           {/* Logo + Description */}
@@ -60,12 +60,30 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-semibold mb-2">Contact Us</h3>
-            <ul className="space-y-1">
-              <li>Office address here</li>
-              <li>+234 XXX XXX XXXX</li>
-              <li>hello@articulatehub.ng</li>
-              <li>WhatsApp: [Insert link]</li>
+            <h3 className="font-semibold mb-3">Contact Us</h3>
+            <ul className="space-y-2">
+              <li>Suite 4F Mokland Plaza 3-9 Olu Koleosho Street off medical road Ikeja Lagos</li>
+              <li> +234 814 007 5596</li>
+              <li>apgbusinesshub@gmail.com</li>
+              <li style={{ listStyle: "none" }}>
+                <a
+                  href="https://wa.me/2348140075596?text=Hello%20👋%20Welcome!%20Please%20select%20an%20option%20below:%0A%0A1️⃣%20Business%0A2️⃣%20Investment%0A3️⃣%20Homes%0A4️⃣%20Sublet%20Gadgets%20%26%20Accessories"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-block",
+                    backgroundColor: "#25D366",
+                    color: "white",
+                    padding: "10px 18px",
+                    borderRadius: "8px",
+                    fontWeight: 600,
+                    textDecoration: "none",
+                    transition: "0.3s ease",
+                  }}
+                >
+                  💬 Start WhatsApp Conversation
+                </a>
+              </li>          
             </ul>
           </div>
 

@@ -5,12 +5,12 @@ import vr from "@/public/images/vrMan.png";
 
 function Why() {
   return (
-    <section className=" my-12 container">
+    <section className="container">
       {/* Tabs and bigger */}
       <div className=" lg:h-[722px] md:flex hidden">
         <div className="bg-[#F5F5F5] rounded-2xl h-full p-8 xl:px-24 lg:px-16 lg:py-16 w-full items-center relative">
           {/* Text Section */}
-          <div className=" mt-3">
+          <div className="">
             <div>
               <h3 className="text-[32px] font-medium text-[#151515] leading-[105%] tracking-[-1.92px]">
                 Why Buy From Us?
@@ -22,15 +22,21 @@ function Why() {
               </h2>
             </div>
 
-            <div className="text-2xl tracking-[-1.4px] text-[#656565] leading-[237%] mt-4">
+            <div className="text-2xl tracking-[-1.4px] text-[#656565] leading-[130%] md:leading-[170%] mt-4 space-y-1 md:space-y-3">
               <p className="flex items-center">Original products only</p>
               <p className="flex items-center">Competitive pricing</p>
               <p className="flex items-center">Delivery available</p>
             </div>
 
-            <button className="btn btnBig pryBtn w-[190px] mt-12 ">
-              Contact Sales
-            </button>
+            <a
+              href="https://wa.me/2349022638251?text=Hello%20👋%20I%20would%20like%20to%20contact%20sales."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="btn btnBig pryBtn w-[190px] mt-5">
+                Contact Sales
+              </button>
+            </a>
           </div>
 
           {/* Image Section */}
