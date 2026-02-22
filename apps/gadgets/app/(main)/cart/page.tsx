@@ -7,6 +7,7 @@ import { useCart } from "@/components/context/cartContext";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import Link from "next/link";
 
 export default function CartPage() {
   const { items, total, loading, updateQtyOptimistic } = useCart();
@@ -118,12 +119,27 @@ export default function CartPage() {
         ))}
       </div>
 
-      <div className="mt-10 flex justify-between">
-        <p className="text-2xl font-bold">Total: {total.toFixed(2)} USD</p>
+      <div className="mt-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+  <p className="text-2xl font-bold text-center lg:text-left">
+    Total: {total.toFixed(2)} USD
+  </p>
 
-        <button onClick={handleCheckout} className="btn pryBtn px-8 py-3">
-          Proceed to Checkout
-        </button>
+        <div className="flex flex-col gap-4 w-full lg:w-auto lg:flex-row">
+          <Link
+            href="/products"
+            rel="noopener noreferrer"
+            className="w-full lg:w-[250px] btn pryBtn btnBig text-center"
+          >
+            Continue Shopping
+          </Link>
+
+          <button
+            onClick={handleCheckout}
+            className="w-full lg:w-auto btn pryBtn px-8 py-3"
+          >
+            Proceed to Checkout
+          </button>
+        </div>
       </div>
     </div>
   );

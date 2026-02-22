@@ -1,0 +1,120 @@
+
+> gadgets@0.1.0 dev C:\Users\USER\Desktop\Workspace\apg\apg\apps\gadgets
+> next dev
+
+   ▲ Next.js 15.4.10
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.56.1:3000
+
+ ✓ Starting...
+ ✓ Ready in 11.3s
+ ○ Compiling /[slug] ...
+ ⨯ ./app/(main)/[slug]/page.tsx
+Error:   [31mx[0m You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+  [31m|[0m
+  [31m|[0m  Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+  [31m|[0m
+
+   ,-[[36;1;4mC:\Users\USER\Desktop\Workspace\apg\apg\apps\gadgets\app\(main)\[slug]\page.tsx[0m:4:1]
+ [2m1[0m | import { getProductBySlug } from "@calls/productCalls";
+ [2m2[0m | import Image from "next/image";
+ [2m3[0m | import { Metadata } from "next";
+ [2m4[0m | import { useState } from "react";
+   : [35;1m         ^^^^^^^^[0m
+ [2m5[0m | import { notFound } from "next/navigation";
+ [2m6[0m | import StarRating from "@/components/ui/starRating";
+ [2m6[0m | import bg from "@/public/icons/contourBg.png";
+   `----
+
+Import trace for requested module:
+./app/(main)/[slug]/page.tsx
+ ⨯ ./app/(main)/[slug]/page.tsx
+Error:   [31mx[0m You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+  [31m|[0m
+  [31m|[0m  Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+  [31m|[0m
+
+   ,-[[36;1;4mC:\Users\USER\Desktop\Workspace\apg\apg\apps\gadgets\app\(main)\[slug]\page.tsx[0m:4:1]
+ [2m1[0m | import { getProductBySlug } from "@calls/productCalls";
+ [2m2[0m | import Image from "next/image";
+ [2m3[0m | import { Metadata } from "next";
+ [2m4[0m | import { useState } from "react";
+   : [35;1m         ^^^^^^^^[0m
+ [2m5[0m | import { notFound } from "next/navigation";
+ [2m6[0m | import StarRating from "@/components/ui/starRating";
+ [2m6[0m | import bg from "@/public/icons/contourBg.png";
+   `----
+
+Import trace for requested module:
+./app/(main)/[slug]/page.tsx
+ ⨯ ./app/(main)/[slug]/page.tsx
+Error:   [31mx[0m You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+  [31m|[0m
+  [31m|[0m  Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+  [31m|[0m
+
+   ,-[[36;1;4mC:\Users\USER\Desktop\Workspace\apg\apg\apps\gadgets\app\(main)\[slug]\page.tsx[0m:4:1]
+ [2m1[0m | import { getProductBySlug } from "@calls/productCalls";
+ [2m2[0m | import Image from "next/image";
+ [2m3[0m | import { Metadata } from "next";
+ [2m4[0m | import { useState } from "react";
+   : [35;1m         ^^^^^^^^[0m
+ [2m5[0m | import { notFound } from "next/navigation";
+ [2m6[0m | import StarRating from "@/components/ui/starRating";
+ [2m6[0m | import bg from "@/public/icons/contourBg.png";
+   `----
+
+Import trace for requested module:
+./app/(main)/[slug]/page.tsx
+ GET /dell-latitude-7480-iBUpXs 500 in 57986ms
+ ⨯ ./app/(main)/[slug]/page.tsx
+Error:   [31mx[0m You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+  [31m|[0m
+  [31m|[0m  Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+  [31m|[0m
+
+   ,-[[36;1;4mC:\Users\USER\Desktop\Workspace\apg\apg\apps\gadgets\app\(main)\[slug]\page.tsx[0m:4:1]
+ [2m1[0m | import { getProductBySlug } from "@calls/productCalls";
+ [2m2[0m | import Image from "next/image";
+ [2m3[0m | import { Metadata } from "next";
+ [2m4[0m | import { useState } from "react";
+   : [35;1m         ^^^^^^^^[0m
+ [2m5[0m | import { notFound } from "next/navigation";
+ [2m6[0m | import StarRating from "@/components/ui/starRating";
+ GET /_next/static/webpack/e14c854c65baed54.webpack.hot-update.json 500 in 3089ms
+ GET /dell-latitude-7480-iBUpXs 500 in 87ms
+ [2m6[0m | import bg from "@/public/icons/contourBg.png";
+   `----
+
+Import trace for requested module:
+./app/(main)/[slug]/page.tsx
+ ⨯ ./app/(main)/[slug]/page.tsx
+Error:   [31mx[0m You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+  [31m|[0m
+  [31m|[0m  Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+  [31m|[0m
+
+   ,-[[36;1;4mC:\Users\USER\Desktop\Workspace\apg\apg\apps\gadgets\app\(main)\[slug]\page.tsx[0m:4:1]
+ [2m1[0m | import { getProductBySlug } from "@calls/productCalls";
+ [2m2[0m | import Image from "next/image";
+ [2m3[0m | import { Metadata } from "next";
+ [2m4[0m | import { useState } from "react";
+   : [35;1m         ^^^^^^^^[0m
+ [2m5[0m | import { notFound } from "next/navigation";
+ [2m6[0m | import StarRating from "@/components/ui/starRating";
+ [2m6[0m | import bg from "@/public/icons/contourBg.png";
+   `----
+
+Import trace for requested module:
+./app/(main)/[slug]/page.tsx
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled /[slug] in 22s (2224 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /_next/static/webpack/e14c854c65baed54.webpack.hot-update.json 404 in 28013ms
+ GET /dell-latitude-7480-iBUpXs 200 in 42634ms
+ ✓ Compiled in 10.1s (2235 modules)
+ GET /dell-latitude-7480-iBUpXs 200 in 14052ms
+ GET /dell-latitude-7480-iBUpXs 200 in 27383ms
+ GET /dell-latitude-7480-iBUpXs 200 in 13697ms
+ ✓ Compiled in 18.1s (2235 modules)
+ GET /dell-latitude-7480-iBUpXs 200 in 11408ms

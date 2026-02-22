@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import StarRating from "@/components/ui/starRating";
 import bg from "@/public/icons/contourBg.png";
 import { HiBadgeCheck } from "react-icons/hi";
+import Link from "next/link";
 
 type ProductImage = {
   id: number;
@@ -97,7 +98,7 @@ export default async function ProductDetailsPage({
           <div className=" text-black flex items-center px-20 h-full w-full">
             <h1 className="text-4xl font-bold tracking-tighter">{title}</h1>
           </div>
-        </div>
+        </div>         
       </div>
 
       {/* --- Main Product Layout --- */}
@@ -238,6 +239,14 @@ export default async function ProductDetailsPage({
           </div>
         </div>
       </div>
+
+      <Link
+        href="/products"
+        rel="noopener noreferrer"
+        className="lg:mt-[56px] mt-10 w-40 lg:w-[250px] btn pryBtn btnBig"
+      >
+        Back to Categories
+      </Link>
 
       {/* --- Related Products --- */}
       <div>
