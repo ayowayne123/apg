@@ -234,7 +234,8 @@ export default function Details({ listing }) {
         {/* Back Button */}
         <div className="mt-20 text-center mb-6 lg:mb-32">
           <Link
-            href={`/${listing?.listing_type}`}
+            // href={`/${listing?.listing_type}`}
+            href= "/shortlets"
             className="btn secBtn btnBig w-[220px] cursor-pointer"
           >
             Back to Listings

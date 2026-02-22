@@ -131,9 +131,14 @@ export default function HeroSlider() {
                 >
                   Browse Listings
                 </Link>
-                <Link className="btn pryBtn btnBig lg:w-[178px]" href="/about">
+                <a
+                  href="https://wa.me/2348012345678?text=Hello%20APG%20Business%20Hub,%20I%20am%20interested%20in%20your%20services."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn pryBtn btnBig lg:w-[178px]"
+                >
                   Contact Sales
-                </Link>
+                </a>
               </div>
             </div>
           </div>

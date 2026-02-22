@@ -15,7 +15,7 @@ export default function ListingCard({ listing }) {
       {/* Image */}
       <div className="relative w-full h-[250px] max-h-[250px]  rounded-2xl overflow-hidden bg-black shrink-0">
         <Image
-          src={listing?.cover_photo?.url || "icons/apg-homes.png"}
+          src={listing?.cover_photo?.url || "/icons/apg-homes.png"}
           alt={listing?.title || "Image of House"}
           fill
           className={` ${

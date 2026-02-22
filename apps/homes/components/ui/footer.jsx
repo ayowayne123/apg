@@ -9,6 +9,7 @@ import {
   FaLinkedinIn,
   FaTwitter,
 } from "react-icons/fa";
+import { FaTiktok } from "react-icons/fa6";
 
 export default function Footer() {
   return (
@@ -60,46 +61,68 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-semibold mb-2">Contact Us</h3>
-            <ul className="space-y-1">
-              <li>Office address here</li>
-              <li>+234 XXX XXX XXXX</li>
-              <li>hello@articulatehub.ng</li>
-              <li>WhatsApp: [Insert link]</li>
+            <h3 className="font-semibold mb-3">Contact Us</h3>
+            <ul className="space-y-2">
+              <li>Valley View Plaza 99 Opebi Road Ikeja Lagos</li>
+              <li>+234 902 263 8251</li>
+              <li>apgbusinesshub@gmail.com</li>
+              <li style={{ listStyle: "none" }}>
+                <a
+                  href="https://wa.me/2349022638251?text=Hello%20👋%20Welcome!%20Please%20select%20an%20option%20below:%0A%0A1️⃣%20Business%0A2️⃣%20Investment%0A3️⃣%20Homes%0A4️⃣%20Sublet%20Gadgets%20%26%20Accessories"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-block",
+                    backgroundColor: "#25D366",
+                    color: "white",
+                    padding: "10px 18px",
+                    borderRadius: "8px",
+                    fontWeight: 600,
+                    textDecoration: "none",
+                    transition: "0.3s ease",
+                  }}
+                >
+                  💬 Start WhatsApp Conversation
+                </a>
+              </li>          
             </ul>
           </div>
 
           {/* Socials */}
           <div>
-            <h3 className="font-semibold mb-2">Stay Connected</h3>
-            <p className="mb-3">
+            <h3 className="font-semibold mb-3">Stay Connected</h3>
+            <p className="mb-4 text-sm lg:text-base">
               Follow us for updates, offers, and new listings
             </p>
-            <div className="flex gap-1 text-white">
-              <Link
-                href="#"
-                className="bg-secondary items-center justify-center h-8 w-8 flex rounded-full hover:bg-primary/70 transition"
-              >
-                <FaFacebookF size={16} />
-              </Link>
-              <Link
-                href="#"
-                className="bg-secondary items-center justify-center h-8 w-8 flex rounded-full hover:bg-primary/70 transition"
-              >
-                <FaInstagram size={16} />
-              </Link>
-              <Link
-                href="#"
-                className="bg-secondary items-center justify-center h-8 w-8 flex rounded-full hover:bg-primary/70 transition"
-              >
-                <FaLinkedinIn size={16} />
-              </Link>
-              <Link
-                href="#"
-                className="bg-secondary items-center justify-center h-8 w-8 flex rounded-full hover:bg-primary/70 transition"
-              >
-                <FaTwitter size={16} />
-              </Link>
+            <div className="flex gap-2 text-white">
+              {[
+                {
+                  icon: FaInstagram,
+                  link: "https://www.instagram.com/apgbusinesshub?igsh=MW9jbTgxOGg3eThkMw==",
+                },
+                {
+                  icon: FaTiktok,
+                  link: "https://www.tiktok.com/@apgbusinesshub?_r=1&_t=ZS-93GLYMm8XId",
+                },
+                {
+                  icon: FaFacebookF,
+                  link: "#"
+                },
+                {
+                  icon: FaTwitter,
+                  link: "#"
+                }
+              ].map(({ icon: Icon, link }, i) => (
+                <Link
+                  key={i}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-primary h-9 w-9 flex items-center justify-center rounded-full hover:bg-primary/70 transition"
+                >
+                  <Icon size={16} />
+                </Link>
+              ))}
             </div>
           </div>
         </div>

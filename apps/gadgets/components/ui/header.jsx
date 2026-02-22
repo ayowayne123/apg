@@ -82,9 +82,13 @@ export default function Header() {
 
           {/* Right Section */}
           <div className="flex flex-row items-center gap-3">
-            <Link className="btn btnSmall secBtn w-28" href="/contact">
+            <a
+              href="https://wa.me/2348140075596?text=Hello%20👋%20I%20would%20like%20to%20make%20an%20enquiry."
+              rel="noopener noreferrer"
+              className="btn btnSmall pryBtn w-28 inline-block text-center"
+            >
               Contact
-            </Link>
+            </a>
 
             {/* Cart */}
             <Link

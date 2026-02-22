@@ -19,12 +19,20 @@ function Offer() {
       <div className="grid lg:grid-cols-2 gap-8 items-center relative container ">
         {/* Left Side */}
         <div className="pt-12 pb-16">
+          <div className="pt-12 pb-16">
           <div className="flex items-center justify-between mb-6 mt-1">
             <h2 className="text-3xl font-bold text-primary">What We Offer</h2>
-            <Link href="/" className="btn pryBtn btnBig lg:w-[178px]">
+
+            <a
+              href="https://wa.me/2349022638251?text=Hello%20I%20am%20interested%20in%20your%20services"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn pryBtn btnBig lg:w-[178px]"
+            >
               Contact Sales
-            </Link>
+            </a>
           </div>
+        </div>
 
           <div className="mt-3 grid sm:grid-cols-2 gap-4">
             {/* Card 1 */}

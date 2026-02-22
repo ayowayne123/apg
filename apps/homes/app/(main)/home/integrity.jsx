@@ -38,9 +38,13 @@ export default function Integrity() {
                 Articulate Homes, you’ll experience professionalism with a
                 personal touch.
               </p>
-              <button className="btn pryBtn btnSmall w-[182px]">
+              <a 
+                href="https://wa.me/2349022638251?text=Hello%20👋%20I%20would%20like%20to%20make%20an%20enquiry."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn pryBtn btnSmall w-[182px]">
                 Contact Sales
-              </button>
+              </a>
             </div>
 
             {/* Features */}

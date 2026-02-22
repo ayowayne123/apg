@@ -63,9 +63,13 @@ export default function Header() {
             ))}
           </nav>
           <div>
-            <Link className="btn btnSmall pryBtn w-28" href="/contact">
+            <a
+              href="https://wa.me/2349022638251?text=Hello%20👋%20I%20would%20like%20to%20make%20an%20enquiry."
+              rel="noopener noreferrer"
+              className="btn btnSmall pryBtn w-28 inline-block text-center"
+            >
               Contact
-            </Link>
+            </a>
           </div>
         </div>
         {/* Mobile Header */}
