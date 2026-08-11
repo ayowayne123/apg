@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import BlogCard from "@/components/blog/blogCard";
 import { getBlogPosts } from "@/utils/calls";
 import BlogCardSkeleton from "@/components/blog/blogCardSkeleton";
@@ -27,37 +28,57 @@ function Insights() {
 
   return (
     <section className="my-20">
-      <h2 className="
-        text-primary 
-        text-2xl sm:text-3xl lg:text-4xl
-        text-center 
-        tracking-tight
-        px-4
-      ">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        <h2
+          className="
+          text-primary 
+          text-2xl sm:text-3xl lg:text-4xl
+          text-center 
+          tracking-tight
+          px-4
+        "
+        >
           Insights, Tips & Trends That Keep You Ahead
-      </h2>
-      <p className="
-        text-base sm:text-lg lg:text-2xl
-        text-center 
-        mx-auto 
-        px-4
-        mt-4
-        max-w-[90%] md:max-w-[550px] lg:max-w-[660px]
-        tracking-tight
-        leading-relaxed
-      ">        Whether you’re a tech lover or a home seeker, our blog is your go-to
-        resource for smart decisions and better living.
-      </p>
+        </h2>
+        <p
+          className="
+          text-base sm:text-lg lg:text-2xl
+          text-center 
+          mx-auto 
+          px-4
+          mt-4
+          max-w-[90%] md:max-w-[550px] lg:max-w-[660px]
+          tracking-tight
+          leading-relaxed
+        "
+        >
+          Whether you're a tech lover or a home seeker, our blog is your go-to
+          resource for smart decisions and better living.
+        </p>
+      </motion.div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-9 gap-6">
         {loading ? (
-          // show 4 skeleton cards while loading
           [...Array(4)].map((_, i) => <BlogCardSkeleton key={i} />)
         ) : error ? (
           <p className="col-span-full text-center text-red-500">{error}</p>
         ) : blogs.length > 0 ? (
-          blogs
-            .slice(0, 4)
-            .map((blog, index) => <BlogCard key={index} blog={blog} />)
+          blogs.slice(0, 4).map((blog, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <BlogCard blog={blog} />
+            </motion.div>
+          ))
         ) : (
           <p className="col-span-full text-center text-gray-500">
             No blogs available

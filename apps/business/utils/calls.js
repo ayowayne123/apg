@@ -2,8 +2,9 @@
 import { apiFetch } from "./api";
 
 // Get all blog posts
-export function getBlogPosts() {
-  return apiFetch("api/posts", { method: "GET" });
+export function getBlogPosts(params = {}) {
+  const query = new URLSearchParams(params).toString();
+  return apiFetch(`api/posts${query ? `?${query}` : ""}`, { method: "GET" });
 }
 
 // Get a single post by id
